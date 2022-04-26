@@ -5,10 +5,10 @@
     "title": "REST API",
     "description": ""
   },
-  "host": "localhost:3000",
+  "host": "apiaquila.herokuapp.com",
   "basePath": "/",
   "schemes": [
-    "http"
+    "https"
   ],
   "paths": {
     "/": {
