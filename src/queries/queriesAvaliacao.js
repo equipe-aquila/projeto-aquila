@@ -10,8 +10,8 @@ const pool = new Pool({
 
 //require('dotenv').config()
 
-const getServicos= (request, response) => {
-  pool.query('SELECT * FROM servicos ORDER BY ID_Servico ASC', (error, results) => {
+const getAvaliacao = (request, response) => {
+  pool.query('SELECT * FROM avaliacao ORDER BY id_avaliacao ASC', (error, results) => {
     if (error) {
       throw error
     }
@@ -19,10 +19,10 @@ const getServicos= (request, response) => {
   })
 }
 
-const getServicosById = (request, response) => {
+const getAvaliacaoById = (request, response) => {
   const id = parseInt(request.params.id)
 
-  pool.query('SELECT * FROM servicos WHERE id_servico = $1', [id], (error, results) => {
+  pool.query('SELECT * FROM avaliacao WHERE id_avaliacao = $1', [id], (error, results) => {
     if (error) {
       throw error
     }
@@ -30,26 +30,27 @@ const getServicosById = (request, response) => {
   })
 }
 
-const createServicos = (request, response) => {
-  const { id_servico ,  id_prestador, nome_servico } = request.body
+const createAvaliacao = (request, response) => {
+  const { id_avaliacao, id_agendamento } = request.body
 
-  pool.query('INSERT INTO servicos (id_servico, id_prestador, nome_servico ) VALUES ($1, $2, $3) RETURNING *', [ id_servico ,  id_prestador, nome_servico ], (error, results) => {
+  pool.query('INSERT INTO avaliacao ( id_avaliacao, id_agendamento) VALUES ($1, $2) RETURNING *', 
+  [ id_avaliacao, id_agendamento], (error, results) => {
     if (error) {
       throw error
     } else if (!Array.isArray(results.rows) || results.rows.length < 1) {
     	throw error
     }
-    response.status(201).send(`User added with ID: ${results.rows[0].id_servico}`)
+    response.status(201).send(`User added with ID: ${results.rows[0].id_avaliacao}`)
   })
 }
 
-const updateServicos = (request, response) => {
+const updateAvaliacao = (request, response) => {
   const id = parseInt(request.params.id)
-  const { id_servico ,  id_prestador, nome_servico } = request.body
+  const {id_avaliacao, id_agendamento} = request.body
 
   pool.query(
-    'UPDATE servicos SET id_prestador = $2, nome_servico = $3 WHERE id_servico = $1 RETURNING *',
-    [id_servico,  id_prestador, nome_servico],
+    'UPDATE avaliacao SET id_avaliacao = $1, id_agendamento = $2 WHERE id_avaliacao = $1 RETURNING *',
+    [id_avaliacao, id_agendamento],
     (error, results) => {
       if (error) {
         throw error
@@ -59,17 +60,17 @@ const updateServicos = (request, response) => {
       } else if (Array.isArray(results.rows) && results.rows.length < 1) {
       	response.status(404).send(`User not found`);
       } else {
-  	 	  response.status(200).send(`User modified with ID: ${results.rows[0].id_servico}`)         	
+  	 	  response.status(200).send(`User modified with ID: ${results.rows[0].id_avaliacao}`)         	
       }
       
     }
   )
 }
 
-const deleteServicos = (request, response) => {
+const deleteAvaliacao = (request, response) => {
   const id = parseInt(request.params.id)
 
-  pool.query('DELETE FROM servicos WHERE id_servico = $1', [id], (error, results) => {
+  pool.query('DELETE FROM avaliacao WHERE id_avaliacao = $1', [id], (error, results) => {
     if (error) {
       throw error
     }
@@ -78,9 +79,9 @@ const deleteServicos = (request, response) => {
 }
 
 module.exports = {
-  getServicos,
-  getServicosById,
-  createServicos,
-  updateServicos,
-  deleteServicos,
+  getAvaliacao,
+  getAvaliacaoById,
+  createAvaliacao,
+  updateAvaliacao,
+  deleteAvaliacao,
 }

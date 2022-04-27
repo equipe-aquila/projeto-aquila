@@ -1,9 +1,9 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "1.0.0",
-    "title": "REST API",
-    "description": ""
+    "title": "My API",
+    "description": "temple API",
+    "version": "1.0.0"
   },
   "host": "apiaquila.herokuapp.com",
   "basePath": "/",
@@ -30,9 +30,34 @@
           "200": {
             "description": "OK"
           }
-        }
       }
     },
+    "post": {
+      "description": "",
+      "parameters": [
+        {
+          "name": "body",
+          "in": "body",
+          "schema": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "example": "any"
+              },
+              "email": {
+                "example": "any"
+              }
+            }
+          }
+        }
+     ],
+     "responses": {
+       "201": {
+       "description": "Created"
+       }
+      }   
+    }   
+  },
     "/usuario/{id}": {
       "get": {
         "description": "",
@@ -224,10 +249,13 @@
             "schema": {
               "type": "object",
               "properties": {
-                "name": {
+                "id_servico": {
                   "example": "any"
                 },
-                "email": {
+                "id_prestador": {
+                  "example": "any"
+                },
+                "nome_servico": {
                   "example": "any"
                 }
               }
@@ -273,10 +301,498 @@
             "schema": {
               "type": "object",
               "properties": {
-                "name": {
+                "id_servico": {
                   "example": "any"
                 },
-                "email": {
+                "id_prestador": {
+                  "example": "any"
+                },
+                "nome_servico": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "delete": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/agendamentos": {
+      "get": {
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id_agendamento": {
+                  "example": "any"
+                },
+                "id_user": {
+                  "example": "any"
+                },
+                "id_favorito": {
+                  "example": "any"
+                },
+                "id_prestador": {
+                  "example": "any"
+                },
+                "data": {
+                  "example": "any"
+                },
+                "hora": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          }
+        }
+      }
+    },
+    "/agendamentos/{id}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id_agendamento": {
+                  "example": "any"
+                },
+                "id_user": {
+                  "example": "any"
+                },
+                "id_favorito": {
+                  "example": "any"
+                },
+                "id_prestador": {
+                  "example": "any"
+                },
+                "data": {
+                  "example": "any"
+                },
+                "hora": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "delete": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/favoritos": {
+      "get": {
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id_favorito": {
+                  "example": "any"
+                },
+                "id_user": {
+                  "example": "any"
+                },
+                "id_prestador": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          }
+        }
+      }
+    },
+    "/favoritos/{id}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id_agendamento": {
+                  "example": "any"
+                },
+                "id_user": {
+                  "example": "any"
+                },
+                "id_favorito": {
+                  "example": "any"
+                },
+                "id_prestador": {
+                  "example": "any"
+                },
+                "data": {
+                  "example": "any"
+                },
+                "hora": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "delete": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/meioPagamentos": {
+      "get": {
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id_meio_pag": {
+                  "example": "any"
+                },
+                "meio_pagamento": {
+                  "example": "any"
+                },
+                "id_user": {
+                  "example": "any"
+                },
+                "n_cartao": {
+                  "example": "any"
+                },
+                "nome_titular": {
+                  "example": "any"
+                },
+                "cod_segurança": {
+                  "example": "any"
+                },
+                "validade": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          }
+        }
+      }
+    },
+    "/meioPagamentos/{id}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id_meio_pag": {
+                  "example": "any"
+                },
+                "meio_pagamento": {
+                  "example": "any"
+                },
+                "id_user": {
+                  "example": "any"
+                },
+                "n_cartao": {
+                  "example": "any"
+                },
+                "nome_titular": {
+                  "example": "any"
+                },
+                "cod_segurança": {
+                  "example": "any"
+                },
+                "validade": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "delete": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/avaliacao": {
+      "get": {
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id_avaliacao": {
+                  "example": "any"
+                },
+                "id_agendamento": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          }
+        }
+      }
+    },
+    "/avaliacao/{id}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id_avaliacao": {
+                  "example": "any"
+                },
+                "id_agendamento": {
                   "example": "any"
                 }
               }
