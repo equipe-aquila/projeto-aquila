@@ -58,7 +58,7 @@
       }   
     }   
   },
-    "/usuario/{id}": {
+    "/usuarios/{id}": {
       "get": {
         "description": "",
         "parameters": [

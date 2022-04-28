@@ -42,7 +42,7 @@ app.get('/usuarios', db.getUsers)
 app.get('/usuarios/:id', db.getUserById)
 app.post('/usuarios', db.createUser)
 app.put('/usuarios/:id', db.updateUser)
-app.delete('/usuarios/:id', db.deleteUser)
+app.delete('/usuarios/:id', db.deleteUser) 
 
 app.get('/prestador', db2.getPrestador)
 app.get('/prestador/:id', db2.getPrestadorById)
