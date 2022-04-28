@@ -30,34 +30,67 @@
           "200": {
             "description": "OK"
           }
-      }
-    },
-    "post": {
-      "description": "",
-      "parameters": [
-        {
-          "name": "body",
-          "in": "body",
-          "schema": {
-            "type": "object",
-            "properties": {
-              "name": {
-                "example": "any"
-              },
-              "email": {
-                "example": "any" 
+        }
+      },
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nome": {
+                  "example": "any"
+                },
+                "id_user": {
+                  "example": "any"
+                },
+                "tipo_pessoa": {
+                  "example": "any"
+                },
+                "cpf_cnpj": {
+                  "example": "any"
+                },
+                "portfolio": {
+                  "example": "any"
+                },
+                "id_servico": {
+                  "example": "any"
+                },
+                "rua": {
+                  "example": "any"
+                },
+                "numero": {
+                  "example": "any"
+                },
+                "bairro": {
+                  "example": "any"
+                },
+                "cidade": {
+                  "example": "any"
+                },
+                "estado": {
+                  "example": "any"
+                },
+                "cep": {
+                  "example": "any"
+                },
+                "login": {
+                  "example": "any"
+                }
               }
             }
           }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          }
         }
-     ],
-     "responses": {
-       "201": {
-       "description": "Created"
-       }
-      }   
-    }   
-  },
+      }
+    },
     "/usuarios/{id}": {
       "get": {
         "description": "",
@@ -90,10 +123,43 @@
             "schema": {
               "type": "object",
               "properties": {
-                "name": {
+                "nome": {
                   "example": "any"
                 },
-                "email": {
+                "id_user": {
+                  "example": "any"
+                },
+                "tipo_pessoa": {
+                  "example": "any"
+                },
+                "cpf_cnpj": {
+                  "example": "any"
+                },
+                "portfolio": {
+                  "example": "any"
+                },
+                "id_servico": {
+                  "example": "any"
+                },
+                "rua": {
+                  "example": "any"
+                },
+                "numero": {
+                  "example": "any"
+                },
+                "bairro": {
+                  "example": "any"
+                },
+                "cidade": {
+                  "example": "any"
+                },
+                "estado": {
+                  "example": "any"
+                },
+                "cep": {
+                  "example": "any"
+                },
+                "login": {
                   "example": "any"
                 }
               }
@@ -145,10 +211,43 @@
             "schema": {
               "type": "object",
               "properties": {
-                "name": {
+                "nome": {
                   "example": "any"
                 },
-                "email": {
+                "id_prestador": {
+                  "example": "any"
+                },
+                "tipo_pessoa": {
+                  "example": "any"
+                },
+                "cpf_cnpj": {
+                  "example": "any"
+                },
+                "portfolio": {
+                  "example": "any"
+                },
+                "id_servico": {
+                  "example": "any"
+                },
+                "rua": {
+                  "example": "any"
+                },
+                "numero": {
+                  "example": "any"
+                },
+                "bairro": {
+                  "example": "any"
+                },
+                "cidade": {
+                  "example": "any"
+                },
+                "estado": {
+                  "example": "any"
+                },
+                "cep": {
+                  "example": "any"
+                },
+                "login": {
                   "example": "any"
                 }
               }
