@@ -9,7 +9,7 @@ const db2 = require('./queries/queriesPrestador')
 const db3 = require('./queries/queriesServicos')
 const db4 = require('./queries/queriesAgendamentos')
 const db5 = require('./queries/queriesFavoritos')
-const db6 = require('./queries/queriesMeio_Pagamentos')
+const db6 = require('./queries/queriesPagamentos')
 const db7 = require('./queries/queriesAvaliacao')
 
 const port = 3000
@@ -39,10 +39,10 @@ app.get('/', (request, response) => {
 });*/
 
 app.get('/usuarios', db.getUsers)
-app.get('/usuario/:id', db.getUserById)
-app.post('usuario', db.createUser)
-app.put('/usuario/:id', db.updateUser)
-app.delete('/usuario/:id', db.deleteUser)
+app.get('/usuarios/:id', db.getUserById)
+app.post('/usuarios', db.createUser)
+app.put('/usuarios/:id', db.updateUser)
+app.delete('/usuarios/:id', db.deleteUser)
 
 app.get('/prestador', db2.getPrestador)
 app.get('/prestador/:id', db2.getPrestadorById)
