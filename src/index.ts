@@ -1,6 +1,7 @@
 import express from 'express';
 import routes from './routes';
 import connect from './utils/connect';
+import swaggerDocs from './utils/swagger';
 
 const app = express();
 
@@ -12,4 +13,6 @@ app.listen(8080, async () => {
 	await connect();
 
 	routes(app)
+
+	swaggerDocs(app, 8080)
 });
