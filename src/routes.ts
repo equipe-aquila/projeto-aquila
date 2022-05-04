@@ -19,10 +19,10 @@ function routes(app: Express) {
 
   /**
    * @openapi
-   * /api/users:
+   * /api/prestadores:
    *  get:
    *    tags:
-   *    - Users
+   *    - Prestadores
    *    description: Fetch all prestadores
    *    responses:
    *      200:
