@@ -1,7 +1,7 @@
 import {
-	BaseEntity, Column, Entity, OneToMany, PrimaryColumn
+	BaseEntity, Column, Entity, JoinTable, ManyToMany, PrimaryColumn
 } from 'typeorm';
-import { Favoritos } from './Favoritos';
+import { Prestador } from './Prestador';
 
 @Entity('users')
 export class User extends BaseEntity {
@@ -14,6 +14,7 @@ export class User extends BaseEntity {
 	@Column({ length: 30 })
 	email: string
 
-	@OneToMany(() => Favoritos, (favoritos) => favoritos.user)
-	favoritos: Favoritos[]
+	@ManyToMany(() => Prestador)
+	@JoinTable()
+	favoritos: Prestador[]
 }

@@ -5,3 +5,10 @@ export const getPrestadores = async () => {
 
     return prestadores
 }
+
+
+export const getPrestador = async (prestadorId: number) => {
+    const prestador = await Prestador.findOne(prestadorId)
+
+    return prestador
+}

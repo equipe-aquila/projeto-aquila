@@ -5,3 +5,9 @@ export const getUsers = async () => {
 
     return users
 }
+
+export const getUser = async (userId: number) => {
+    const user = await User.findOne(userId)
+
+    return user
+}

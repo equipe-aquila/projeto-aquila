@@ -1,5 +1,5 @@
 import { Express } from "express";
-import { getPrestadoresHandler } from "./controller/PrestadorController";
+import { addFavoritoHandler, getPrestadoresHandler } from "./controller/PrestadorController";
 import { getUsersHandler } from "./controller/UserController";
 
 function routes(app: Express) {
@@ -29,6 +29,8 @@ function routes(app: Express) {
    *        description: Succesfully fetched all prestadores
    */
   app.get("/api/prestadores", getPrestadoresHandler);
+
+  app.post("/api/prestadores/:id/addFavorito", addFavoritoHandler);
 }
 
 export default routes;
