@@ -1,12 +1,12 @@
 import {
-    BaseEntity, Column, Entity, ManyToOne, PrimaryColumn
+    BaseEntity, Column, Entity, ManyToOne, PrimaryColumn, PrimaryGeneratedColumn
 } from 'typeorm';
 import { Prestador } from './Prestador';
 import { User } from './User';
 
 @Entity('agendamento')
 export class Agendamento extends BaseEntity {
-	@PrimaryColumn()
+	@PrimaryGeneratedColumn()
 	id: number
 
     @Column({ type: 'date' })
@@ -19,5 +19,12 @@ export class Agendamento extends BaseEntity {
 	user: User
 
 	@ManyToOne(() => Prestador, (prestador) => prestador.agendamentos)
+	prestador: Prestador
+}
+
+export interface agendamentoInput {
+	data: Date,
+	hora: Date,
+	user: User,
 	prestador: Prestador
 }

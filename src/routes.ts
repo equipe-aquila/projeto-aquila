@@ -1,4 +1,5 @@
 import { Express } from "express";
+import { createAgendamentoHandler } from "./controller/AgendamentoController";
 import { addFavoritoHandler, getPrestadoresHandler } from "./controller/PrestadorController";
 import { createUserHandler, deleteUserHandler, getUserHandler, getUsersHandler, updateUserHandler } from "./controller/UserController";
 
@@ -38,6 +39,8 @@ function routes(app: Express) {
   app.get("/api/prestadores", getPrestadoresHandler);
 
   app.post("/api/prestadores/:id/addFavorito", addFavoritoHandler);
+  
+  app.post("/api/agendamento/:userId/agendar/:prestadorId", createAgendamentoHandler);
 }
 
 export default routes;

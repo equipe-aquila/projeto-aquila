@@ -1,11 +1,11 @@
 import {
-	BaseEntity, Column, Entity, OneToMany, PrimaryColumn
+	BaseEntity, Column, Entity, OneToMany, PrimaryColumn, PrimaryGeneratedColumn
 } from 'typeorm';
 import { Agendamento } from './Agendamento';
 
 @Entity('prestador')
 export class Prestador extends BaseEntity {
-	@PrimaryColumn()
+	@PrimaryGeneratedColumn()
 	id: number
 
 	@Column({ length: 30 })
