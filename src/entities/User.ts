@@ -14,9 +14,9 @@ export class User extends BaseEntity {
 	@Column({ length: 30 })
 	email: string
 
-	@ManyToMany(() => Prestador)
+	/*@ManyToMany(() => Prestador)
 	@JoinTable()
-	favoritos: Prestador[]
+	favoritos: Prestador[]*/
 }
 
 export interface userInput {
