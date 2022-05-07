@@ -2,6 +2,7 @@ import { User } from "../entities/User"
 import { getConnection } from "typeorm"
 import { Avaliacao, avaliacaoInput } from "../entities/Avaliacao"
 import { Prestador } from "../entities/Prestador"
+import { getFavoritos } from "./UserService"
 
 export const getPrestadores = async () => {
     const prestadores = await Prestador.find()
@@ -23,11 +24,7 @@ export const addFavorito = async (user: User, prestador: Prestador) => {
         .of(user)
         .add(prestador);
 
-    const favoritos = await getConnection()
-        .createQueryBuilder()
-        .relation(User, 'favoritos')
-        .of(user)
-        .loadMany();
+    const favoritos = await getFavoritos(user);
 
     return favoritos;
 }
