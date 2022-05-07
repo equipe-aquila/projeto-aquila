@@ -1,6 +1,7 @@
 import {
-	BaseEntity, Column, Entity, PrimaryColumn
+	BaseEntity, Column, Entity, OneToMany, PrimaryColumn
 } from 'typeorm';
+import { Agendamento } from './Agendamento';
 
 @Entity('prestador')
 export class Prestador extends BaseEntity {
@@ -12,4 +13,7 @@ export class Prestador extends BaseEntity {
 
 	@Column({ length: 30 })
 	email: string
+
+	@OneToMany(() => Agendamento, (agendamento) => agendamento.prestador)
+	agendamentos: Agendamento[]
 }
