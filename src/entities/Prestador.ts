@@ -1,10 +1,12 @@
 import {
-	BaseEntity, Column, Entity, PrimaryColumn
+	BaseEntity, Column, Entity, OneToMany, PrimaryGeneratedColumn
 } from 'typeorm';
+import { Agendamento } from './Agendamento';
+import { Avaliacao } from './Avaliacao';
 
 @Entity('prestador')
 export class Prestador extends BaseEntity {
-	@PrimaryColumn()
+	@PrimaryGeneratedColumn()
 	id: number
 
 	@Column({ length: 30 })
@@ -12,4 +14,10 @@ export class Prestador extends BaseEntity {
 
 	@Column({ length: 30 })
 	email: string
+
+	@OneToMany(() => Agendamento, (agendamento) => agendamento.prestador)
+	agendamentos: Agendamento[]
+
+	@OneToMany(() => Avaliacao, (avaliacao) => avaliacao.user)
+	avaliacoes: Avaliacao[]
 }

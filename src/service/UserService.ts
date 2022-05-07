@@ -1,34 +1,34 @@
-import { User, userInput } from "../entities/User"
+import { User, userInput } from "../entities/User";
 
 export const getUsers = async () => {
-    const users = await User.find()
-
+    const users = await User.find();
+;
     return users
 }
 
 export const getUser = async (userId: number) => {
-    const user = await User.findOne(userId)
+    const user = await User.findOne(userId);
 
-    return user
+    return user;
 }
 
 export const createUser = async (input: userInput) => {
-    const user = User.create(input)
+    const user = User.create(input);
 
-    await user.save()
+    await user.save();
 
-    return user
+    return user;
 }
 
 export const updateUser = async (userId: number, input: userInput) => {
     await User.update(userId, input);
 
-    const updatedUser = await User.findOne(userId)
+    const updatedUser = await User.findOne(userId);
 
-    return updatedUser
+    return updatedUser;
 }
 
 
 export const deleteUser = async (userId: number) => {    
-    await User.delete(userId)
+    await User.delete(userId);
 }

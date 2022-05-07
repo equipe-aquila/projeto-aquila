@@ -1,12 +1,13 @@
 import { Express } from "express";
-import { addFavoritoHandler, getPrestadoresHandler } from "./controller/PrestadorController";
+import { createAgendamentoHandler, getAgendamentoHandler, getAgendamentosByUserHandler } from "./controller/AgendamentoController";
+import { addFavoritoHandler, createAvalicaoHandler, getPrestadoresHandler } from "./controller/PrestadorController";
 import { createUserHandler, deleteUserHandler, getUserHandler, getUsersHandler, updateUserHandler } from "./controller/UserController";
 import { createUsuarioHandler, deleteUsuarioHandler, getUsuariosHandler, getUsuarioHandler, updateUsuarioHandler } from "./controller/UsuarioController";
 import { createPrestadorsHandler, deletePrestadorsHandler, getPrestadorsHandler, getPrestadoressHandler, updatePrestadorsHandler } from "./controller/PrestadorServicoController";
 import { createServicosHandler, deleteServicosHandler, getServicosHandler, getServicossHandler, updateServicosHandler } from "./controller/ServicosController";
 
 
-function routes(app: Express) {
+export default (app: Express) => {
   /**
    * @openapi
    * /api/users:
@@ -18,6 +19,7 @@ function routes(app: Express) {
    *      200:
    *        description: Succesfully fetched all users
    */
+<<<<<<< HEAD
   app.get("/api/servicos", getServicossHandler);
 
   app.get("/api/servicos/:id", getServicosHandler);
@@ -82,6 +84,13 @@ function routes(app: Express) {
    *        description: Succesfully fetched all users
    */
     app.get("/api/prestadors", getPrestadoressHandler);
+=======
+  app.get("/api/users", getUsersHandler);
+  app.get("/api/users/:id", getUserHandler);
+  app.post("/api/users", createUserHandler);
+  app.put("/api/users/:id", updateUserHandler);
+  app.delete("/api/users/:id", deleteUserHandler);
+>>>>>>> 8b836c61e337767078e8f3a57c0dda244db4304d
 
     app.get("/api/prestadors/:id", getPrestadorsHandler);
   
@@ -103,8 +112,11 @@ function routes(app: Express) {
    *        description: Succesfully fetched all prestadores
    */
   app.get("/api/prestadores", getPrestadoresHandler);
+  app.post("/api/prestadores/:id/favorito", addFavoritoHandler);
+  app.post("/api/prestadores/:id/avaliacao", createAvalicaoHandler);
 
-  app.post("/api/prestadores/:id/addFavorito", addFavoritoHandler);
+  
+  app.post("/api/agendamentos/:userId/agendar/:prestadorId", createAgendamentoHandler);
+  app.get("/api/agendamentos/user/:id", getAgendamentosByUserHandler);
+  app.get("/api/agendamentos/:id", getAgendamentoHandler);
 }
-
-export default routes;
