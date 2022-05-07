@@ -1,12 +1,12 @@
 import {
-	BaseEntity, Column, Entity, JoinTable, ManyToMany, OneToMany, PrimaryColumn
+	BaseEntity, Column, Entity, JoinTable, ManyToMany, OneToMany, PrimaryGeneratedColumn
 } from 'typeorm';
 import { Agendamento } from './Agendamento';
 import { Prestador } from './Prestador';
 
 @Entity('users')
 export class User extends BaseEntity {
-	@PrimaryColumn()
+	@PrimaryGeneratedColumn()
 	id: number
 
 	@Column({ length: 30 })
@@ -21,4 +21,9 @@ export class User extends BaseEntity {
 	@ManyToMany(() => Prestador)
 	@JoinTable()
 	favoritos: Prestador[]
+}
+
+export interface userInput {
+	name?: string
+	email?: string
 }

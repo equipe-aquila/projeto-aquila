@@ -1,6 +1,6 @@
 import { Express } from "express";
 import { addFavoritoHandler, getPrestadoresHandler } from "./controller/PrestadorController";
-import { getUsersHandler } from "./controller/UserController";
+import { createUserHandler, deleteUserHandler, getUserHandler, getUsersHandler, updateUserHandler } from "./controller/UserController";
 
 function routes(app: Express) {
   /**
@@ -16,6 +16,13 @@ function routes(app: Express) {
    */
   app.get("/api/users", getUsersHandler);
 
+  app.get("/api/users/:id", getUserHandler);
+
+  app.post("/api/users", createUserHandler);
+
+  app.put("/api/users/:id", updateUserHandler);
+
+  app.delete("/api/users/:id", deleteUserHandler);
 
   /**
    * @openapi
