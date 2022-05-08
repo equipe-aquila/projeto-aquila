@@ -1,7 +1,7 @@
 import { Express } from "express";
 import { createAgendamentoHandler, getAgendamentoHandler, getAgendamentosByUserHandler } from "./controller/AgendamentoController";
 import { addFavoritoHandler, createAvalicaoHandler, getPrestadoresHandler } from "./controller/PrestadorController";
-import { createUserHandler, deleteUserHandler, getUserFavoritosHandler, getUserHandler, getUsersHandler, updateUserHandler } from "./controller/UserController";
+import { addMeioPagamentoHandler, createUserHandler, deleteUserHandler, getMeiosPagamentoHandler, getUserFavoritosHandler, getUserHandler, getUsersHandler, updateUserHandler } from "./controller/UserController";
 
 export default (app: Express) => {
   /**
@@ -21,6 +21,8 @@ export default (app: Express) => {
   app.put("/api/users/:id", updateUserHandler);
   app.delete("/api/users/:id", deleteUserHandler);
   app.get("/api/users/:id/favoritos", getUserFavoritosHandler);
+  app.post("/api/users/:id/meio-pagamento", addMeioPagamentoHandler);
+  app.get("/api/users/:id/meio-pagamento", getMeiosPagamentoHandler);
 
 
   /**

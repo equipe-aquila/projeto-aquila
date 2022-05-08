@@ -26,3 +26,12 @@ export class MeioPagamento extends BaseEntity {
     @ManyToOne(() => User, (user) => user.meiosPagamento)
 	user: User
 }
+
+export interface meioPagamentoInput {
+	meioPagamento: string
+	numeroCartao: string
+	nomeTitular: string
+	codSeguranca: string
+	validade: string
+	user: User
+}

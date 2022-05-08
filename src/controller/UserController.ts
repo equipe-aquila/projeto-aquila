@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { createUser, deleteUser, getFavoritos, getUser, getUsers, updateUser } from '../service/UserService'
+import { addMeioPagamento, createUser, deleteUser, getFavoritos, getMeiosPagamento, getUser, getUsers, updateUser } from '../service/UserService'
 
 export const getUsersHandler = async (req: Request, res: Response) => {
     const users = await getUsers();
@@ -53,4 +53,31 @@ export const getUserFavoritosHandler = async (req: Request, res: Response) => {
     const favoritos = await getFavoritos(user);
 
     return res.status(200).send(favoritos);
+}
+
+export const addMeioPagamentoHandler = async (req: Request, res: Response) => {
+    const userId = parseInt(req.params.id);
+
+    const user = await getUser(userId);
+
+    if (!user) return res.status(404).send('User not found');
+
+    const input = req.body;
+    input.user = user;
+
+    const meioPagamento = await addMeioPagamento(input);
+
+    return res.status(201).send(meioPagamento);
+}
+
+export const getMeiosPagamentoHandler = async (req: Request, res: Response) => {
+    const userId = parseInt(req.params.id);
+
+    const user = await getUser(userId);
+
+    if (!user) return res.status(404).send('User not found');
+
+    const meiosPagamento = await getMeiosPagamento(user);
+
+    return res.status(200).send(meiosPagamento);
 }

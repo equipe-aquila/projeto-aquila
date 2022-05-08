@@ -1,3 +1,4 @@
+import { MeioPagamento, meioPagamentoInput } from "../entities/MeioPagamento";
 import { getConnection } from "typeorm";
 import { User, userInput } from "../entities/User";
 
@@ -42,4 +43,18 @@ export const getFavoritos = async (user: User) => {
     .loadMany();
 
     return favoritos;
+}
+
+export const addMeioPagamento = async (input: meioPagamentoInput) => {
+    const meioPagamento = MeioPagamento.create(input);
+
+    await meioPagamento.save();
+
+    return meioPagamento;
+}
+
+export const getMeiosPagamento = async (user: User) => {
+    const meiosPagamento = await MeioPagamento.find({ where: { user} });
+
+    return meiosPagamento;
 }
