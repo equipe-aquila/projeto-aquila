@@ -1,34 +1,39 @@
-import { Servicos, userInput } from "../entities/Servicos"
+import { User } from "../entities/User";
+//import { Servico } from "../entities/Servico";
+import {Servico, servicoInput } from "../entities/Servico"
 
-export const getServicos= async () => {
-    const users = await Servicos.find()
-
+export const getServicos = async () => {
+    const users = await User.find();
+;
     return users
 }
 
-export const getServico = async (userId: number) => {
-    const user = await Servicos.findOne(userId)
+export const getServicosByUser = async (id: number) => {
+    const servico = await Servico.findOne(id, {
+        relations: ['user', 'prestador']
+    });
 
-    return user
+    return servico;
 }
 
-export const createServico= async (input: userInput) => {
-    const user = Servicos.create(input)
+export const createServico = async (input: servicoInput) => {
+    const servico = Servico.create(input);
 
-    await user.save()
+    await servico.save();
 
-    return user
+    return servico;
 }
 
-export const updateServico  = async (userId: number, input: userInput) => {
-    await Servicos.update(userId, input);
+export const updateServico = async (serviceId: number, input: servicoInput) => {
 
-    const updatedUser = await Servicos.findOne(userId)
-
-    return updatedUser
+        await Servico.update(serviceId, input);
+    
+        const updatedUser = await User.findOne(serviceId);
+    
+        return updatedUser;
 }
-
-
-export const deleteServico  = async (userId: number) => {    
-    await Servicos.delete(userId)
+    
+    
+export const deleteServico = async (serviceId: number) => {    
+        await User.delete(serviceId);
 }

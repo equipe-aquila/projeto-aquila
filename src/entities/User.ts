@@ -3,6 +3,7 @@ import {
 } from 'typeorm';
 import { Agendamento } from './Agendamento';
 import { Avaliacao } from './Avaliacao';
+import { MeioPagamento } from './MeioPagamento';
 import { Prestador } from './Prestador';
 
 @Entity('users')
@@ -21,6 +22,9 @@ export class User extends BaseEntity {
 
 	@OneToMany(() => Avaliacao, (avaliacao) => avaliacao.user)
 	avaliacoes: Avaliacao[]
+
+	@OneToMany(() => MeioPagamento, (meioPagamento) => meioPagamento.user)
+	meiosPagamento: MeioPagamento[]
 
 	@ManyToMany(() => Prestador)
 	@JoinTable()

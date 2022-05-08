@@ -1,18 +1,23 @@
 import { Request, Response } from "express";
-import { createServico, deleteServico, getServico, getServicos, updateServico} from '../service/ServicosService'
+import { createServico, deleteServico, getServicos, updateServico, getServicosByUser} from '../service/ServicosService'
 
 export const getServicossHandler = async (req: Request, res: Response) => {
     const users = await getServicos();
   
-    return res.status(200).send(users);
+    return res.status(200).send(users);''
 }
 
-export const getServicosHandler = async (req: Request, res: Response) => {
-    const userId = parseInt(req.params.id);
-    const user = await getServico(userId);
+export const getServicosByUserHandler = async (req: Request, res: Response) => {
+    const IdServico = parseInt(req.params.id)
+    const user = await getServicosByUser(IdServico);
 
-  
-    return res.status(200).send(user);
+    if (!user) {
+        return res.status(400).send('User not found');
+    }
+
+    const agendamentos = await getServicosByUser(IdServico);
+
+    return res.status(200).send(agendamentos);
 }
 
 export const createServicosHandler = async (req: Request, res: Response) => {
@@ -23,7 +28,7 @@ export const createServicosHandler = async (req: Request, res: Response) => {
 
 export const updateServicosHandler = async (req: Request, res: Response) => {
     const userId = parseInt(req.params.id);
-    const user = await getServico(userId);
+    const user = await getServicosByUser(userId);
 
     if (!user) {
         return res.status(404).send('Usuário não encontrado')

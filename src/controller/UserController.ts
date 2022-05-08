@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { createUser, deleteUser, getUser, getUsers, updateUser } from '../service/UserService'
+import { createUser, deleteUser, getFavoritos, getUser, getUsers, updateUser } from '../service/UserService'
 
 export const getUsersHandler = async (req: Request, res: Response) => {
     const users = await getUsers();
@@ -41,4 +41,16 @@ export const deleteUserHandler = async (req: Request, res: Response) => {
     await deleteUser(userId);
 
     res.status(200).send('Usuário removido com sucesso')
+}
+
+export const getUserFavoritosHandler = async (req: Request, res: Response) => {
+    const userId = parseInt(req.params.id);
+
+    const user = await getUser(userId);
+
+    if (!user) return res.status(404).send('User not found');
+
+    const favoritos = await getFavoritos(user);
+
+    return res.status(200).send(favoritos);
 }

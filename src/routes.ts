@@ -4,7 +4,7 @@ import { addFavoritoHandler, createAvalicaoHandler, getPrestadoresHandler } from
 import { createUserHandler, deleteUserHandler, getUserHandler, getUsersHandler, updateUserHandler } from "./controller/UserController";
 import { createUsuarioHandler, deleteUsuarioHandler, getUsuariosHandler, getUsuarioHandler, updateUsuarioHandler } from "./controller/UsuarioController";
 import { createPrestadorsHandler, deletePrestadorsHandler, getPrestadorsHandler, getPrestadoressHandler, updatePrestadorsHandler } from "./controller/PrestadorServicoController";
-import { createServicosHandler, deleteServicosHandler, getServicosHandler, getServicossHandler, updateServicosHandler } from "./controller/ServicosController";
+import { createServicosHandler, deleteServicosHandler, getServicosByUserHandler, getServicossHandler, updateServicosHandler } from "./controller/ServicosController";
 
 
 export default (app: Express) => {
@@ -19,10 +19,9 @@ export default (app: Express) => {
    *      200:
    *        description: Succesfully fetched all users
    */
-<<<<<<< HEAD
   app.get("/api/servicos", getServicossHandler);
 
-  app.get("/api/servicos/:id", getServicosHandler);
+  app.get("/api/servicos/:id", getServicosByUserHandler);
 
   app.post("/api/servico", createServicosHandler);
 
@@ -84,13 +83,6 @@ export default (app: Express) => {
    *        description: Succesfully fetched all users
    */
     app.get("/api/prestadors", getPrestadoressHandler);
-=======
-  app.get("/api/users", getUsersHandler);
-  app.get("/api/users/:id", getUserHandler);
-  app.post("/api/users", createUserHandler);
-  app.put("/api/users/:id", updateUserHandler);
-  app.delete("/api/users/:id", deleteUserHandler);
->>>>>>> 8b836c61e337767078e8f3a57c0dda244db4304d
 
     app.get("/api/prestadors/:id", getPrestadorsHandler);
   

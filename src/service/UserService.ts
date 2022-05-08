@@ -1,3 +1,4 @@
+import { getConnection } from "typeorm";
 import { User, userInput } from "../entities/User";
 
 export const getUsers = async () => {
@@ -31,4 +32,14 @@ export const updateUser = async (userId: number, input: userInput) => {
 
 export const deleteUser = async (userId: number) => {    
     await User.delete(userId);
+}
+
+export const getFavoritos = async (user: User) => {
+    const favoritos = await getConnection()
+    .createQueryBuilder()
+    .relation(User, 'favoritos')
+    .of(user)
+    .loadMany();
+
+    return favoritos;
 }
