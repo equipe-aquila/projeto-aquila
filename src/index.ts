@@ -7,12 +7,12 @@ const app = express();
 
 app.use(express.json());
 
-app.listen(8080, async () => {
+app.listen(9090, async () => {
 	console.log('running on port 8080');
 
 	await connect();
 
 	routes(app)
 
-	swaggerDocs(app, 8080)
+	swaggerDocs(app, 9090)
 });
