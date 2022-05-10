@@ -17,6 +17,27 @@ export class User extends BaseEntity {
 	@Column({ length: 30 })
 	email: string
 
+	@Column({ nullable: true })
+	tipo_pessoa: string
+
+	@Column({ nullable: true })
+	rua: string
+
+	@Column({ nullable: true })
+	numero: number
+
+	@Column({ nullable: true })
+	bairro: string
+
+	@Column({ nullable: true })
+	cidade: string
+
+	@Column({ nullable: true })
+	estado: string
+
+	@Column({ nullable: true })
+	cep: string
+
 	@OneToMany(() => Agendamento, (agendamento) => agendamento.user)
 	agendamentos: Agendamento[]
 
@@ -28,7 +49,8 @@ export class User extends BaseEntity {
 
 	@ManyToMany(() => Prestador)
 	@JoinTable()
-	favoritos: Prestador[]}
+	favoritos: Prestador[]
+}
 
 export interface userInput {
 	name?: string

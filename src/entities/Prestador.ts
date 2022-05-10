@@ -16,6 +16,27 @@ export class Prestador extends BaseEntity {
 	@Column({ length: 30 })
 	email: string
 
+	@Column({ nullable: true })
+	tipo_pessoa: string
+
+	@Column({ nullable: true })
+	rua: string
+
+	@Column({ nullable: true })
+	numero: number
+
+	@Column({ nullable: true })
+	bairro: string
+
+	@Column({ nullable: true })
+	cidade: string
+
+	@Column({ nullable: true })
+	estado: string
+
+	@Column({ nullable: true })
+	cep: string
+
 	@OneToMany(() => Agendamento, (agendamento) => agendamento.prestador)
 	agendamentos: Agendamento[]
 

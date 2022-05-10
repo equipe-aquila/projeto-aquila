@@ -439,7 +439,6 @@ export default (app: Express) => {
  *      required:
  *        - email
  *        - name
-
  *      properties:
  *        email:
  *          type: string
@@ -447,6 +446,27 @@ export default (app: Express) => {
  *        name:
  *          type: string
  *          default: Jane Doe
+ *        tipo_pessoa:
+ *          type: string
+ *          default: Jane Doe
+ *        rua:
+ *          type: string
+ *          default: Rua
+ *        numero:
+ *          type: string
+ *          default: 1
+ *        bairro:
+ *          type: string
+ *          default: Bairro
+ *        cidade:
+ *          type: string
+ *          default: Cidade
+ *        estado:
+ *          type: string
+ *          default: Estado
+ *        cep:
+ *          type: string
+ *          default: CEP
  *    UserResponse:
  *      type: object
  *      properties:
@@ -454,12 +474,24 @@ export default (app: Express) => {
  *          type: string
  *        name:
  *          type: string
- * 
+ *        tipo_pessoa:
+ *          type: string
+ *        rua:
+ *          type: string
+ *        numero:
+ *          type: string
+ *        bairro:
+ *          type: string
+ *        cidade:
+ *          type: string
+ *        estado:
+ *          type: string
+ *        cep:
+ *          type: string
  *    UpdateUserInput:
  *      type: object
  *      required:
  *        []
- * 
  *      properties:
  *        email:
  *          type: string
@@ -467,7 +499,27 @@ export default (app: Express) => {
  *        name:
  *          type: string
  *          default: Jane Doe
- * 
+ *        tipo_pessoa:
+ *          type: string
+ *          default: Jane Doe
+ *        rua:
+ *          type: string
+ *          default: Rua
+ *        numero:
+ *          type: string
+ *          default: 1
+ *        bairro:
+ *          type: string
+ *          default: Bairro
+ *        cidade:
+ *          type: string
+ *          default: Cidade
+ *        estado:
+ *          type: string
+ *          default: Estado
+ *        cep:
+ *          type: string
+ *          default: CEP
  *    PrestadorResponse:
  *      type: object
  *      properties:
@@ -475,7 +527,21 @@ export default (app: Express) => {
  *          type: string
  *        name:
  *          type: string
-  *    CreatePrestadorInput:
+ *        tipo_pessoa:
+ *          type: string
+ *        rua:
+ *          type: string
+ *        numero:
+ *          type: string
+ *        bairro:
+ *          type: string
+ *        cidade:
+ *          type: string
+ *        estado:
+ *          type: string
+ *        cep:
+ *          type: string
+ *    CreatePrestadorInput:
  *      type: object
  *      required:
  *        - email
@@ -487,6 +553,27 @@ export default (app: Express) => {
  *        name:
  *          type: string
  *          default: John Doe
+ *        tipo_pessoa:
+ *          type: string
+ *          default: John Doe
+ *        rua:
+ *          type: string
+ *          default: Rua
+ *        numero:
+ *          type: string
+ *          default: 1
+ *        bairro:
+ *          type: string
+ *          default: Bairro
+ *        cidade:
+ *          type: string
+ *          default: Cidade
+ *        estado:
+ *          type: string
+ *          default: Estado
+ *        cep:
+ *          type: string
+ *          default: CEP
  *    CreateMeioPagamentoInput:
  *      type: object
  *      required:
