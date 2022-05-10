@@ -14,3 +14,8 @@ export class Servico extends BaseEntity {
     @ManyToOne(() => Prestador, (prestador) => prestador.servicos)
 	prestador: Prestador
 }
+
+export interface servicoInput {
+	nomeServico: string,
+	prestador: Prestador
+}

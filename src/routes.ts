@@ -1,6 +1,7 @@
 import { Express } from "express";
 import { createAgendamentoHandler, getAgendamentoHandler, getAgendamentosByUserHandler } from "./controller/AgendamentoController";
 import { addFavoritoHandler, createAvalicaoHandler, createPrestadorHandler, deletePrestadorHandler, getPrestadoresHandler, getPrestadorHandler, updatePrestadorHandler } from "./controller/PrestadorController";
+import { createServicosHandler, deleteServicosHandler, getServicoHandler, getServicossHandler, updateServicosHandler } from "./controller/ServicoController";
 import { addMeioPagamentoHandler, createUserHandler, deleteUserHandler, getMeiosPagamentoHandler, getUserFavoritosHandler, getUserHandler, getUsersHandler, updateUserHandler } from "./controller/UserController";
 
 export default (app: Express) => {
@@ -372,6 +373,104 @@ export default (app: Express) => {
 
   /**
    * @openapi
+   * /api/servicos:
+   *  get:
+   *    tags:
+   *    - Serviço
+   *    responses:
+   *      200:
+   *        description: Sucesso
+   */
+  app.get("/api/servicos", getServicossHandler);
+
+  /**
+   * @openapi
+   * '/api/servicos/{id}':
+   *  get:
+   *     tags:
+   *     - Serviço
+   *     parameters:
+   *      - name: id
+   *        in: path
+   *        description: O id do serviço
+   *        required: true
+   *     responses:
+   *       200:
+   *         description: Sucesso
+   *       404:
+   *         description: Serviço não encontrado
+   */
+ app.get("/api/servicos/:id", getServicoHandler);
+
+ /**
+  * @openapi
+  * '/api/servicos':
+  *  post:
+  *     tags:
+  *     - Serviço
+  *     requestBody:
+  *      required: true
+  *      content:
+  *        application/json:
+  *           schema:
+  *              $ref: '#/components/schemas/CreateServicoInput'
+  *     responses:
+  *      201:
+  *        description: Sucesso
+  *      409:
+  *        description: Conflito
+  *      400:
+  *        description: Bad request
+  */
+ app.post("/api/servicos", createServicosHandler);
+
+ /**
+  * @openapi
+  * '/api/servicos/{id}':
+  *  put:
+  *     tags:
+  *     - Serviço
+  *     requestBody:
+  *      required: true
+  *      content:
+  *        application/json:
+  *           schema:
+  *              $ref: '#/components/schemas/UpdateServicoInput'
+  *     parameters:
+  *      - name: id
+  *        in: path
+  *        description: O id do serviço
+  *        required: true
+  *     responses:
+  *       200:
+  *         description: Sucesso
+  *       404:
+  *         description: Serviço não encontrado
+  */
+ app.put("/api/servicos/:id", updateServicosHandler);
+
+ /**
+  * @openapi
+  * '/api/servicos/{id}':
+  *  delete:
+  *     tags:
+  *     - Serviço
+  *     parameters:
+  *      - name: id
+  *        in: path
+  *        description: O id do serviço
+  *        required: true
+  *     responses:
+  *       200:
+  *         description: Sucesso
+  *       404:
+  *         description: Serviço não encontrado
+  */
+ app.delete("/api/servicos/:id", deleteServicosHandler);
+
+
+  /**
+   * @openapi
    * '/api/agendamentos/{userId}/agendar/{prestadorId}':
    *  post:
    *     tags:
@@ -633,4 +732,23 @@ export default (app: Express) => {
  *          type: int
  *        avaliacao:
  *          type: string
+ *    CreateServicoInput:
+ *      type: object
+ *      required:
+ *        - nomeServico
+ *      properties:
+ *        nomeServico:
+ *          type: string
+ *          default: Serviço
+ *        idPrestador:
+ *          type: int
+ *          default: 1
+ *    UpdateServicoInput:
+ *      type: object
+ *      required:
+ *        []
+  *      properties:
+ *        nomeServico:
+ *          type: string
+ *          default: Serviço
  */
