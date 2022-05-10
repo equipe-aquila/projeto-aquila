@@ -1,6 +1,6 @@
 import { Express } from "express";
 import { createAgendamentoHandler, getAgendamentoHandler, getAgendamentosByUserHandler } from "./controller/AgendamentoController";
-import { addFavoritoHandler, createAvalicaoHandler, getPrestadoresHandler } from "./controller/PrestadorController";
+import { addFavoritoHandler, createAvalicaoHandler, createPrestadorHandler, deletePrestadorHandler, getPrestadoresHandler, getPrestadorHandler, updatePrestadorHandler } from "./controller/PrestadorController";
 import { addMeioPagamentoHandler, createUserHandler, deleteUserHandler, getMeiosPagamentoHandler, getUserFavoritosHandler, getUserHandler, getUsersHandler, updateUserHandler } from "./controller/UserController";
 
 export default (app: Express) => {
@@ -201,13 +201,112 @@ export default (app: Express) => {
    *  get:
    *    tags:
    *    - Prestador
-   *    description: Fetch all prestadores
    *    responses:
    *      200:
-   *        description: Succesfully fetched all prestadores
+   *        description: Sucesso
    *              
    */
   app.get("/api/prestadores", getPrestadoresHandler);
+
+
+  /**
+   * @openapi
+   * '/api/prestadores/{id}':
+   *  get:
+   *     tags:
+   *     - Prestador
+   *     parameters:
+   *      - name: id
+   *        in: path
+   *        description: O id do prestador
+   *        required: true
+   *     responses:
+   *       200:
+   *         description: Sucesso
+   *         content:
+   *          application/json:
+   *           schema:
+   *              $ref: '#/components/schemas/PrestadorResponse'
+   *       404:
+   *         description: Prestador não encontrado
+   */
+ app.get("/api/prestadores/:id", getPrestadorHandler);
+
+ /**
+  * @openapi
+  * '/api/prestadores':
+  *  post:
+  *     tags:
+  *     - Prestador
+  *     requestBody:
+  *      required: true
+  *      content:
+  *        application/json:
+  *           schema:
+  *              $ref: '#/components/schemas/CreatePrestadorInput'
+  *     responses:
+  *      201:
+  *        description: Sucesso
+  *        content:
+  *          application/json:
+  *            schema:
+  *              $ref: '#/components/schemas/PrestadorResponse'
+  *      409:
+  *        description: Conflito
+  *      400:
+  *        description: Bad request
+  */
+ app.post("/api/prestadores", createPrestadorHandler);
+
+
+ /**
+  * @openapi
+  * '/api/prestadores/{id}':
+  *  put:
+  *     tags:
+  *     - Prestador
+  *     requestBody:
+  *      required: true
+  *      content:
+  *        application/json:
+  *           schema:
+  *              $ref: '#/components/schemas/UpdatePrestadorInput'
+  *     parameters:
+  *      - name: id
+  *        in: path
+  *        description: O id do prestador
+  *        required: true
+  *     responses:
+  *       200:
+  *         description: Sucesso
+  *         content:
+  *          application/json:
+  *           schema:
+  *              $ref: '#/components/schemas/PrestadorResponse'
+  *       404:
+  *         description: Prestador não encontrado
+  */
+ app.put("/api/prestadores/:id", updatePrestadorHandler);
+
+
+ /**
+  * @openapi
+  * '/api/prestadores/{id}':
+  *  delete:
+  *     tags:
+  *     - Prestador
+  *     parameters:
+  *      - name: id
+  *        in: path
+  *        description: O id do prestador
+  *        required: true
+  *     responses:
+  *       200:
+  *         description: Sucesso
+  *       404:
+  *         description: Prestador não encontrado
+  */
+ app.delete("/api/prestadores/:id", deletePrestadorHandler);
 
   /**
    * @openapi
@@ -381,7 +480,6 @@ export default (app: Express) => {
  *      required:
  *        - email
  *        - name
-
  *      properties:
  *        email:
  *          type: string
