@@ -9,11 +9,11 @@ export default (app: Express) => {
    * /api/users:
    *  get:
    *    tags:
-   *    - Users
-   *    description: Fetch all users
+   *    - Usuário
+   *    description: Obter todos os usuários
    *    responses:
    *      200:
-   *        description: Succesfully fetched all users
+   *        description: Sucesso
    */
   app.get("/api/users", getUsersHandler);
 
@@ -22,21 +22,21 @@ export default (app: Express) => {
    * '/api/users/{id}':
    *  get:
    *     tags:
-   *     - Users
+   *     - Usuário
    *     parameters:
    *      - name: id
    *        in: path
-   *        description: The id of the user
+   *        description: O id usuário
    *        required: true
    *     responses:
    *       200:
-   *         description: Success
+   *         description: Sucesso
    *         content:
    *          application/json:
    *           schema:
    *              $ref: '#/components/schemas/UserResponse'
    *       404:
-   *         description: User not found
+   *         description: Usuário não encontrado
    */
   app.get("/api/users/:id", getUserHandler);
 
@@ -45,7 +45,7 @@ export default (app: Express) => {
    * '/api/users':
    *  post:
    *     tags:
-   *     - Users
+   *     - Usuário
    *     requestBody:
    *      required: true
    *      content:
@@ -54,13 +54,13 @@ export default (app: Express) => {
    *              $ref: '#/components/schemas/CreateUserInput'
    *     responses:
    *      201:
-   *        description: Success
+   *        description: Sucesso
    *        content:
    *          application/json:
    *            schema:
    *              $ref: '#/components/schemas/UserResponse'
    *      409:
-   *        description: Conflict
+   *        description: Conflito
    *      400:
    *        description: Bad request
    */
@@ -72,7 +72,7 @@ export default (app: Express) => {
    * '/api/users/{id}':
    *  put:
    *     tags:
-   *     - Users
+   *     - Usuário
    *     requestBody:
    *      required: true
    *      content:
@@ -82,17 +82,17 @@ export default (app: Express) => {
    *     parameters:
    *      - name: id
    *        in: path
-   *        description: The id of the user
+   *        description: O id do usário
    *        required: true
    *     responses:
    *       200:
-   *         description: Success
+   *         description: Sucesso
    *         content:
    *          application/json:
    *           schema:
    *              $ref: '#/components/schemas/UserResponse'
    *       404:
-   *         description: User not found
+   *         description: Usuário não encontrado
    */
   app.put("/api/users/:id", updateUserHandler);
 
@@ -102,17 +102,17 @@ export default (app: Express) => {
    * '/api/users/{id}':
    *  delete:
    *     tags:
-   *     - Users
+   *     - Usuário
    *     parameters:
    *      - name: id
    *        in: path
-   *        description: The id of the user
+   *        description: O id do usuário
    *        required: true
    *     responses:
    *       200:
-   *         description: Success
+   *         description: Sucesso
    *       404:
-   *         description: User not found
+   *         description: Usuário não encontrado
    */
   app.delete("/api/users/:id", deleteUserHandler);
 
@@ -122,27 +122,76 @@ export default (app: Express) => {
    * '/api/users/{id}/favoritos':
    *  get:
    *     tags:
-   *     - Users
+   *     - Usuário
    *     parameters:
    *      - name: id
    *        in: path
-   *        description: The id of the user
+   *        description: O id do usuário
    *        required: true
    *     responses:
    *       200:
-   *         description: Success
+   *         description: Sucesso
    *         content:
    *          application/json:
    *           schema:
    *              type: array
    *              $ref: '#/components/schemas/PrestadorResponse'
    *       404:
-   *         description: User not found
+   *         description: Usuário não encontrado
    */
   app.get("/api/users/:id/favoritos", getUserFavoritosHandler);
 
-  
+  /**
+   * @openapi
+   * '/api/users/{id}/meio-pagamento':
+   *  post:
+   *     tags:
+   *     - Usuário
+   *     parameters:
+   *      - name: id
+   *        in: path
+   *        description: O id do usuário
+   *     requestBody:
+   *      required: true
+   *      content:
+   *        application/json:
+   *           schema:
+   *              $ref: '#/components/schemas/CreateMeioPagamentoInput'
+   *     responses:
+   *      201:
+   *        description: Sucesso
+   *        content:
+   *          application/json:
+   *            schema:
+   *              $ref: '#/components/schemas/MeioPagamentoResponse'
+   *      409:
+   *        description: Conflito
+   *      400:
+   *        description: Bad request
+   */
   app.post("/api/users/:id/meio-pagamento", addMeioPagamentoHandler);
+
+  /**
+   * @openapi
+   * '/api/users/{id}/meio-pagamento':
+   *  get:
+   *     tags:
+   *     - Usuário
+   *     parameters:
+   *      - name: id
+   *        in: path
+   *        description: O id usuário
+   *        required: true
+   *     responses:
+   *       200:
+   *         description: Sucesso
+   *         content:
+   *          application/json:
+   *           schema:
+   *              $ref: '#/components/schemas/MeioPagamentoResponse'
+   *       404:
+   *         description: Usuário não encontrado
+   */
   app.get("/api/users/:id/meio-pagamento", getMeiosPagamentoHandler);
 
 
@@ -151,7 +200,7 @@ export default (app: Express) => {
    * /api/prestadores:
    *  get:
    *    tags:
-   *    - Prestadores
+   *    - Prestador
    *    description: Fetch all prestadores
    *    responses:
    *      200:
@@ -165,18 +214,27 @@ export default (app: Express) => {
    * '/api/prestadores/{id}/favorito':
    *  post:
    *     tags:
-   *     - Prestadores
-   *     requestBody:
-   *      required: true
+   *     - Prestador
    *     parameters:
    *      - name: id
    *        in: path
-   *        description: O id do prestador
+   *        description: O id do usuário
+   *     requestBody:
+   *      required: true
+   *      content:
+   *        application/json:
+   *           schema:
+   *              $ref: '#/components/schemas/CreateFavoritoInput'
    *     responses:
    *      201:
-   *        description: Success
+   *        description: Sucesso
+   *        content:
+   *          application/json:
+   *            schema:
+   *              type: array
+   *              $ref: '#/components/schemas/PrestadorResponse'
    *      409:
-   *        description: Conflict
+   *        description: Conflito
    *      400:
    *        description: Bad request
    */
@@ -187,18 +245,26 @@ export default (app: Express) => {
    * '/api/prestadores/{id}/avaliacao':
    *  post:
    *     tags:
-   *     - Prestadores
-   *     requestBody:
-   *      required: true
+   *     - Prestador
    *     parameters:
    *      - name: id
    *        in: path
    *        description: O id do prestador
+   *     requestBody:
+   *      required: true
+   *      content:
+   *        application/json:
+   *           schema:
+   *              $ref: '#/components/schemas/CreateAvaliacaoInput'
    *     responses:
    *      201:
-   *        description: Success
+   *        description: Sucesso
+   *        content:
+   *          application/json:
+   *            schema:
+   *              $ref: '#/components/schemas/AvaliacaoResponse'
    *      409:
-   *        description: Conflict
+   *        description: Conflito
    *      400:
    *        description: Bad request
    */
@@ -323,4 +389,63 @@ export default (app: Express) => {
  *        name:
  *          type: string
  *          default: John Doe
+ *    CreateMeioPagamentoInput:
+ *      type: object
+ *      required:
+ *        - meioPagamento
+ *        - numeroCartao
+ *        - nomeTitular
+ *        - codSeguranca
+ *        - validade
+ *      properties:
+ *        meioPagamento:
+ *          type: string
+ *          default: cartão
+ *        numeroCartao:
+ *          type: string
+ *          default: 7895646547
+ *        codSeguranca:
+ *          type: string
+ *          default: 123
+ *        validade:
+ *          type: string
+ *          default: 05/29
+ *    MeioPagamentoResponse:
+ *      type: object
+ *      properties:
+ *        meioPagamento:
+ *          type: string
+ *        numeroCartao:
+ *          type: string
+ *        codSeguranca:
+ *          type: string
+ *        validade:
+ *          type: string
+ *    CreateFavoritoInput:
+ *      type: object
+ *      required:
+ *        - userId
+ *      properties:
+ *        userId:
+ *          type: int
+ *          default: 9
+ *    CreateAvaliacaoInput:
+ *      type: object
+ *      required:
+ *        - userId
+ *        - avaliacao
+ *      properties:
+ *        userId:
+ *          type: int
+ *          default: 9
+ *        avaliacao:
+ *          type: string
+ *          default: avaliação
+ *    AvaliacaoResponse:
+ *      type: object
+ *      properties:
+ *        userId:
+ *          type: int
+ *        avaliacao:
+ *          type: string
  */

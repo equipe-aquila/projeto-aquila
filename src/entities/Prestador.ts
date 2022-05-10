@@ -25,3 +25,8 @@ export class Prestador extends BaseEntity {
 	@OneToMany(() => Servico, (servico) => servico.prestador)
 	servicos: Servico[]
 }
+
+export interface prestadorInput {
+	name: string
+	email: string
+}
