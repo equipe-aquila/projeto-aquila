@@ -7,8 +7,8 @@ const app = express();
 
 app.use(express.json());
 
-app.listen(9090, async () => {
-	console.log('running on port 8080');
+app.listen(process.env.PORT || 9090, async () => {
+	console.log('running on port 9090');
 
 	await connect();
 
