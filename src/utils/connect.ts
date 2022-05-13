@@ -1,3 +1,9 @@
+import { Agendamento } from "../entities/Agendamento";
+import { Avaliacao } from "../entities/Avaliacao";
+import { MeioPagamento } from "../entities/MeioPagamento";
+import { Prestador } from "../entities/Prestador";
+import { Servico } from "../entities/Servico";
+import { User } from "../entities/User";
 import { createConnection } from "typeorm";
 
 export default async () => {
@@ -8,7 +14,7 @@ export default async () => {
             password: '5ff488f69681ea28e682bd6e499c8b67c803493fee3f05a5ea746ef44a00d545',
             database: 'd4ahtk0vtsf17a',
             host: 'ec2-23-20-224-166.compute-1.amazonaws.com',
-            entities: ['src/entities/*.ts'],
+            entities: [Agendamento, Avaliacao, MeioPagamento, Prestador, Servico, User],
             synchronize: true,
             ssl: true,
             extra: {
