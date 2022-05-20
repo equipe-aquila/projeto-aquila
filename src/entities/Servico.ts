@@ -20,6 +20,5 @@ export class Servico extends BaseEntity {
 
 export interface servicoInput {
 	nomeServico: string,
-	preco: number,
 	prestador: Prestador
 }
