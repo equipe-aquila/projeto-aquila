@@ -11,11 +11,15 @@ export class Servico extends BaseEntity {
 	@Column({ length: 30 })
 	nomeServico: string
 
+	@Column()
+	preco: number
+
     @ManyToOne(() => Prestador, (prestador) => prestador.servicos)
 	prestador: Prestador
 }
 
 export interface servicoInput {
 	nomeServico: string,
+	preco: number,
 	prestador: Prestador
 }
