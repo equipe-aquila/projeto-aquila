@@ -529,7 +529,7 @@ export default (app: Express) => {
    */
   app.get("/api/agendamentos/:id", getAgendamentoHandler);
 
-  app.post("api/processar_pagamento", pagamentoHandler);
+  app.post("/api/processar_pagamento", pagamentoHandler);
 }
 
 /**
