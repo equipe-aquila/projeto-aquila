@@ -1,0 +1,32 @@
+{
+    "products": [
+        {
+            "id": "5",
+            "titulo": "Barbearia Borbas",
+            "descricao": "Serviços de corte de cabelo",
+            "img": "/images/barbeariaBorbas.png",
+            "preco": 96.99
+        },
+        {
+            "id": "6",
+            "titulo": "Mestre da Barbearia",
+            "descricao": "Serviços de Barbearia",
+            "img": "/images/mestreDaBarbearia.png",
+            "preco":49.99
+        },
+        {
+            "id": "7",
+            "titulo": "Barbearia Tatuape",
+            "descricao": "Serviços de Barbearia",
+            "img": "/images/BarbeariaTatuape.png",
+            "preco":49.99
+        },
+        {
+            "id": "8",
+            "titulo": "Barbearia Club",
+            "descricao": "Serviços de Barbearia",
+            "img": "/images/BarbeariaClub.png",
+            "preco":69.99
+        }
+    ]
+}
