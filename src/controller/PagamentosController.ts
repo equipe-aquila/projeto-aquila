@@ -1,9 +1,30 @@
 import { Request, Response } from "express";
+import { Stripe } from "stripe"
 
-export const pagamentoHandler = async (req: Request, res: Response) => {
-    const mercadopago = require('mercadopago');
-    mercadopago.configurations.setAccessToken('TEST-1289700758935001-051814-8984670e790b5be608e26784dccc22aa-502914238');
+const stripe = new Stripe(
+    'sk_test_51KzpspCY7lj4QJBqz1M3BvJpD8klgmeydZlBuVfCBg7cSyAJVYH3KMTvXfoP1CkSrOyAPoztZKPt9dHg2vdqBjci00xUyzf1RN', {
+        apiVersion: "2020-08-27", typescript: true
+    });
 
-    const response = await mercadopago.payment.save(req.body);
-    console.log(response);
+export const addPaymentMethod = async (req: Request, res: Response) => {
+    const paymentMethod = await stripe.paymentMethods.create(req.body);
+
+    return res.status(200).send(paymentMethod);
+}
+
+export const createPaymentIntention = async (req: Request, res: Response) => {
+    const paymentIntent = await stripe.paymentIntents.create(req.body);
+
+    return res.status(200).send(paymentIntent);
+}
+
+export const confirmPaymentIntention = async (req: Request, res: Response) => {
+    const { paymentIntentId, paymentMethodId } = req.body;
+
+    const paymentIntent = await stripe.paymentIntents.confirm(
+        paymentIntentId,
+        { payment_method: paymentMethodId }
+    );
+
+    return res.status(200).send(paymentIntent);
 }

@@ -7,14 +7,14 @@ import cors from 'cors'
 const app = express();
 
 app.use(express.json());
-app.use(cors())
+app.use(cors());
 
 app.listen(process.env.PORT || 9090, async () => {
 	console.log('running on port 9090');
 
 	await connect();
 
-	routes(app)
+	routes(app);
 
-	swaggerDocs(app, 9090)
+	swaggerDocs(app, 9090);
 });

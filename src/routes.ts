@@ -1,6 +1,6 @@
 import { Express } from "express";
 import { createAgendamentoHandler, getAgendamentoHandler, getAgendamentosByUserHandler } from "./controller/AgendamentoController";
-import { pagamentoHandler } from "./controller/PagamentosController";
+import { confirmPaymentIntention, createPaymentIntention } from "./controller/PagamentosController";
 import { addFavoritoHandler, createAvalicaoHandler, createPrestadorHandler, deletePrestadorHandler, getPrestadoresHandler, getPrestadorHandler, updatePrestadorHandler } from "./controller/PrestadorController";
 import { createServicosHandler, deleteServicosHandler, getServicoHandler, getServicossHandler, updateServicosHandler } from "./controller/ServicoController";
 import { addMeioPagamentoHandler, createUserHandler, deleteUserHandler, getMeiosPagamentoHandler, getUserFavoritosHandler, getUserHandler, getUsersHandler, updateUserHandler } from "./controller/UserController";
@@ -529,7 +529,7 @@ export default (app: Express) => {
    */
   app.get("/api/agendamentos/:id", getAgendamentoHandler);
 
-  app.post("/api/processar_pagamento", pagamentoHandler);
+  app.post("/api/processar_pagamento", confirmPaymentIntention);
 }
 
 /**
