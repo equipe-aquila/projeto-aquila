@@ -1,6 +1,6 @@
 import { Express } from "express";
 import { createAgendamentoHandler, getAgendamentoHandler, getAgendamentosByUserHandler } from "./controller/AgendamentoController";
-import { confirmPaymentIntention, createPaymentIntention } from "./controller/PagamentosController";
+import { confirmPaymentIntent, createPaymentIntent } from "./controller/PagamentosController";
 import { addFavoritoHandler, createAvalicaoHandler, createPrestadorHandler, deletePrestadorHandler, getPrestadoresHandler, getPrestadorHandler, updatePrestadorHandler } from "./controller/PrestadorController";
 import { createServicosHandler, deleteServicosHandler, getServicoHandler, getServicossHandler, updateServicosHandler } from "./controller/ServicoController";
 import { addMeioPagamentoHandler, createUserHandler, deleteUserHandler, getMeiosPagamentoHandler, getUserFavoritosHandler, getUserHandler, getUsersHandler, updateUserHandler } from "./controller/UserController";
@@ -475,7 +475,7 @@ export default (app: Express) => {
    * '/api/agendamentos/{userId}/agendar/{prestadorId}':
    *  post:
    *     tags:
-   *     - Agendamentos
+   *     - Agendamento
    *     requestBody:
    *      required: true
    *     parameters:
@@ -500,7 +500,7 @@ export default (app: Express) => {
    * /api/agendamentos/user/{id}:
    *  get:
    *    tags:
-   *    - Agendamentos
+   *    - Agendamento
    *    parameters:
    *      - name: id
    *        in: path
@@ -517,7 +517,7 @@ export default (app: Express) => {
    * /api/agendamentos/{id}:
    *  get:
    *    tags:
-   *    - Agendamentos
+   *    - Agendamento
    *    parameters:
    *      - name: id
    *        in: path
@@ -527,9 +527,25 @@ export default (app: Express) => {
    *      200:
    *        description: Sucesso
    */
-  app.get("/api/agendamentos/:id", getAgendamentoHandler);
+  app.post("/api/agendamentos/:id", getAgendamentoHandler);
 
-  app.post("/api/processar_pagamento", confirmPaymentIntention);
+  /**
+   * @openapi
+   * /api/create_payment_intent:
+   *  get:
+   *    tags:
+   *    - Pagamento
+   *    requestBody:
+   *     required: true
+   *     content:
+   *       application/json:
+   *          schema:
+   *             $ref: '#/components/schemas/CreatePaymentIntentInput'
+   *    responses:
+   *      200:
+   *        description: Sucesso
+   */
+  app.post("/api/create_payment_intent", createPaymentIntent);
 }
 
 /**

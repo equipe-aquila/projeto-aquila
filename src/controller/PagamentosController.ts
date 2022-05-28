@@ -12,13 +12,13 @@ export const addPaymentMethod = async (req: Request, res: Response) => {
     return res.status(200).send(paymentMethod);
 }
 
-export const createPaymentIntention = async (req: Request, res: Response) => {
+export const createPaymentIntent = async (req: Request, res: Response) => {
     const paymentIntent = await stripe.paymentIntents.create(req.body);
 
     return res.status(200).send(paymentIntent);
 }
 
-export const confirmPaymentIntention = async (req: Request, res: Response) => {
+export const confirmPaymentIntent = async (req: Request, res: Response) => {
     const { paymentIntentId, paymentMethodId } = req.body;
 
     const paymentIntent = await stripe.paymentIntents.confirm(
