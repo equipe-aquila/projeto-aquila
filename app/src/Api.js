@@ -5,7 +5,7 @@ export default {
     checkToken: async (token) => {
         const req = await fetch(`${BASE_API}#/Usuário/get_api_users__id_`,{
             method: 'POST',
-            header:{
+            headers:{
                 Accept: 'application/json',
                 'Content-Type': 'aplication/json'
             },
@@ -15,9 +15,11 @@ export default {
         return json;
     },
     signIn: async(email,password) => {
-        const req = await fetch (`${BASE_API}/#/Usuário/get_api_users`,{
+        // console.log("URL", `${BASE_API}/#/Usuário/post_api_users`)
+        // console.log("Body",JSON.stringify({email,password}));
+        const req = await fetch (`${BASE_API}/api/users/:id`,{
             method: 'POST',
-            header:{
+            headers:{
                 accept: 'application/json',
                 'Content-Type': 'application/json'
             },
@@ -28,9 +30,9 @@ export default {
 
     },
     signUp: async (name,email,password) => {
-            const req = await fetch (`${BASE_API}/#/Usuário/get_api_users`,{
+            const req = await fetch (`${BASE_API}/api/users`,{
                 method: 'POST',
-                header:{
+                headers:{
                     accept: 'application/json',
                     'Content-Type': 'application/json'
                 },

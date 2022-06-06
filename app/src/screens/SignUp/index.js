@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { Container,InputArea,CustomButton,CustomButtonText,SignMessageButton,SignMessageButtonText,SignMessageButtonTextBold } from './styles';
+import  Api from '../../Api';
 import SignInput from '../../components/SignInput';
 import AquilaLogo from '../../assets/Aquila-Logo.svg';
 import EmailIcon from '../../assets/email.svg';
@@ -13,6 +14,16 @@ export default () => {
     const [passwordField,setPasswordField] = useState('');
 
     const handleSignClick = () => {
+        if(nameField !='' && emailField !='') {
+            // let res = await Api.signUp(nameField, emailField);
+            // if(res.token) {
+            //LATER
+            // } else {
+            //     alert("Erro:" +res.error);
+            // }
+        }else {
+            alert("Preencha os campos!")
+        }
         
     }
     const handleMessageButtonClick = () => {
