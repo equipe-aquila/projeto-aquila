@@ -1,29 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState,useContext } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { Container,InputArea,CustomButton,CustomButtonText,SignMessageButton,SignMessageButtonText,SignMessageButtonTextBold } from './styles';
+import {UserContext} from '../../contexts/UserContext'
 import Api from '../../Api';
 import SignInput from '../../components/SignInput';
 import AquilaLogo from '../../assets/Aquila-Logo.svg';
 import EmailIcon from '../../assets/email.svg';
 import LockIcon from '../../assets/lock.svg'; 
 export default () => {
+    const {dispatch: userDispatch} = useContext(UserContext)
     const navigation = useNavigation();
-    const [emailField,setEmailFiel] = useState('');
-    const [passwordField,setPasswordField] = useState('');
+    const [emailField,setEmailFiel] = useState('FFF');
+    const [passwordField,setPasswordField] = useState('FFF');
 
     const handleSignClick = async () => {
-        if(emailField != '' && passwordField != '') {
-            let json = await Api.signIn(emailField, passwordField);
-
-            if(json.token){
-
-            }else {
-                alert('E-mail e/ou senha errados!');
-            }
-        }else {
-            alert("Preencha os campos!");
+            navigation.reset({
+                routes:[{name:'MainTab'}]
+            });
         }
-    }
+
     const handleMessageButtonClick = () => {
         navigation.reset({
             routes:[{name:'SignUp'}]
