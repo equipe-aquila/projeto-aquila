@@ -1,4 +1,4 @@
-const BASE_API = "https://projeto-aquila.herokuapp.com/docs/";
+const BASE_API = "https://projeto-aquila.herokuapp.com/";
 const BASE_API_PAYPAL = "";
 
 export default {
@@ -40,5 +40,18 @@ export default {
             });
             const json = await req.json();
             return json;
+    },
+
+    getBarbers: async (rua=null, numero=null, cidade=null, estado=null) => {
+        const id = await AsyncStorage.getItem('id');
+
+        console.log("RUA", rua);
+        console.log("NUMERO", numero)
+        console.log("CIDADE", cidade);
+        console.log("ESTADO", estado);
+
+        const req = await fetch(`${BASE_API}/api/prestadores${id}&rua=${rua}&numero=${numero}&cidade=${bairro}&cidade=${cidade}&estado=${estado}`);
+        const json = await req.json();
+        return json;
     }
 };
