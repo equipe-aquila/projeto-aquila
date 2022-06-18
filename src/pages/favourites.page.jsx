@@ -1,4 +1,4 @@
-import { Divider, NavBar } from 'antd-mobile';
+import { NavBar } from 'antd-mobile';
 import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
@@ -27,7 +27,11 @@ const Favourites = () => {
     return (
         <>
         <NavBar onBack={() => navigate(-1)}>Favoritos</NavBar>
-        <PrestadorCard prestadores={favourites} onClick={handlePrestadorClick}/>
+        {favourites.map((prestador) => {
+            return (
+                <PrestadorCard key={prestador.id} prestador={prestador} onClick={handlePrestadorClick}/>
+            );
+        })}
         </>
     );
 }

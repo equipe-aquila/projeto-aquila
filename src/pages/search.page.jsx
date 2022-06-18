@@ -18,6 +18,7 @@ const Search = () => {
     }, []);
 
     const handlePrestadorClick = (id) => {
+        console.log('why no work')
         navigate(`/prestador/${id}`);
     }
 
@@ -25,7 +26,11 @@ const Search = () => {
         <>
         <NavBar onBack={() => navigate(-1)}>Pesquisa</NavBar>
         <SearchBar placeholder='Pesquisar barbearia' />
-        <PrestadorCard prestadores={prestadores} onClick={handlePrestadorClick}/>
+        {prestadores.map((prestador) => {
+            return (
+                <PrestadorCard key={prestador.id} prestador={prestador} onClick={handlePrestadorClick}/>
+            );
+        })}
         </>
     );
 }
