@@ -13,7 +13,7 @@ const App = () => {
   if (currentUser) {
     return (
       <Routes>
-        <Route path='/' element={<Navigate to='/map'/>}></Route>
+        <Route path='/' element={<Navigate to='/profile'/>}></Route>
         <Route path='/' element={<Navigation/>}>
             <Route path='/map' element={<Map/>}/>
             <Route path='/search' element={<Search/>}/>
