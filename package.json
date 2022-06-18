@@ -30,7 +30,7 @@
       "react-app/jest"
     ]
   },
-  "browserslist": {
+  "bgitrowserslist": {
     "production": [
       ">0.2%",
       "not dead",
