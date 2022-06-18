@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { TabBar } from 'antd-mobile';
-import { CalendarOutline, EnvironmentOutline, SearchOutline, UserOutline } from 'antd-mobile-icons';
+import { CalendarOutline, EnvironmentOutline, HeartOutline, SearchOutline, UserOutline } from 'antd-mobile-icons';
 
 import {
     useNavigate,
@@ -33,6 +33,11 @@ const Navigation = () => {
             key: '/appointments',
             title: 'Agendamentos',
             icon: <CalendarOutline />,
+        },
+        {
+            key: '/favourites',
+            title: 'Favoritos',
+            icon: <HeartOutline />,
         },
         {
             key: '/profile',
