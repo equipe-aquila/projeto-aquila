@@ -18,7 +18,6 @@ const Search = () => {
     }, []);
 
     const handlePrestadorClick = (id) => {
-        console.log('why no work')
         navigate(`/prestador/${id}`);
     }
 

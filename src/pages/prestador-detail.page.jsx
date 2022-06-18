@@ -1,4 +1,5 @@
 import { Button, NavBar, Space } from 'antd-mobile';
+import { HeartFill, HeartOutline } from 'antd-mobile-icons';
 import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router';
@@ -42,16 +43,20 @@ const PrestadorDetail = () => {
         {
             selectedPrestador && (
                 <>
-                <NavBar onBack={() => navigate(-1)}>{selectedPrestador.name}</NavBar>
-                <Space direction='vertical'>
-                    {selectedPrestador.name}
-                    {
+                <NavBar
+                    right={
                         favourites.includes(selectedPrestador) ? (
-                            <Button color='primary' onClick={handleFavoritoAdd}>Adicionar aos favoritos</Button>
+                            <HeartOutline fontSize='180%' onClick={handleFavoritoAdd}/>
                         ) : (
-                            <Button color='danger'>Remover dos favoritos</Button>
+                            <HeartFill color='var(--adm-color-danger)' fontSize='180%' onClick={handleFavoritoAdd}/>
                         )
                     }
+                    onBack={() => navigate(-1)}
+                >
+                    {selectedPrestador.name}
+                    </NavBar>
+                <Space direction='vertical'>
+                    {selectedPrestador.name}
                 </Space>
                 </>
             )
