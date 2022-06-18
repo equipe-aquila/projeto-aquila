@@ -1,7 +1,7 @@
-import { Button, Space } from 'antd-mobile';
+import { Button, NavBar, Space } from 'antd-mobile';
 import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react';
-import { useParams } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 import { PrestadorContext } from '../contexts/prestador.context';
 import { UserContext } from '../contexts/user.context';
 
@@ -12,6 +12,8 @@ const PrestadorDetail = () => {
 
     const {selectedPrestador, setSelectedPrestador} = useContext(PrestadorContext);
     const {currentUser} = useContext(UserContext);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         const getPrestador = async () => {
@@ -39,6 +41,8 @@ const PrestadorDetail = () => {
         <>
         {
             selectedPrestador && (
+                <>
+                <NavBar onBack={() => navigate(-1)}>{selectedPrestador.name}</NavBar>
                 <Space direction='vertical'>
                     {selectedPrestador.name}
                     {
@@ -49,6 +53,7 @@ const PrestadorDetail = () => {
                         )
                     }
                 </Space>
+                </>
             )
         }
         </>
