@@ -47,6 +47,16 @@ const PrestadorDetail = () => {
         });
     }
 
+    const handleFavoritoRemove = async () => {
+        await axios.delete(`https://projeto-aquila.herokuapp.com/api/users/${currentUser.uid}/favoritos`, {
+            'prestadorId': selectedPrestador.id
+        });
+    }
+
+    const handleServicoClick = (id) => {
+        navigate(`/servico/${id}`)
+    }
+
     return (
         <>
         {
@@ -55,7 +65,7 @@ const PrestadorDetail = () => {
                 <NavBar
                     right={
                         favourites.some(prestador => prestador.id === selectedPrestador.id) ? (
-                            <HeartFill color='var(--adm-color-danger)' fontSize='180%' onClick={handleFavoritoAdd}/>
+                            <HeartFill color='var(--adm-color-danger)' fontSize='180%' onClick={handleFavoritoRemove}/>
 
                         ) : (
                             <HeartOutline fontSize='180%' onClick={handleFavoritoAdd}/>
@@ -94,7 +104,7 @@ const PrestadorDetail = () => {
                 <Divider>Serviços</Divider>
                 {servicos.map((servico) => {
                     return (
-                        <ServicoCard key={servico.id} servico={servico} onClick={() => console.log(`wtf`)}/>
+                        <ServicoCard key={servico.id} servico={servico} onClick={handleServicoClick}/>
                     );
                 })}
                 </>
