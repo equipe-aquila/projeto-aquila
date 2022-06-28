@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { addFavorito, createAvalicao, createPrestador, deletePrestador, getPrestador, getPrestadores, updatePrestador } from "../service/PrestadorService";
+import { createAvalicao, createPrestador, deletePrestador, getPrestador, getPrestadores, getServicos, updatePrestador } from "../service/PrestadorService";
 import { getUser } from "../service/UserService";
 
 export const getPrestadoresHandler = async (req: Request, res: Response) => {
@@ -24,7 +24,7 @@ export const createPrestadorHandler = async (req: Request, res: Response) => {
 
 export const updatePrestadorHandler = async (req: Request, res: Response) => {
     const prestadorId = parseInt(req.params.id);
-    const prestador = await getUser(prestadorId);
+    const prestador = await getPrestador(prestadorId);
 
     if (!prestador) {
         return res.status(404).send('Prestador não encontrado')
@@ -42,22 +42,6 @@ export const deletePrestadorHandler = async (req: Request, res: Response) => {
     await deletePrestador(prestadorId);
 
     res.status(200).send('Prestador removido com sucesso');
-}
-
-export const addFavoritoHandler = async (req: Request, res: Response) => {
-    const prestadorId = parseInt(req.params.id);
-    const prestador = await getPrestador(prestadorId);
-
-    if (!prestador) return res.status(404).send('Prestador not found');
-
-    const { userId } = req.body;
-    const user = await getUser(userId);
-
-    if (!user) return res.status(404).send('User not found');
-    
-    const favoritos = await addFavorito(user, prestador);
-    
-    return res.status(201).send(favoritos);
 }
 
 export const createAvalicaoHandler = async (req: Request, res: Response) => {
@@ -79,4 +63,16 @@ export const createAvalicaoHandler = async (req: Request, res: Response) => {
     });
 
     return res.status(201).send(newAvaliacao);
+}
+
+export const getPrestadorServicosHandler = async (req: Request, res: Response) => {
+    const prestadorId = parseInt(req.params.id);
+
+    const prestador = await getPrestador(prestadorId);
+
+    if (!prestador) return res.status(404).send('Prestador not found');
+
+    const servicos = await getServicos(prestador);
+
+    return res.status(200).send(servicos);
 }

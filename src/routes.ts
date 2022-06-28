@@ -1,9 +1,43 @@
 import { Express } from "express";
-import { createAgendamentoHandler, getAgendamentoHandler, getAgendamentosByUserHandler } from "./controller/AgendamentoController";
-import { confirmPaymentIntent, createPaymentIntent } from "./controller/PagamentosController";
-import { addFavoritoHandler, createAvalicaoHandler, createPrestadorHandler, deletePrestadorHandler, getPrestadoresHandler, getPrestadorHandler, updatePrestadorHandler } from "./controller/PrestadorController";
-import { createServicosHandler, deleteServicosHandler, getServicoHandler, getServicossHandler, updateServicosHandler } from "./controller/ServicoController";
-import { addMeioPagamentoHandler, createUserHandler, deleteUserHandler, getMeiosPagamentoHandler, getUserFavoritosHandler, getUserHandler, getUsersHandler, updateUserHandler } from "./controller/UserController";
+import {
+  createAgendamentoHandler,
+  deleteAgendamentoHandler,
+  getAgendamentoHandler,
+  getAgendamentosByUserHandler,
+  updateAgendamentoHandler,
+} from "./controller/AgendamentoController";
+import {
+  confirmPaymentIntent,
+  createPaymentIntent,
+} from "./controller/PagamentosController";
+import {
+  createAvalicaoHandler,
+  createPrestadorHandler,
+  deletePrestadorHandler,
+  getPrestadoresHandler,
+  getPrestadorHandler,
+  getPrestadorServicosHandler,
+  updatePrestadorHandler,
+} from "./controller/PrestadorController";
+import {
+  createServicosHandler,
+  deleteServicosHandler,
+  getServicoHandler,
+  getServicossHandler,
+  updateServicosHandler,
+} from "./controller/ServicoController";
+import {
+  addFavoritoHandler,
+  addMeioPagamentoHandler,
+  createUserHandler,
+  deleteFavoritoHandler,
+  deleteUserHandler,
+  getMeiosPagamentoHandler,
+  getUserFavoritosHandler,
+  getUserHandler,
+  getUsersHandler,
+  updateUserHandler,
+} from "./controller/UserController";
 
 export default (app: Express) => {
   /**
@@ -68,7 +102,6 @@ export default (app: Express) => {
    */
   app.post("/api/users", createUserHandler);
 
-
   /**
    * @openapi
    * '/api/users/{id}':
@@ -98,7 +131,6 @@ export default (app: Express) => {
    */
   app.put("/api/users/:id", updateUserHandler);
 
-
   /**
    * @openapi
    * '/api/users/{id}':
@@ -117,7 +149,6 @@ export default (app: Express) => {
    *         description: Usuário não encontrado
    */
   app.delete("/api/users/:id", deleteUserHandler);
-
 
   /**
    * @openapi
@@ -142,6 +173,47 @@ export default (app: Express) => {
    *         description: Usuário não encontrado
    */
   app.get("/api/users/:id/favoritos", getUserFavoritosHandler);
+
+  /**
+   * @openapi
+   * '/api/users/{id}/favoritos':
+   *  post:
+   *     tags:
+   *     - Usuário
+   *     parameters:
+   *      - name: id
+   *        in: path
+   *        description: O id do usuário
+   *     requestBody:
+   *      required: true
+   *     responses:
+   *      201:
+   *        description: Sucesso
+   *      409:
+   *        description: Conflito
+   *      400:
+   *        description: Bad request
+   */
+  app.post("/api/users/:id/favoritos", addFavoritoHandler);
+
+  /**
+   * @openapi
+   * '/api/users/{id}/favoritos':
+   *  delete:
+   *     tags:
+   *     - Usuário
+   *     parameters:
+   *      - name: id
+   *        in: path
+   *        description: O id do usuário
+   *        required: true
+   *     responses:
+   *       200:
+   *         description: Sucesso
+   *       404:
+   *         description: Usuário não encontrado
+   */
+  app.delete("/api/users/:id/favoritos", deleteFavoritoHandler);
 
   /**
    * @openapi
@@ -196,7 +268,6 @@ export default (app: Express) => {
    */
   app.get("/api/users/:id/meio-pagamento", getMeiosPagamentoHandler);
 
-
   /**
    * @openapi
    * /api/prestadores:
@@ -206,10 +277,9 @@ export default (app: Express) => {
    *    responses:
    *      200:
    *        description: Sucesso
-   *              
+   *
    */
   app.get("/api/prestadores", getPrestadoresHandler);
-
 
   /**
    * @openapi
@@ -232,114 +302,81 @@ export default (app: Express) => {
    *       404:
    *         description: Prestador não encontrado
    */
- app.get("/api/prestadores/:id", getPrestadorHandler);
-
- /**
-  * @openapi
-  * '/api/prestadores':
-  *  post:
-  *     tags:
-  *     - Prestador
-  *     requestBody:
-  *      required: true
-  *      content:
-  *        application/json:
-  *           schema:
-  *              $ref: '#/components/schemas/CreatePrestadorInput'
-  *     responses:
-  *      201:
-  *        description: Sucesso
-  *        content:
-  *          application/json:
-  *            schema:
-  *              $ref: '#/components/schemas/PrestadorResponse'
-  *      409:
-  *        description: Conflito
-  *      400:
-  *        description: Bad request
-  */
- app.post("/api/prestadores", createPrestadorHandler);
-
-
- /**
-  * @openapi
-  * '/api/prestadores/{id}':
-  *  put:
-  *     tags:
-  *     - Prestador
-  *     requestBody:
-  *      required: true
-  *      content:
-  *        application/json:
-  *           schema:
-  *              $ref: '#/components/schemas/UpdatePrestadorInput'
-  *     parameters:
-  *      - name: id
-  *        in: path
-  *        description: O id do prestador
-  *        required: true
-  *     responses:
-  *       200:
-  *         description: Sucesso
-  *         content:
-  *          application/json:
-  *           schema:
-  *              $ref: '#/components/schemas/PrestadorResponse'
-  *       404:
-  *         description: Prestador não encontrado
-  */
- app.put("/api/prestadores/:id", updatePrestadorHandler);
-
-
- /**
-  * @openapi
-  * '/api/prestadores/{id}':
-  *  delete:
-  *     tags:
-  *     - Prestador
-  *     parameters:
-  *      - name: id
-  *        in: path
-  *        description: O id do prestador
-  *        required: true
-  *     responses:
-  *       200:
-  *         description: Sucesso
-  *       404:
-  *         description: Prestador não encontrado
-  */
- app.delete("/api/prestadores/:id", deletePrestadorHandler);
+  app.get("/api/prestadores/:id", getPrestadorHandler);
 
   /**
    * @openapi
-   * '/api/prestadores/{id}/favorito':
+   * '/api/prestadores':
    *  post:
    *     tags:
    *     - Prestador
-   *     parameters:
-   *      - name: id
-   *        in: path
-   *        description: O id do usuário
    *     requestBody:
    *      required: true
    *      content:
    *        application/json:
    *           schema:
-   *              $ref: '#/components/schemas/CreateFavoritoInput'
+   *              $ref: '#/components/schemas/CreatePrestadorInput'
    *     responses:
    *      201:
    *        description: Sucesso
    *        content:
    *          application/json:
    *            schema:
-   *              type: array
    *              $ref: '#/components/schemas/PrestadorResponse'
    *      409:
    *        description: Conflito
    *      400:
    *        description: Bad request
    */
-  app.post("/api/prestadores/:id/favorito", addFavoritoHandler);
+  app.post("/api/prestadores", createPrestadorHandler);
+
+  /**
+   * @openapi
+   * '/api/prestadores/{id}':
+   *  put:
+   *     tags:
+   *     - Prestador
+   *     requestBody:
+   *      required: true
+   *      content:
+   *        application/json:
+   *           schema:
+   *              $ref: '#/components/schemas/UpdatePrestadorInput'
+   *     parameters:
+   *      - name: id
+   *        in: path
+   *        description: O id do prestador
+   *        required: true
+   *     responses:
+   *       200:
+   *         description: Sucesso
+   *         content:
+   *          application/json:
+   *           schema:
+   *              $ref: '#/components/schemas/PrestadorResponse'
+   *       404:
+   *         description: Prestador não encontrado
+   */
+  app.put("/api/prestadores/:id", updatePrestadorHandler);
+
+  /**
+   * @openapi
+   * '/api/prestadores/{id}':
+   *  delete:
+   *     tags:
+   *     - Prestador
+   *     parameters:
+   *      - name: id
+   *        in: path
+   *        description: O id do prestador
+   *        required: true
+   *     responses:
+   *       200:
+   *         description: Sucesso
+   *       404:
+   *         description: Prestador não encontrado
+   */
+  app.delete("/api/prestadores/:id", deletePrestadorHandler);
 
   /**
    * @openapi
@@ -371,104 +408,121 @@ export default (app: Express) => {
    */
   app.post("/api/prestadores/:id/avaliacao", createAvalicaoHandler);
 
+  /**
+   * @openapi
+   * '/api/prestadores/{id}/servicos':
+   *  get:
+   *     tags:
+   *     - Prestador
+   *     parameters:
+   *      - name: id
+   *        in: path
+   *        description: O id do prestador
+   *        required: true
+   *     responses:
+   *       200:
+   *         description: Sucesso
+   *       404:
+   *         description: Prestador não encontrado
+   */
+  app.get("/api/prestadores/:id/servicos", getPrestadorServicosHandler);
 
-//   /**
-//    * @openapi
-//    * /api/servicos:
-//    *  get:
-//    *    tags:
-//    *    - Serviço
-//    *    responses:
-//    *      200:
-//    *        description: Sucesso
-//    */
-//   app.get("/api/servicos", getServicossHandler);
+  /**
+   * @openapi
+   * /api/servicos:
+   *  get:
+   *    tags:
+   *    - Serviço
+   *    responses:
+   *      200:
+   *        description: Sucesso
+   */
+  app.get("/api/servicos", getServicossHandler);
 
-//   /**
-//    * @openapi
-//    * '/api/servicos/{id}':
-//    *  get:
-//    *     tags:
-//    *     - Serviço
-//    *     parameters:
-//    *      - name: id
-//    *        in: path
-//    *        description: O id do serviço
-//    *        required: true
-//    *     responses:
-//    *       200:
-//    *         description: Sucesso
-//    *       404:
-//    *         description: Serviço não encontrado
-//    */
-//  app.get("/api/servicos/:id", getServicoHandler);
+  /**
+   * @openapi
+   * '/api/servicos/{id}':
+   *  get:
+   *     tags:
+   *     - Serviço
+   *     parameters:
+   *      - name: id
+   *        in: path
+   *        description: O id do serviço
+   *        required: true
+   *     responses:
+   *       200:
+   *         description: Sucesso
+   *       404:
+   *         description: Serviço não encontrado
+   */
+  app.get("/api/servicos/:id", getServicoHandler);
 
-//  /**
-//   * @openapi
-//   * '/api/servicos':
-//   *  post:
-//   *     tags:
-//   *     - Serviço
-//   *     requestBody:
-//   *      required: true
-//   *      content:
-//   *        application/json:
-//   *           schema:
-//   *              $ref: '#/components/schemas/CreateServicoInput'
-//   *     responses:
-//   *      201:
-//   *        description: Sucesso
-//   *      409:
-//   *        description: Conflito
-//   *      400:
-//   *        description: Bad request
-//   */
-//  app.post("/api/servicos", createServicosHandler);
+  /**
+   * @openapi
+   * '/api/servicos':
+   *  post:
+   *     tags:
+   *     - Serviço
+   *     requestBody:
+   *      required: true
+   *      content:
+   *        application/json:
+   *           schema:
+   *              $ref: '#/components/schemas/CreateServicoInput'
+   *     responses:
+   *      201:
+   *        description: Sucesso
+   *      409:
+   *        description: Conflito
+   *      400:
+   *        description: Bad request
+   */
+  app.post("/api/servicos", createServicosHandler);
 
-//  /**
-//   * @openapi
-//   * '/api/servicos/{id}':
-//   *  put:
-//   *     tags:
-//   *     - Serviço
-//   *     requestBody:
-//   *      required: true
-//   *      content:
-//   *        application/json:
-//   *           schema:
-//   *              $ref: '#/components/schemas/UpdateServicoInput'
-//   *     parameters:
-//   *      - name: id
-//   *        in: path
-//   *        description: O id do serviço
-//   *        required: true
-//   *     responses:
-//   *       200:
-//   *         description: Sucesso
-//   *       404:
-//   *         description: Serviço não encontrado
-//   */
-//  app.put("/api/servicos/:id", updateServicosHandler);
+  /**
+   * @openapi
+   * '/api/servicos/{id}':
+   *  put:
+   *     tags:
+   *     - Serviço
+   *     requestBody:
+   *      required: true
+   *      content:
+   *        application/json:
+   *           schema:
+   *              $ref: '#/components/schemas/UpdateServicoInput'
+   *     parameters:
+   *      - name: id
+   *        in: path
+   *        description: O id do serviço
+   *        required: true
+   *     responses:
+   *       200:
+   *         description: Sucesso
+   *       404:
+   *         description: Serviço não encontrado
+   */
+  app.put("/api/servicos/:id", updateServicosHandler);
 
-//  /**
-//   * @openapi
-//   * '/api/servicos/{id}':
-//   *  delete:
-//   *     tags:
-//   *     - Serviço
-//   *     parameters:
-//   *      - name: id
-//   *        in: path
-//   *        description: O id do serviço
-//   *        required: true
-//   *     responses:
-//   *       200:
-//   *         description: Sucesso
-//   *       404:
-//   *         description: Serviço não encontrado
-//   */
-//  app.delete("/api/servicos/:id", deleteServicosHandler);
-
+  /**
+   * @openapi
+   * '/api/servicos/{id}':
+   *  delete:
+   *     tags:
+   *     - Serviço
+   *     parameters:
+   *      - name: id
+   *        in: path
+   *        description: O id do serviço
+   *        required: true
+   *     responses:
+   *       200:
+   *         description: Sucesso
+   *       404:
+   *         description: Serviço não encontrado
+   */
+  app.delete("/api/servicos/:id", deleteServicosHandler);
 
   /**
    * @openapi
@@ -478,6 +532,10 @@ export default (app: Express) => {
    *     - Agendamento
    *     requestBody:
    *      required: true
+   *      content:
+   *        application/json:
+   *           schema:
+   *              $ref: ''
    *     parameters:
    *      - name: userId
    *        in: path
@@ -493,7 +551,10 @@ export default (app: Express) => {
    *      400:
    *        description: Bad request
    */
-  app.post("/api/agendamentos/:userId/agendar/:prestadorId", createAgendamentoHandler);
+  app.post(
+    "/api/agendamentos/:userId/agendar/:prestadorId",
+    createAgendamentoHandler
+  );
 
   /**
    * @openapi
@@ -527,7 +588,43 @@ export default (app: Express) => {
    *      200:
    *        description: Sucesso
    */
-  app.post("/api/agendamentos/:id", getAgendamentoHandler);
+  app.get("/api/agendamentos/:id", getAgendamentoHandler);
+
+  /**
+   * @openapi
+   * /api/agendamentos/{id}:
+   *  put:
+   *    tags:
+   *    - Agendamento
+   *    parameters:
+   *      - name: id
+   *        in: path
+   *        description: O id do agendamento
+   *        required: true
+   *    responses:
+   *      200:
+   *        description: Sucesso
+   */
+  app.put("/api/agendamentos/:id", updateAgendamentoHandler);
+
+  /**
+   * @openapi
+   * '/api/agendamentos/{id}':
+   *  delete:
+   *     tags:
+   *     - Agendamento
+   *     parameters:
+   *      - name: id
+   *        in: path
+   *        description: O id do agendamento
+   *        required: true
+   *     responses:
+   *       200:
+   *         description: Sucesso
+   *       404:
+   *         description: Serviço não encontrado
+   */
+  app.delete("/api/agendamentos/:id", deleteAgendamentoHandler);
 
   /**
    * @openapi
@@ -546,7 +643,7 @@ export default (app: Express) => {
    *        description: Sucesso
    */
   app.post("/api/create_payment_intent", createPaymentIntent);
-}
+};
 
 /**
  * @openapi
@@ -766,7 +863,7 @@ export default (app: Express) => {
  *      type: object
  *      required:
  *        []
-  *      properties:
+ *      properties:
  *        nomeServico:
  *          type: string
  *          default: Serviço

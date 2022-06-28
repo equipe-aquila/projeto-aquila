@@ -1,24 +1,39 @@
 import { User } from "../entities/User";
-import { Agendamento, agendamentoInput } from "../entities/Agendamento"
+import { Agendamento, agendamentoInput } from "../entities/Agendamento";
 
 export const createAgendamento = async (input: agendamentoInput) => {
-    const agendamento = Agendamento.create(input);
+  const agendamento = Agendamento.create(input);
 
-    await agendamento.save();
+  await agendamento.save();
 
-    return agendamento;
-}
+  return agendamento;
+};
 
 export const getAgendamentosByUser = async (user: User) => {
-    const agendamentos = await Agendamento.find({ where: { user } });
+  const agendamentos = await Agendamento.find({ where: { user } });
 
-    return agendamentos;
-}
+  return agendamentos;
+};
 
 export const getAgendamento = async (id: number) => {
-    const agendamento = await Agendamento.findOne(id, {
-        relations: ['user', 'prestador']
-    });
+  const agendamento = await Agendamento.findOne(id, {
+    relations: ["user", "prestador", "servico"],
+  });
 
-    return agendamento;
-}
+  return agendamento;
+};
+
+export const updateAgendamento = async (
+  agendamentoId: number,
+  input: agendamentoInput
+) => {
+  await Agendamento.update(agendamentoId, input);
+
+  const updatedAgendamento = await Agendamento.findOne(agendamentoId);
+
+  return updatedAgendamento;
+};
+
+export const deleteAgendamento = async (id: number) => {
+  await Agendamento.delete(id);
+};

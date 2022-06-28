@@ -38,22 +38,20 @@ export const deletePrestador = async (prestadorId: number) => {
     await Prestador.delete(prestadorId);
 }
 
-export const addFavorito = async (user: User, prestador: Prestador) => {
-    await getConnection()
-        .createQueryBuilder()
-        .relation(User, 'favoritos')
-        .of(user)
-        .add(prestador);
-
-    const favoritos = await getFavoritos(user);
-
-    return favoritos;
-}
-
 export const createAvalicao = async (input: avaliacaoInput) => {
     const avalicao = Avaliacao.create(input);
 
     await avalicao.save();
 
     return avalicao;
+}
+
+export const getServicos = async (prestador: Prestador) => {
+    const servicos = await getConnection()
+    .createQueryBuilder()
+    .relation(Prestador, 'servicos')
+    .of(prestador)
+    .loadMany();
+
+    return servicos;
 }

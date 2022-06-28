@@ -20,7 +20,7 @@ export const getServicoHandler = async (req: Request, res: Response) => {
 }
 
 export const createServicosHandler = async (req: Request, res: Response) => {
-    const { nomeServico, idPrestador } = req.body;
+    const { titulo, descricao, preco, idPrestador } = req.body;
 
     const prestador = await getPrestador(idPrestador);
 
@@ -29,7 +29,9 @@ export const createServicosHandler = async (req: Request, res: Response) => {
     }
 
     const servico = await createServico({
-        nomeServico,
+        titulo,
+        descricao,
+        preco,
         prestador
     });
 
@@ -55,5 +57,5 @@ export const deleteServicosHandler = async (req: Request, res: Response) => {
 
     await deleteServico(servicoId);
 
-    res.status(200).send('Serviço removido com sucesso')
+    res.status(200).send('Serviço removido com sucesso');
 }

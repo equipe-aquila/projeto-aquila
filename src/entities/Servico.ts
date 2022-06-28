@@ -1,24 +1,41 @@
 import {
-	BaseEntity, Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn
-} from 'typeorm';
-import { Prestador } from './Prestador';
+  BaseEntity,
+  Column,
+  Entity,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from "typeorm";
+import { Agendamento } from "./Agendamento";
+import { Prestador } from "./Prestador";
 
-@Entity('servicos')
+@Entity("servicos")
 export class Servico extends BaseEntity {
-	@PrimaryGeneratedColumn()
-	id: number
+  @PrimaryGeneratedColumn()
+  id: number;
 
-	@Column({ length: 30 })
-	nomeServico: string
+  @Column({ length: 30 })
+  titulo: string;
 
-	@Column()
-	preco: number
+  @Column({ type: "text" })
+  descricao: string;
 
-    @ManyToOne(() => Prestador, (prestador) => prestador.servicos)
-	prestador: Prestador
+  @Column({ length: 30, nullable: true })
+  imagem: string;
+
+  @Column()
+  preco: number;
+
+  @ManyToOne(() => Prestador, (prestador) => prestador.servicos)
+  prestador: Prestador;
+
+  @OneToMany(() => Agendamento, (agendamento) => agendamento.servico)
+  agendamentos: Agendamento[];
 }
 
 export interface servicoInput {
-	nomeServico: string,
-	prestador: Prestador
+  titulo: string;
+  descricao: string;
+  preco: number;
+  prestador: Prestador;
 }

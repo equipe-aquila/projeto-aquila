@@ -1,5 +1,5 @@
 import {
-	BaseEntity, Column, Entity, JoinTable, ManyToMany, OneToMany, PrimaryGeneratedColumn
+	BaseEntity, Column, Entity, JoinTable, ManyToMany, OneToMany, PrimaryColumn
 } from 'typeorm';
 import { Agendamento } from './Agendamento';
 import { Avaliacao } from './Avaliacao';
@@ -8,8 +8,8 @@ import { Prestador } from './Prestador';
 
 @Entity('users')
 export class User extends BaseEntity {
-	@PrimaryGeneratedColumn()
-	id: number
+	@PrimaryColumn()
+	id: string
 
 	@Column({ length: 30 })
 	name: string

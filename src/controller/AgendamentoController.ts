@@ -1,54 +1,92 @@
 import { Request, Response } from "express";
-import { createAgendamento, getAgendamento, getAgendamentosByUser } from "../service/AgendamentoService";
+import { getServico } from "../service/ServicoService";
+import {
+  createAgendamento,
+  deleteAgendamento,
+  getAgendamento,
+  getAgendamentosByUser,
+  updateAgendamento,
+} from "../service/AgendamentoService";
 import { getPrestador } from "../service/PrestadorService";
 import { getUser } from "../service/UserService";
 
 export const createAgendamentoHandler = async (req: Request, res: Response) => {
-    const { userId, prestadorId } = req.params;
+  const { userId, prestadorId } = req.params;
 
-    const user = await getUser(parseInt(userId));
+  const user = await getUser(userId);
 
-    if (!user) {
-        return res.status(404).send('User not found');
-    }
+  if (!user) {
+    return res.status(404).send("User not found");
+  }
 
-    const prestador = await getPrestador(parseInt(prestadorId));
+  const prestador = await getPrestador(parseInt(prestadorId));
 
-    if (!prestador) {
-        return res.status(404).send('Prestador not found');
-    }
+  if (!prestador) {
+    return res.status(404).send("Prestador not found");
+  }
 
-    const { data, hora } = req.body;
+  const { data, servicoId } = req.body;
 
-    const agendamento = await createAgendamento({
-        data,
-        hora,
-        user,
-        prestador
-    });
+  const servico = await getServico(parseInt(servicoId));
 
-    return res.status(201).send(agendamento);
-}
+  if (!servico) {
+    return res.status(404).send("Serviço not found");
+  }
 
-export const getAgendamentosByUserHandler = async (req: Request, res: Response) => {
-    const userId = parseInt(req.params.id)
-    const user = await getUser(userId);
+  const agendamento = await createAgendamento({
+    data,
+    user,
+    prestador,
+    servico,
+  });
 
-    if (!user) {
-        return res.status(400).send('User not found');
-    }
+  return res.status(201).send(agendamento);
+};
 
-    const agendamentos = await getAgendamentosByUser(user);
+export const getAgendamentosByUserHandler = async (
+  req: Request,
+  res: Response
+) => {
+  const userId = req.params.id;
+  const user = await getUser(userId);
 
-    return res.status(200).send(agendamentos);
-}
+  if (!user) {
+    return res.status(400).send("User not found");
+  }
+
+  const agendamentos = await getAgendamentosByUser(user);
+
+  return res.status(200).send(agendamentos);
+};
 
 export const getAgendamentoHandler = async (req: Request, res: Response) => {
-    const agendamentoId = parseInt(req.params.id);
-    
-    const agendamento = await getAgendamento(agendamentoId);
+  const agendamentoId = parseInt(req.params.id);
 
-    if (!agendamento) return res.status(404).send('Agendamento not found');
+  const agendamento = await getAgendamento(agendamentoId);
 
-    return res.status(200).send(agendamento);
-}
+  if (!agendamento) return res.status(404).send("Agendamento not found");
+
+  return res.status(200).send(agendamento);
+};
+
+export const deleteAgendamentoHandler = async (req: Request, res: Response) => {
+  const agendamentoId = parseInt(req.params.id);
+
+  await deleteAgendamento(agendamentoId);
+
+  return res.status(200).send("Agendamento removido com sucesso!");
+};
+
+export const updateAgendamentoHandler = async (req: Request, res: Response) => {
+  const agendamentoId = parseInt(req.params.id);
+
+  const agendamento = await getAgendamento(agendamentoId);
+
+  if (!agendamento) {
+    return res.status(404).send("Agendamento não encontrado");
+  }
+
+  const updatedAgendamento = await updateAgendamento(agendamentoId, req.body);
+
+  return res.status(200).send(updatedAgendamento);
+};
