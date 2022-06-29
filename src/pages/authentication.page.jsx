@@ -24,7 +24,7 @@ const Authenticate = () => {
     }, []);
 
     return (
-        <div>
+        <div className="aquila">
             <AutoCenter>
                 <Space direction="vertical">
                     <AutoCenter>
