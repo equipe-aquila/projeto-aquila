@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { getServico } from "../service/ServicoService";
 import {
+
   createAgendamento,
   deleteAgendamento,
   getAgendamento,
@@ -12,6 +13,7 @@ import { getUser } from "../service/UserService";
 
 export const createAgendamentoHandler = async (req: Request, res: Response) => {
   const { userId, prestadorId } = req.params;
+  //const { prestadorId } = req.params;
 
   const user = await getUser(userId);
 
@@ -39,9 +41,50 @@ export const createAgendamentoHandler = async (req: Request, res: Response) => {
     prestador,
     servico,
   });
-
+  
   return res.status(201).send(agendamento);
 };
+
+/*export const createAgendamentoHandler = async (req: Request, res: Response) => {
+  const { userId, prestadorId } = req.params;
+  //const { prestadorId } = req.params;
+
+  const user = await getUser(userId);
+
+  if (!user) {
+    return res.status(404).send("User not found");
+  }
+
+  const prestador = await getPrestador(parseInt(prestadorId));
+
+  if (!prestador) {
+    return res.status(404).send("Prestador not found");
+  }
+
+  const { data, servicoId } = req.body;
+
+  const servico = await getServico(parseInt(servicoId));
+
+  if (!servico) {
+    return res.status(404).send("Serviço not found");
+  }
+
+  const cadastroHorario = await cadastrarHoraDisponivel({
+    data,
+    prestador,
+    servico,
+  });
+
+  const agendamento = await createAgendamento({
+    data,
+    user,
+    prestador,
+    servico,
+  });
+  
+
+  return res.status(201).send(agendamento);
+};*/
 
 export const getAgendamentosByUserHandler = async (
   req: Request,

@@ -19,8 +19,8 @@ export class Agendamento extends BaseEntity {
 
   @Column({ nullable: true })
   status: boolean;
-
-  @ManyToOne(() => User, (user) => user.agendamentos)
+  
+  @ManyToOne(() => User, (user) => user.agendamentos, { nullable: true })
   user: User;
 
   @ManyToOne(() => Prestador, (prestador) => prestador.agendamentos)
@@ -32,6 +32,12 @@ export class Agendamento extends BaseEntity {
   servico: Servico;
 }
 
+export interface cadastroInput {
+  data: Date;
+  status?: boolean;
+  prestador: Prestador;
+  servico: Servico;
+};
 export interface agendamentoInput {
   data: Date;
   status?: boolean;

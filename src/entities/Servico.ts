@@ -4,9 +4,11 @@ import {
   Entity,
   ManyToOne,
   OneToMany,
+  OneToOne,
   PrimaryGeneratedColumn,
 } from "typeorm";
 import { Agendamento } from "./Agendamento";
+import { Colaborador } from "./Colaborador";
 import { Prestador } from "./Prestador";
 
 @Entity("servicos")
@@ -31,6 +33,9 @@ export class Servico extends BaseEntity {
 
   @OneToMany(() => Agendamento, (agendamento) => agendamento.servico)
   agendamentos: Agendamento[];
+
+  @OneToOne(() => Colaborador, (colaborador) => colaborador.servico)
+  colaborador: Colaborador[];
 }
 
 export interface servicoInput {

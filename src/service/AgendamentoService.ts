@@ -1,5 +1,13 @@
 import { User } from "../entities/User";
-import { Agendamento, agendamentoInput } from "../entities/Agendamento";
+import { Agendamento, cadastroInput, agendamentoInput } from "../entities/Agendamento";
+
+export const cadastrarHoraDisponivel = async (input: cadastroInput) => {
+  const agendamento = Agendamento.create(input);
+
+  await agendamento.save();
+
+  return agendamento;
+};
 
 export const createAgendamento = async (input: agendamentoInput) => {
   const agendamento = Agendamento.create(input);
