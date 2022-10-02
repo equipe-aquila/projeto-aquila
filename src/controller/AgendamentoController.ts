@@ -4,6 +4,7 @@ import {
   createAgendamento,
   deleteAgendamento,
   getAgendamento,
+  getAgendamentosByPrestador,
   getAgendamentosByUser,
   updateAgendamento,
 } from "../service/AgendamentoService";
@@ -55,6 +56,22 @@ export const getAgendamentosByUserHandler = async (
   }
 
   const agendamentos = await getAgendamentosByUser(user);
+
+  return res.status(200).send(agendamentos);
+};
+
+export const getAgendamentosByPrestadorHandler = async (
+  req: Request,
+  res: Response
+) => {
+  const prestadorId = parseInt(req.params.id);
+  const prestador = await getPrestador(prestadorId);
+
+  if (!prestador) {
+    return res.status(400).send("User not found");
+  }
+
+  const agendamentos = await getAgendamentosByPrestador(prestador);
 
   return res.status(200).send(agendamentos);
 };

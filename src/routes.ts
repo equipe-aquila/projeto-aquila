@@ -3,6 +3,7 @@ import {
   createAgendamentoHandler,
   deleteAgendamentoHandler,
   getAgendamentoHandler,
+  getAgendamentosByPrestadorHandler,
   getAgendamentosByUserHandler,
   updateAgendamentoHandler,
 } from "./controller/AgendamentoController";
@@ -572,6 +573,8 @@ export default (app: Express) => {
    *        description: Success
    */
   app.get("/api/agendamentos/user/:id", getAgendamentosByUserHandler);
+  
+  app.get("/api/agendamentos/prestador/:id", getAgendamentosByPrestadorHandler);
 
   /**
    * @openapi
@@ -769,40 +772,7 @@ export default (app: Express) => {
  *          type: string
  *          default: John Doe
  *        tipo_pessoa:
- *          type: string
- *          default: John Doe
- *        rua:
- *          type: string
- *          default: Rua
- *        numero:
- *          type: string
- *          default: 1
- *        bairro:
- *          type: string
- *          default: Bairro
- *        cidade:
- *          type: string
- *          default: Cidade
- *        estado:
- *          type: string
- *          default: Estado
- *        cep:
- *          type: string
- *          default: CEP
- *    CreateMeioPagamentoInput:
- *      type: object
- *      required:
- *        - meioPagamento
- *        - numeroCartao
- *        - nomeTitular
- *        - codSeguranca
- *        - validade
- *      properties:
- *        meioPagamento:
- *          type: string
- *          default: cartão
- *        numeroCartao:
- *          type: string
+m
  *          default: 7895646547
  *        codSeguranca:
  *          type: string

@@ -1,5 +1,6 @@
 import { User } from "../entities/User";
 import { Agendamento, agendamentoInput } from "../entities/Agendamento";
+import { Prestador } from "src/entities/Prestador";
 
 export const createAgendamento = async (input: agendamentoInput) => {
   const agendamento = Agendamento.create(input);
@@ -11,6 +12,12 @@ export const createAgendamento = async (input: agendamentoInput) => {
 
 export const getAgendamentosByUser = async (user: User) => {
   const agendamentos = await Agendamento.find({ where: { user } });
+
+  return agendamentos;
+};
+
+export const getAgendamentosByPrestador = async (prestador: Prestador) => {
+  const agendamentos = await Agendamento.find({ where: { prestador } });
 
   return agendamentos;
 };
