@@ -11,6 +11,7 @@ import PrestadorDetail from "./pages/prestador-detail.page";
 import Profile from "./pages/profile.page";
 import Search from "./pages/search.page";
 import ServicoDetail from "./pages/servico-detail.page";
+import SignUp from "./pages/sign-up.page";
 
 const App = () => {
   const {currentUser} = useContext(UserContext);
@@ -18,6 +19,7 @@ const App = () => {
   if (currentUser) {
     return (
       <Routes>
+        <Route path='*' element={<Navigate to='/map'/>}/>
         <Route path='/' element={<Navigate to='/map'/>}></Route>
         <Route path='/' element={<Navigation/>}>
             <Route path='/map' element={<Map/>}/>
@@ -34,8 +36,9 @@ const App = () => {
   } else {
     return (
       <Routes>
-        <Route path='*' element={<Navigate to='/'/>}/>
-        <Route path='/' element={<Authenticate/>}/>
+        <Route path='*' element={<Navigate to='/signin'/>}/>
+        <Route path='/signin' element={<Authenticate/>}/>
+        <Route path="/signup" element={<SignUp/>}/>
       </Routes>
     )
   }
