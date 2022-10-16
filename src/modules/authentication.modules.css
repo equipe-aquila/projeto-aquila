@@ -1,59 +1,72 @@
 body{
     font-family: arial;
-    font-size: 20px;
+    font-size: 14px;
 }
 
 #painel{
-    width:700px;
-    height: 550px;
+    width:300px;
+    height: 500px;
     position: relative;
-    margin: 50px auto;
+    margin: 20px auto;
     padding: 20px;
 }
 
-#garota{
-    display: inline;
-    padding: 20px;
-    position: absolute;
-    margin: 0px auto;
-    background-color: #00008B;
-    border-radius: 5px;
+#fantasia{
+    text-align: center;
+    margin-bottom: 10px;
 }
-
 
 #caixa form{
     padding: 22px 20px;
     border-style: solid;
-    border-width: 0.5px;
+    border-width: 15px 3px 15px;
     border-radius: 5px;
-    border-color:#00008B;
+    border-color: #363636;
     display: inline;
     position: absolute;
-    top: 20px;
-    right: 0px;
+    right: auto;
+    left: auto;
 }
 
 #tituloLogin{
     text-align: center;
-    font-size: 40px;
+    font-size: 28px;
     font-weight: bold;
-    padding: 15px 0px 15px;
+    padding: 10px 0px 10px;
     color:#00008B;
 }
 
 #text-email{
-    font-size: 26px;
-    width: 300px;
+    font-size: 18px;
+    width: 240px;
     padding: 5px 0px 5px;
     margin: 10px 0px 10px 0;
     display: block;
+    border-width: 0px 0px 1px 0px;
+    border-color:#00008B;
 }
+
+#text-email:focus {
+    box-shadow: 0 0 0 0;
+    outline: 0;
+    border-color:#00BFFF;
+}
+
+
 #text-password{
-    font-size: 26px;
-    width: 300px;
+    font-size: 18px;
+    width: 240px;
     padding: 5px 0px 5px;
     margin: 10px 0px 10px 0;
     display: block;
+    border-width: 0px 0px 1px 0px;
+    border-color:#00008B;
+}
+
+#text-password:focus {
+    box-shadow: 0 0 0 0;
+    outline: 0;
+    border-color:#00BFFF;
 }
 
 #logado{
@@ -79,8 +92,7 @@ body{
 }
 
 #botao-entrar:hover {
-    background-color: #0000FF;
-    font-size: 22px;
+    background-color: #00BFFF;
   }
 
 #cadastro{
@@ -106,6 +118,5 @@ body{
 }
 
 #botao-cadastrar:hover {
-    background-color: #0000FF;
-    font-size: 12px;
-  }
+    background-color: #00BFFF;
+}
