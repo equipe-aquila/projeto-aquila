@@ -1,0 +1,111 @@
+body{
+    font-family: arial;
+    font-size: 20px;
+}
+
+#painel{
+    width:700px;
+    height: 550px;
+    position: relative;
+    margin: 50px auto;
+    padding: 20px;
+}
+
+#garota{
+    display: inline;
+    padding: 20px;
+    position: absolute;
+    margin: 0px auto;
+    background-color: #00008B;
+    border-radius: 5px;
+}
+
+
+#caixa form{
+    padding: 22px 20px;
+    border-style: solid;
+    border-width: 0.5px;
+    border-radius: 5px;
+    border-color:#00008B;
+    display: inline;
+    position: absolute;
+    top: 20px;
+    right: 0px;
+}
+
+#tituloLogin{
+    text-align: center;
+    font-size: 40px;
+    font-weight: bold;
+    padding: 15px 0px 15px;
+    color:#00008B;
+}
+
+#text-email{
+    font-size: 26px;
+    width: 300px;
+    padding: 5px 0px 5px;
+    margin: 10px 0px 10px 0;
+    display: block;
+}
+#text-password{
+    font-size: 26px;
+    width: 300px;
+    padding: 5px 0px 5px;
+    margin: 10px 0px 10px 0;
+    display: block;
+}
+
+#logado{
+    margin-left:0;
+}
+
+#labelLogado{
+    font-size: 15px;
+}
+
+#botao-entrar{
+    margin:auto;
+    font-family: arial;
+    font-size:16px;
+    color: #ffffff;
+    background-color: #00008B;
+    margin: 20px 0px 20px 0px;
+    display:block;
+    width: 240px;
+    height: 50px;
+    border-style: solid;
+    border-width: 0px;
+}
+
+#botao-entrar:hover {
+    background-color: #0000FF;
+    font-size: 22px;
+  }
+
+#cadastro{
+    text-align: center;
+    margin: 10px 0px;
+}
+
+#labelCadastrar{
+    font-size: 15px;
+    margin-right: 5px;
+}
+
+#botao-cadastrar{
+    width: 100px;
+    height: 20px;
+    font-family: arial;
+    font-size: 10px;
+    padding: 2px 5px 2px 5px;
+    color: #ffffff;
+    background-color: #00008B;
+    border-style: solid;
+    border-width: 0px;
+}
+
+#botao-cadastrar:hover {
+    background-color: #0000FF;
+    font-size: 12px;
+  }
