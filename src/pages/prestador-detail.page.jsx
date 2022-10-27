@@ -79,7 +79,7 @@ const PrestadorDetail = () => {
                 <Card style={{marginRight:"40px",marginLeft:"40px"}}>
                     <Grid columns={2}>
                         <Grid.Item>
-                            <Avatar src='https://img.freepik.com/free-vector/vintage-barbershop-logo-template_441059-26.jpg?w=2000'/>
+                            <Avatar src='./logo-placeholder-image.png'/>
                         </Grid.Item>
                         <Grid.Item style={{justifySelf: 'right'}}>
                             <Space direction='vertical' style={{textAlign: 'right'}}>

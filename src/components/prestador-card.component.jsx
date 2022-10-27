@@ -5,7 +5,7 @@ const PrestadorCard = ({prestador, onClick}) => {
         <Card style={{ zIndex:99999,width:"230px",marginTop:"10px"}} onClick={() => onClick(prestador.id)}>
             <Grid columns={1} style={{display:"flex"}}>
                 <Grid.Item>
-                    <Avatar src='https://img.freepik.com/free-vector/vintage-barbershop-logo-template_441059-26.jpg?w=2000'/>
+                    <Avatar src='./logo-placeholder-image.png'/>
                 </Grid.Item>
                 <Grid.Item style={{alignSelf: 'center', justifySelf: 'right'}}>
                     <Space direction='vertical'>

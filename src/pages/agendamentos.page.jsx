@@ -26,7 +26,7 @@ const Agendamentos = () => {
 
             <NavBar style={{marginBottom:"12px",marginTop:"12px",zIndex:999999,backgroundColor:"#B59EE2"}} onBack={() => navigate(-1)}> 
             <div style={{display:"flex",justifyContent:"center",backgroundColor:"#B59EE2",}}>
-            <Image width={110} src="./aquilalogo.svg"></Image>
+            <Image width={110} src="./aquilalogo.png"></Image>
             </div>
             </NavBar>
 

@@ -15,18 +15,23 @@ const MapPage = () => {
   };
 
   const positionzeze = {
-    lat :-23.5436159919714,
-    lng :-46.65469221494126,
+    lat :-23.509230057876472,
+    lng :-46.63563502730356,
   }
 
   const positionlulu = {
-    lat :-23.545141256496578,
-    lng :-46.65730441722437
+    lat :-23.47760170733252,
+    lng :-46.56408930362278
   }
 
   const positionBotox= {
-    lat :-23.54603282804938,
-    lng :-46.656227386129174
+    lat :-23.505261781237717,
+    lng :-46.676690865781005
+  }
+
+  const positionalgo= {
+    lat :-23.57403103263997,
+    lng :-46.6910884744566
   }
 
 
@@ -50,7 +55,7 @@ const MapPage = () => {
       {
       <Marker position={positionzeze} options={{
         label: {
-          text: "Barbearia do ze",
+          text: "Manicure",
           className: "map-marker"
         }
       }} />
@@ -72,7 +77,15 @@ const MapPage = () => {
       {
               <Marker position={positionlulu} options={{
                 label: {
-                  text: "Unhas da Lu",
+                  text: "Cabeleleiro",
+                  className: "map-marker"
+                }
+              }} />
+      }
+            {
+              <Marker position={positionalgo} options={{
+                label: {
+                  text: "Seu vizinho",
                   className: "map-marker"
                 }
               }} />
@@ -81,7 +94,7 @@ const MapPage = () => {
 
 <Marker position={positionBotox} options={{
   label: {
-    text: "Estetica da Le",
+    text: "Manicure Mai",
     className: "map-marker"
   }
 }} />

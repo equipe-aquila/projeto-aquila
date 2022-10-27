@@ -37,7 +37,7 @@ const Authenticate = () => {
             <HeroContent>
                 <HeroContentText>
                         <HeroTitle>
-                        <Image width={100} src="./aquilalogo.svg" alt="" />
+                        <Image width={100} src="./aquilalogo.png" alt="" />
                         </HeroTitle>
                      <HeroText>
                      <i> Com Áquila você fica mais bonito! <br></br>Cadastre-se e encontre o serviço estético mais perto de você!</i>
