@@ -9,7 +9,7 @@ import {
     HeroContent,
     HeroContentText,
     HeroTitle,
-    HeroTitleText,
+    Herobox,
     HeroText,
     ImgHero,
 
@@ -37,12 +37,15 @@ const Authenticate = () => {
             <HeroContent>
                 <HeroContentText>
                         <HeroTitle>
-                        <Image width={100} src="./aquilalogo.png" alt="" />
+                        <Image width={220} src="./aquilalogo.png" alt="" />
                         </HeroTitle>
+                     <Herobox>
                      <HeroText>
                      <i> Com Áquila você fica mais bonito! <br></br>Cadastre-se e encontre o serviço estético mais perto de você!</i>
                      </HeroText>
+
                      <GoogleButton className="google" style={{borderRadius:"3px"}} label="Entrar com Google" onClick={signInWithGoogleRedirect}/>
+                     </Herobox>
                 </HeroContentText>
                 <ImgHero>
                 <Image size="large" width={500} src="./imghero.svg" alt="" />

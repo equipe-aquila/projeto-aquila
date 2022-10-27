@@ -10,6 +10,12 @@ justify-content: center;
 height: 100vh;
 `;
 
+export const Heroimage = styled.div`
+display:flex-column;
+justify-content: center;
+height: 100vh;
+`;
+
 
 export const HeroContent = styled.section`
 height: 100%;
@@ -34,11 +40,8 @@ display: flex;
 flex-direction: column;
 justify-content: left;
 align-items: left;
-box-shadow: 0 1px 2px #0003;
-padding: 20px;
-background-color: white;
-border-radius: 35px;
-margin: 0px;
+
+
 
 
 @media only screen and (max-width:600px) {
@@ -54,7 +57,8 @@ export const HeroTitle = styled.h1`
 padding-bottom: 5px;
 font-size: clamp(2rem, 3rem, 4rem);
 margin: 0;
-
+display: flex;
+justify-content:center;
 font-weight: 900;
 text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 `;
@@ -69,6 +73,13 @@ text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 
 export const HeroTitleText = styled.span`
 display: block;
+`;
+export const Herobox = styled.div`
+padding: 20px;
+background-color: white;
+border-radius: 35px;
+margin: 0px;
+box-shadow: 0 1px 2px #0003;
 `;
 
 export const HeroText = styled.h3`
