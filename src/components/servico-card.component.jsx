@@ -2,7 +2,7 @@ import { Card, Space, Image, Divider, Button, Grid, AutoCenter } from 'antd-mobi
 
 const ServicoCard = ({servico, onClick}) => {
     return (
-        <Card>
+        <Card style={{marginRight:"40px",marginLeft:"40px"}}>
             <Space>
                 <Image
                     src='https://i2.wp.com/therighthairstyles.com/wp-content/uploads/2021/09/1-the-ivy-league-mens-cut.jpg?resize=500%2C592'
@@ -12,7 +12,7 @@ const ServicoCard = ({servico, onClick}) => {
                 />
                 <Space direction='vertical'>
                     <font style={{fontWeight: 'bold', fontSize: 'large'}}>{servico.titulo}</font>
-                    <AutoCenter style={{width: '69vw'}}>{servico.descricao}</AutoCenter>
+                    <AutoCenter style={{width: '49vw'}}>{servico.descricao}</AutoCenter>
                 </Space>
             </Space>
             <Divider/>

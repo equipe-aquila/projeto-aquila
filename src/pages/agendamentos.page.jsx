@@ -1,4 +1,4 @@
-import { AutoCenter, NavBar } from 'antd-mobile';
+import { AutoCenter, NavBar,Image } from 'antd-mobile';
 import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
@@ -22,14 +22,22 @@ const Agendamentos = () => {
     }, []);
 
     return (
-        <div>
-            <NavBar onBack={() => navigate(-1)}>
-                Agendamentos
+        <div style={{marginBottom:"80px",backgroundColor:"#B59EE2"}}>
+
+            <NavBar style={{marginBottom:"12px",marginTop:"12px",zIndex:999999,backgroundColor:"#B59EE2"}} onBack={() => navigate(-1)}> 
+            <div style={{display:"flex",justifyContent:"center",backgroundColor:"#B59EE2",}}>
+            <Image width={110} src="./aquilalogo.svg"></Image>
+            </div>
             </NavBar>
+
             {agendamentos.length > 0 ? (
                 <h1>{agendamentos.map((agendamento, index)=> {
                     return (
-                        <AgendamentoCard key={index} agendamentoId={agendamento.id}/>
+                        <div style={{display:"flex",justifyContent:"center",paddingLeft:"40px",paddingRight:"40px"}}>
+                            <div style={{width:"900px",paddingBottom:"6px"}}>
+                        <AgendamentoCard  key={index} agendamentoId={agendamento.id}/>
+                        </div>
+                        </div>
                     );
                 })}</h1>
             ) : (

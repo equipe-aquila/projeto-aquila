@@ -26,12 +26,16 @@ const Favourites = () => {
 
     return (
         <>
+        <div style={{display:"flex",justifyContent:"center"}}>
+            <div>
         <NavBar onBack={() => navigate(-1)}>Favoritos</NavBar>
         {favourites.map((prestador) => {
             return (
                 <PrestadorCard key={prestador.id} prestador={prestador} onClick={handlePrestadorClick}/>
             );
         })}
+        </div>
+        </div>
         </>
     );
 }

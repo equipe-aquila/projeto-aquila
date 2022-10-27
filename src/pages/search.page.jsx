@@ -8,29 +8,33 @@ const Search = () => {
     const navigate = useNavigate();
     const [prestadores, setPrestadores] = useState([]);
     
-    useEffect(() => {
-        const getPrestadores = async () => {
-            const res = await axios('https://projeto-aquila.herokuapp.com/api/prestadores/');
-            setPrestadores(res.data);
-        }
 
-        getPrestadores();
-    }, []);
-
+    const getPrestadores = async () => {
+        const res = await axios('https://projeto-aquila.herokuapp.com/api/prestadores/');
+        setPrestadores(res.data);
+    }
     const handlePrestadorClick = (id) => {
         navigate(`/prestador/${id}`);
     }
 
+    const aa = (e) => {
+        if (e.length > 0) {
+            return getPrestadores()
+        } setPrestadores([])
+        
+    }
+
     return (
-        <>
-        <NavBar onBack={() => navigate(-1)}>Pesquisa</NavBar>
-        <SearchBar placeholder='Pesquisar barbearia' />
+        <div style={{display:"flex",justifyContent:"center"}}>
+            <div style={{position:"absolute",top: 90, zIndex: 999999, Width:"100%"}}>
+        <SearchBar placeholder='Pesquisar estabelecimento' onChange={aa} />
         {prestadores.map((prestador) => {
             return (
                 <PrestadorCard key={prestador.id} prestador={prestador} onClick={handlePrestadorClick}/>
             );
         })}
-        </>
+        </div>
+        </div>
     );
 }
 

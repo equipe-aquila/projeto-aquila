@@ -65,18 +65,18 @@ const PrestadorDetail = () => {
                 <NavBar
                     right={
                         favourites.some(prestador => prestador.id === selectedPrestador.id) ? (
-                            <HeartFill color='var(--adm-color-danger)' fontSize='180%' onClick={handleFavoritoRemove}/>
+                            <HeartFill color='red' fontSize='180%' onClick={handleFavoritoRemove}/>
 
                         ) : (
                             <HeartOutline fontSize='180%' onClick={handleFavoritoAdd}/>
                         )
                     }
-                    onBack={() => navigate(-1)}
+                    onBack={() => navigate(-1)} style={{marginRight:"40px",marginLeft:"40px"}}
                 >
                     {selectedPrestador.name}
                 </NavBar>
 
-                <Card>
+                <Card style={{marginRight:"40px",marginLeft:"40px"}}>
                     <Grid columns={2}>
                         <Grid.Item>
                             <Avatar src='https://img.freepik.com/free-vector/vintage-barbershop-logo-template_441059-26.jpg?w=2000'/>
@@ -101,7 +101,7 @@ const PrestadorDetail = () => {
                         </Grid.Item>
                     </Grid>
                 </Card>
-                <Divider>Serviços</Divider>
+                <Divider style={{color:"white"}}>Serviços</Divider>
                 {servicos.map((servico) => {
                     return (
                         <ServicoCard key={servico.id} servico={servico} onClick={handleServicoClick}/>

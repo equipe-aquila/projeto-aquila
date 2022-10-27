@@ -25,11 +25,6 @@ const Navigation = () => {
             icon: <EnvironmentOutline />,
         },
         {
-            key: '/search',
-            title: 'Pesquisar',
-            icon: <SearchOutline />,
-        },
-        {
             key: '/appointments',
             title: 'Agendamentos',
             icon: <CalendarOutline />,
@@ -49,8 +44,8 @@ const Navigation = () => {
     return (
         <>
             <Outlet/>
-            <div style={{bottom: 0, position: 'fixed', zIndex: 1000, width: '100%', borderTop: 'solid 1px var(--adm-color-border)'}}>
-                <TabBar activeKey={pathname} onChange={value => setRouteActive(value)} >
+            <div style={{bottom: 0,left: 0, position: 'fixed', width: '100%', borderTop: 'solid 1px var(--adm-color-border)'}}>
+                <TabBar style={{backgroundColor:"#fff"}} activeKey={pathname} onChange={value => setRouteActive(value)} >
                     {tabs.map(item => (
                         <TabBar.Item key={item.key} icon={item.icon} title={item.title} />
                     ))}

@@ -1,11 +1,19 @@
 import axios from "axios";
-
 import { useEffect } from "react";
 import { getRedirectResult } from 'firebase/auth';
 import { auth, signInWithGoogleRedirect } from "../utils/firebase/firebase.utils";
 import GoogleButton from "react-google-button";
-import { AutoCenter, Space } from "antd-mobile";
+import { Image} from "antd-mobile";
+import {
+    HeroContainer,
+    HeroContent,
+    HeroContentText,
+    HeroTitle,
+    HeroTitleText,
+    HeroText,
+    ImgHero,
 
+} from './Hero.Styles';
 const Authenticate = () => {
     useEffect(() => {
         const authenticate = async () => {
@@ -24,16 +32,25 @@ const Authenticate = () => {
     }, []);
 
     return (
-        <div>
-            <AutoCenter>
-                <Space direction="vertical">
-                    <AutoCenter>
-                        <h1>Áquila</h1>
-                    </AutoCenter>
-                    <GoogleButton label="Entrar com Google" onClick={signInWithGoogleRedirect}></GoogleButton>
-                </Space>
-            </AutoCenter>
-        </div>
+        <div style={{margin: "0",padding:"0"}}>
+        <HeroContainer>
+            <HeroContent>
+                <HeroContentText>
+                        <HeroTitle>
+                        <Image width={100} src="./aquilalogo.svg" alt="" />
+                        </HeroTitle>
+                     <HeroText>
+                     <i> Com Áquila você fica mais bonito! <br></br>Cadastre-se e encontre o serviço estético mais perto de você!</i>
+                     </HeroText>
+                     <GoogleButton className="google" style={{borderRadius:"3px"}} label="Entrar com Google" onClick={signInWithGoogleRedirect}/>
+                </HeroContentText>
+                <ImgHero>
+                <Image size="large" width={500} src="./imghero.svg" alt="" />
+                </ImgHero>
+            </HeroContent>
+        </HeroContainer>
+     </div>
+
     );
 }
 

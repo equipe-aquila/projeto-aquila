@@ -33,7 +33,7 @@ const AgendamentoCard = ({agendamentoId}) => {
     console.log(agendamento);
 
     return (
-        <Card onClick={agendamento.status ? ('') : () => navigate(`/payment`, {state: agendamento})}>
+        <Card style={{paddingTop:"3px"}} onClick={agendamento.status ? ('') : () => navigate(`/payment`, {state: agendamento})}>
             <Grid columns={2}>
                 <Grid.Item style={{alignSelf: 'center', justifySelf: 'left'}}>
                     <Space direction='vertical'>

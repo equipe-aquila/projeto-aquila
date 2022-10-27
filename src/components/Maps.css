@@ -1,0 +1,12 @@
+.map {
+  height: 94vh;
+}
+
+.map-marker {
+  margin-top: -30px;
+}
+
+.map-marker > img {
+  color: aqua;
+  background-color: aqua;
+}
