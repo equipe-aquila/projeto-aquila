@@ -89,7 +89,7 @@ const ServicoDetail = () => {
     
 
     return (
-        <>
+        <div style={{marginBottom:"80px"}}>
             <NavBar onBack={() => navigate(-1)}>
                 {servico.titulo}
             </NavBar>
@@ -97,7 +97,7 @@ const ServicoDetail = () => {
             <AutoCenter><font style={{fontSize: 'large', fontWeight: 'bold'}}>Selecione um dia e horário</font></AutoCenter>
             <AutoCenter>
 
-            <Space style={{padding: '0 1rem 0 1rem', overflow: 'scroll', maxWidth: '90vw'}}>
+            <Space style={{padding: '0 1rem 0 1rem', overflow: 'scroll', maxWidth: '90vw',backgroundColor:"#B59EE2"}}>
                     {days.map((day, index) => {
                         return (
                             isSameDay(day, selectedDay) ? (
@@ -110,7 +110,8 @@ const ServicoDetail = () => {
             </Space>
             </AutoCenter>
 
-            <PickerView columns={
+                    <div style={{display:"flex",justifyContent:"center",marginBottom:"5px",marginTop:"5px"}}>
+            <PickerView style={{width:"300px",borderRadius:"40px",zIndex:"-431232"}}  columns={
                 [
                     [
                         { label: '10:00', value: '10' },
@@ -123,11 +124,11 @@ const ServicoDetail = () => {
             }
             onChange={(e) => handleTimeSelect(e)}
             />
-
+</div>
             <AutoCenter>
                 <Button color='primary' size='large' onClick={handleAgendamentoConfirm}>Confirmar</Button>
             </AutoCenter>
-        </>
+        </div>
     );
 }
 

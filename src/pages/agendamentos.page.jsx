@@ -33,7 +33,7 @@ const Agendamentos = () => {
             {agendamentos.length > 0 ? (
                 <h1>{agendamentos.map((agendamento, index)=> {
                     return (
-                        <div style={{display:"flex",justifyContent:"center",paddingLeft:"40px",paddingRight:"40px"}}>
+                        <div style={{display:"flex",justifyContent:"center",paddingLeft:"40px",paddingRight:"40px",}}>
                             <div style={{width:"900px",paddingBottom:"6px"}}>
                         <AgendamentoCard  key={index} agendamentoId={agendamento.id}/>
                         </div>
