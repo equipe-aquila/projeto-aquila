@@ -2,11 +2,14 @@ import {
   BaseEntity,
   Column,
   Entity,
+  JoinTable,
+  ManyToMany,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
 } from "typeorm";
 import { Agendamento } from "./Agendamento";
+import { Colaborador } from "./Colaborador";
 import { Prestador } from "./Prestador";
 
 @Entity("servicos")
@@ -31,6 +34,10 @@ export class Servico extends BaseEntity {
 
   @OneToMany(() => Agendamento, (agendamento) => agendamento.servico)
   agendamentos: Agendamento[];
+
+  @ManyToMany(() => Colaborador)
+  @JoinTable()
+  colaboradores: Colaborador[];
 }
 
 export interface servicoInput {

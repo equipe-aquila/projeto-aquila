@@ -39,6 +39,13 @@ import {
   getUsersHandler,
   updateUserHandler,
 } from "./controller/UserController";
+import {
+  getServicoColaboradorHandler,
+  getServicosColaboradorsHandler,
+  createServicosColaboradorHandler,
+  updateServicosColaboradorHandler,
+  deleteServicosColaboradorHandler,
+} from "./controller/ColaboradorController";
 
 export default (app: Express) => {
   /**
@@ -646,7 +653,104 @@ export default (app: Express) => {
    *        description: Sucesso
    */
   app.post("/api/create_payment_intent", createPaymentIntent);
-};
+
+  /**
+   * @openapi
+   * /api/colaborador:
+   *  get:
+   *    tags:
+   *    - Colaborador
+   *    responses:
+   *      200:
+   *        description: Sucesso
+   */
+   app.get("/api/colaborador", getServicosColaboradorsHandler);
+
+   /**
+    * @openapi
+    * '/api/colaborador/{id}':
+    *  get:
+    *     tags:
+    *     - Colaborador
+    *     parameters:
+    *      - name: id
+    *        in: path
+    *        description: O id do colaborador
+    *        required: true
+    *     responses:
+    *       200:
+    *         description: Sucesso
+    *       404:
+    *         description: colaborador não encontrado
+    */
+   app.get("/api/colaborador/:id", getServicoColaboradorHandler);
+ 
+   /**
+    * @openapi
+    * '/api/colaborador/{id}':
+    *  post:
+    *     tags:
+    *     - Colaborador
+    *     requestBody:
+    *      required: true
+    *      content:
+    *        application/json:
+    *           schema:
+    *              $ref: '#/components/schemas/CreateServicoInput'
+    *     responses:
+    *      201:
+    *        description: Sucesso
+    *      409:
+    *        description: Conflito
+    *      400:
+    *        description: Bad request
+    */
+   app.post("/api/colaborador", createServicosColaboradorHandler);
+ 
+   /**
+    * @openapi
+    * '/api/colaborador/{id}':
+    *  put:
+    *     tags:
+    *     - Colaborador
+    *     requestBody:
+    *      required: true
+    *      content:
+    *        application/json:
+    *           schema:
+    *              $ref: '#/components/schemas/UpdateServicoInput'
+    *     parameters:
+    *      - name: id
+    *        in: path
+    *        description: O id do colaborador
+    *        required: true
+    *     responses:
+    *       200:
+    *         description: Sucesso
+    *       404:
+    *         description: colaborador não encontrado
+    */
+   app.put("/api/colaborador/:id", updateServicosColaboradorHandler);
+ 
+   /**
+    * @openapi
+    * '/api/colaborador/{id}':
+    *  delete:
+    *     tags:
+    *     - Colaborador
+    *     parameters:
+    *      - name: id
+    *        in: path
+    *        description: O id do colaborador
+    *        required: true
+    *     responses:
+    *       200:
+    *         description: Sucesso
+    *       404:
+    *         description: Colaborador não encontrado
+    */
+   app.delete("/api/colaborador/:id", deleteServicosColaboradorHandler);
+ };
 
 /**
  * @openapi
