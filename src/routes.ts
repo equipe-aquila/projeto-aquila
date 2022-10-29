@@ -693,10 +693,6 @@ export default (app: Express) => {
     *     - Colaborador
     *     requestBody:
     *      required: true
-    *      content:
-    *        application/json:
-    *           schema:
-    *              $ref: '#/components/schemas/CreateServicoInput'
     *     responses:
     *      201:
     *        description: Sucesso
@@ -876,7 +872,6 @@ export default (app: Express) => {
  *          type: string
  *          default: John Doe
  *        tipo_pessoa:
-m
  *          default: 7895646547
  *        codSeguranca:
  *          type: string
@@ -925,11 +920,24 @@ m
  *    CreateServicoInput:
  *      type: object
  *      required:
- *        - nomeServico
+ *        - titulo
+ *        -  descricao
+ *        -  preco
+ *        -  idPrestador
+ *          
  *      properties:
- *        nomeServico:
+ *        titulo:
  *          type: string
  *          default: Serviço
+ *        descricao:
+ *          type: string
+ *          default: Descrição
+ *        preco:
+ *          type: string
+ *          default: 10
+ *        imagem:
+ *          type: string
+ *          default: imagem_url
  *        idPrestador:
  *          type: int
  *          default: 1

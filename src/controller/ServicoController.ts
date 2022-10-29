@@ -20,7 +20,7 @@ export const getServicoHandler = async (req: Request, res: Response) => {
 }
 
 export const createServicosHandler = async (req: Request, res: Response) => {
-    const { titulo, descricao, preco, idPrestador } = req.body;
+    const { titulo, descricao, preco, imagem, idPrestador } = req.body;
 
     const prestador = await getPrestador(idPrestador);
 
@@ -32,6 +32,7 @@ export const createServicosHandler = async (req: Request, res: Response) => {
         titulo,
         descricao,
         preco,
+        imagem,
         prestador
     });
 

@@ -23,7 +23,7 @@ export class Servico extends BaseEntity {
   @Column({ type: "text" })
   descricao: string;
 
-  @Column({ length: 30, nullable: true })
+  @Column({ length: 255, nullable: true })
   imagem: string;
 
   @Column()
@@ -44,5 +44,6 @@ export interface servicoInput {
   titulo: string;
   descricao: string;
   preco: number;
+  imagem: string;
   prestador: Prestador;
 }
