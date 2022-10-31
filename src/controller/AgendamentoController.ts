@@ -8,7 +8,7 @@ import {
   getAgendamentosByUser,
   updateAgendamento,
 } from "../service/AgendamentoService";
-import { getPrestador } from "../service/PrestadorService";
+import { getAgendamentos, getPrestador } from "../service/PrestadorService";
 import { getUser } from "../service/UserService";
 
 export const createAgendamentoHandler = async (req: Request, res: Response) => {
@@ -32,6 +32,14 @@ export const createAgendamentoHandler = async (req: Request, res: Response) => {
 
   if (!servico) {
     return res.status(404).send("Serviço not found");
+  }
+
+  const agendamentos = await getAgendamentos(prestador);
+
+  for (const agendamento of agendamentos) {
+    if (new Date(data).valueOf() === agendamento.data.valueOf()) {
+      return res.status(409).send({'Erro': 'Já existe um agendamento marcado para este horário'});
+    }
   }
 
   const agendamento = await createAgendamento({

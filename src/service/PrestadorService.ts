@@ -1,8 +1,6 @@
-import { User } from "../entities/User"
-import { getConnection } from "typeorm"
-import { Avaliacao, avaliacaoInput } from "../entities/Avaliacao"
-import { Prestador, prestadorInput } from "../entities/Prestador"
-import { getFavoritos } from "./UserService"
+import { getConnection } from "typeorm";
+import { Avaliacao, avaliacaoInput } from "../entities/Avaliacao";
+import { Prestador, prestadorInput } from "../entities/Prestador";
 
 export const getPrestadores = async () => {
     const prestadores = await Prestador.find()
@@ -54,4 +52,14 @@ export const getServicos = async (prestador: Prestador) => {
     .loadMany();
 
     return servicos;
+}
+
+export const getAgendamentos = async (prestador: Prestador) => {
+    const agendamentos = await getConnection()
+    .createQueryBuilder()
+    .relation(Prestador, 'agendamentos')
+    .of(prestador)
+    .loadMany();
+
+    return agendamentos;
 }

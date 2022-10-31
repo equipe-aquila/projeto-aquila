@@ -14,7 +14,7 @@ export class Agendamento extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ type: "date" })
+  @Column({ type: "timestamptz" })
   data: Date;
 
   @Column({ nullable: true })

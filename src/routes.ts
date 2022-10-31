@@ -543,7 +543,7 @@ export default (app: Express) => {
    *      content:
    *        application/json:
    *           schema:
-   *              $ref: ''
+   *              $ref: '#/components/schemas/CreateAgendamentoInput'
    *     parameters:
    *      - name: userId
    *        in: path
@@ -949,4 +949,17 @@ export default (app: Express) => {
  *        nomeServico:
  *          type: string
  *          default: Serviço
+ *    CreateAgendamentoInput:
+ *      type: object
+ *      required:
+ *        - data
+ *        - servicoId
+ *          
+ *      properties:
+ *        data:
+ *          type: string
+ *          default: 2022-10-30T12:00:00.000-03:00
+ *        servicoId:
+ *          type: int
+ *          default: 1
  */
