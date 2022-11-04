@@ -1,4 +1,4 @@
-import { Colaborador, servicoInput} from "../entities/Colaborador";
+import { Colaborador, colaboradorInput} from "../entities/Colaborador";
 
 export const getServicosColaborador = async () => {
     const servicos = await Colaborador.find();
@@ -14,7 +14,7 @@ export const getServicosColaborador = async () => {
     return servico;
   };
   
-  export const createServicoColaborador = async (input: servicoInput) => {
+  export const createServicoColaborador = async (input: colaboradorInput) => {
     const servico = Colaborador.create(input);
   
     await servico.save();
@@ -22,7 +22,7 @@ export const getServicosColaborador = async () => {
     return servico;
   };
   
-  export const updateServicoColaborador = async (servicoId: number, input: servicoInput) => {
+  export const updateServicoColaborador = async (servicoId: number, input: colaboradorInput) => {
     await Colaborador.update(servicoId, input);
   
     const updatedUser = await Colaborador.findOne(servicoId);
