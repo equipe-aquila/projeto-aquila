@@ -871,14 +871,20 @@ export default (app: Express) => {
  *        name:
  *          type: string
  *          default: John Doe
- *        tipo_pessoa:
- *          default: 7895646547
- *        codSeguranca:
+*        tipo_pessoa:
  *          type: string
- *          default: 123
- *        validade:
+ *        rua:
  *          type: string
- *          default: 05/29
+ *        numero:
+ *          type: string
+ *        bairro:
+ *          type: string
+ *        cidade:
+ *          type: string
+ *        estado:
+ *          type: string
+ *        cep:
+ *          type: string
  *    MeioPagamentoResponse:
  *      type: object
  *      properties:

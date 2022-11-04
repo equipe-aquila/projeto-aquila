@@ -11,16 +11,16 @@ export default async () => {
     try {
         const connection = createConnection({
             type: 'postgres',
-            username: 'xhsylswkvjjxzt',
-            password: '4172410e6e7a2bbca054d3126a8254c505de28ba955c4b3da7366da0a9934838',
-            database: 'd7eul8t2kteh1h',
-            host: 'ec2-3-209-124-113.compute-1.amazonaws.com',
+            username: 'postgres',
+            password: 'projetoaquila2022',
+            database: 'aquila',
+            host: 'database-1.cscrmke2ep8r.us-east-1.rds.amazonaws.com',
             entities: [Agendamento, Avaliacao, MeioPagamento, Prestador, Servico, User, Colaborador],
             synchronize: true,
             ssl: true,
             extra: {
                 ssl: {
-                rejectUnauthorized: false,
+                    rejectUnauthorized: false,
                 },
             },
         });
