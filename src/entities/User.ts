@@ -11,10 +11,10 @@ export class User extends BaseEntity {
 	@PrimaryColumn()
 	id: string
 
-	@Column({ length: 30 })
+	@Column({ length: 255 })
 	name: string
 
-	@Column({ length: 30 })
+	@Column({ length: 255 })
 	email: string
 
 	@Column({ nullable: true })

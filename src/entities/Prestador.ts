@@ -10,10 +10,10 @@ export class Prestador extends BaseEntity {
 	@PrimaryGeneratedColumn()
 	id: number
 
-	@Column({ length: 30 })
+	@Column({ length: 255 })
 	name: string
 
-	@Column({ length: 30 })
+	@Column({ length: 255 })
 	email: string
 
 	@Column({ nullable: true })

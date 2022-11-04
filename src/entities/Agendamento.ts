@@ -17,8 +17,11 @@ export class Agendamento extends BaseEntity {
   @Column({ type: "timestamptz" })
   data: Date;
 
-  @Column({ nullable: true })
-  status: boolean;
+  @Column({ default: false })
+  pago: boolean;
+
+  @Column({ default: false })
+  cancelado: boolean;
 
   @ManyToOne(() => User, (user) => user.agendamentos)
   user: User;
@@ -34,7 +37,8 @@ export class Agendamento extends BaseEntity {
 
 export interface agendamentoInput {
   data: Date;
-  status?: boolean;
+  pago?: boolean;
+  cancelado?: boolean;
   user: User;
   prestador: Prestador;
   servico: Servico;

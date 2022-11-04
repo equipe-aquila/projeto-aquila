@@ -10,10 +10,13 @@ export class Colaborador extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ type: "text" })
+  @Column()
   nomeColaborador: string;
+
+  @Column()
+  foto_url: string;
 }
 
-export interface servicoInput {
+export interface colaboradorInput {
   nomeColaborador: string;
 }
