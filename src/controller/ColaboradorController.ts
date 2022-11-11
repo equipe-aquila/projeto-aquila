@@ -10,56 +10,75 @@ import {
 import { getPrestador } from "../service/PrestadorService";
 
 export const getServicosColaboradorsHandler = async (req: Request, res: Response) => {
-    const users = await getServicosColaborador();
+    try {
+        const users = await getServicosColaborador();
   
-    return res.status(200).send(users);
+        return res.status(200).send(users);
+    } catch (error) {
+        return res.status(200).send({'error': error.message});
+    }
 }
 
 export const getServicoColaboradorHandler = async (req: Request, res: Response) => {
-    const servicoId = parseInt(req.params.id)
-    const servico = await getServicoColaborador(servicoId);
+    try {
+        const servicoId = parseInt(req.params.id)
+        const servico = await getServicoColaborador(servicoId);
 
-    if (!servico) {
-        return res.status(400).send('Serviço not found');
+        if (!servico) {
+            return res.status(400).send('Serviço not found');
+        }
+        return res.status(200).send(servico);
+    } catch (error) {
+        return res.status(200).send({'error': error.message});
     }
-
-    return res.status(200).send(servico);
 }
 
 export const createServicosColaboradorHandler = async (req: Request, res: Response) => {
-    const { nomeColaborador, idPrestador } = req.body;
+    try {
+        const { nomeColaborador, idPrestador } = req.body;
 
-    const prestador = await getPrestador(idPrestador);
+        const prestador = await getPrestador(idPrestador);
 
-    if (!prestador) {
-        return res.status(400).send('Prestador not found');
+        if (!prestador) {
+            return res.status(400).send('Prestador not found');
+        }
+
+        const servico = await createServicoColaborador({
+            nomeColaborador 
+        });
+
+        return res.status(201).send(servico);
+    } catch (error) {
+        return res.status(200).send({'error': error.message});
     }
-
-    const servico = await createServicoColaborador({
-        nomeColaborador 
-    });
-
-    return res.status(201).send(servico);
 }
 
 export const updateServicosColaboradorHandler = async (req: Request, res: Response) => {
-    const servicoId = parseInt(req.params.id);
-    const servico = await getServicoColaborador(servicoId);
+    try {
+        const servicoId = parseInt(req.params.id);
+        const servico = await getServicoColaborador(servicoId);
 
-    if (!servico) {
-        return res.status(404).send('Serviço não encontrado');
+        if (!servico) {
+            return res.status(404).send('Serviço não encontrado');
+        }
+
+        const updatedServico = await updateServicoColaborador(servicoId, req.body);
+
+        return res.status(200).send(updatedServico);
+    } catch (error) {
+        return res.status(200).send({'error': error.message});
     }
-
-    const updatedServico = await updateServicoColaborador(servicoId, req.body);
-
-    return res.status(200).send(updatedServico);
 }
 
 
 export const deleteServicosColaboradorHandler = async (req: Request, res: Response) => {
-    const servicoId = parseInt(req.params.id);
+    try {
+        const servicoId = parseInt(req.params.id);
 
-    await deleteServicoColaborador(servicoId);
+        await deleteServicoColaborador(servicoId);
 
-    res.status(200).send('Serviço removido com sucesso');
+        res.status(200).send('Serviço removido com sucesso');
+    } catch (error) {
+        return res.status(200).send({'error': error.message});
+    }
 }
