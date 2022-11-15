@@ -48,9 +48,18 @@ const Authenticate = () => {
     
         try {
           const response = await signInAuthUserWithEmailAndPassword(email, password);
-          console.log(response);
         } catch (error) {
-          console.log('user sign in failed', error);
+          switch(error.code) {
+            case 'auth/wrong-password':
+                alert('senha errada');
+                break;
+            case 'auth/user-not-found':
+                alert('usuário não está cadastrado');;
+                break;
+            default:
+                alert('occoreu um erro');
+                break;
+          }
         }
       };
 

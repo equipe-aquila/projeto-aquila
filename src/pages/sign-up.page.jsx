@@ -39,7 +39,20 @@ const SignUp = () => {
         });
 
     } catch (error) {
-        console.log(error);
+        switch(error.code) {
+            case 'auth/email-already-in-use':
+                alert('email já está cadastrado');
+                break;
+            case 'auth/invalid-email':
+                alert('email inválido');;
+                break;
+            case 'auth/weak-password':
+                alert('senha deve ter no mínimo 6 caracteres');;
+                break;
+            default:
+                alert('occoreu um erro');
+                break;
+          }
     }
   }
 
