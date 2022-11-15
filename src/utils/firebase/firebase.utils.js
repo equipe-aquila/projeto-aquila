@@ -1,5 +1,6 @@
 import {initializeApp} from 'firebase/app';
-import {getAuth, GoogleAuthProvider, signInWithRedirect, signOut, onAuthStateChanged, createUserWithEmailAndPassword} from 'firebase/auth';
+import {getAuth, GoogleAuthProvider, signInWithRedirect, signOut, onAuthStateChanged,
+    createUserWithEmailAndPassword, signInWithEmailAndPassword} from 'firebase/auth';
 
 const firebaseConfig = {
     apiKey: "AIzaSyCa0al2rbTgh560-ms6J11ENi_tA4eYSe8",
@@ -18,10 +19,20 @@ provider.setCustomParameters({
 });
 
 export const auth = getAuth();
+
 export const signInWithGoogleRedirect = () => signInWithRedirect(auth, provider);
+
 export const signOutUser = async () => await signOut(auth);
+
 export const onAuthStateChangedListener = (callback) => onAuthStateChanged(auth, callback);
+
 export const createAuthUserWithEmailAndPassword = async (email, password) => {
     if(!email || !password) return;
     return await createUserWithEmailAndPassword(auth, email, password);
 }
+
+export const signInAuthUserWithEmailAndPassword = async (email, password) => {
+    if (!email || !password) return;
+  
+    return await signInWithEmailAndPassword(auth, email, password);
+};
