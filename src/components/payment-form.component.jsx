@@ -38,7 +38,7 @@ const PaymentForm = ({agendamento}) => {
                     setSuccess(true);
 
                     await axios.put(`https://projeto-aquila.herokuapp.com/api/agendamentos/${agendamento.id}`, {
-                        status: true
+                        pago: true
                     });
                 }
             } catch (error) {

@@ -42,7 +42,7 @@ const AgendamentoCard = ({agendamentoId}) => {
                             <span style={{fontSize: 'medium', fontWeight: 'bold', padding: '.3rem'}}>{agendamento.data}</span>
                         </div>
                         {
-                            agendamento.status ?
+                            agendamento.pago ?
                             (
                                 <div style={{display: 'flex', alignItems: 'center'}}>
                                     <CheckCircleFill color='green' />
