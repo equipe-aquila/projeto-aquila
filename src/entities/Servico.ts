@@ -10,7 +10,6 @@ import {
 } from "typeorm";
 import { Agendamento } from "./Agendamento";
 import { Colaborador } from "./Colaborador";
-import { Prestador } from "./Prestador";
 
 @Entity("servicos")
 export class Servico extends BaseEntity {
@@ -29,15 +28,15 @@ export class Servico extends BaseEntity {
   @Column()
   preco: number;
 
-  @ManyToOne(() => Prestador, (prestador) => prestador.servicos)
-  prestador: Prestador;
+  @ManyToOne(() => Colaborador, (colaborador) => colaborador.servicos)
+  colaborador: Colaborador;
 
   @OneToMany(() => Agendamento, (agendamento) => agendamento.servico)
   agendamentos: Agendamento[];
 
-  @ManyToMany(() => Colaborador)
-  @JoinTable()
-  colaboradores: Colaborador[];
+  // @ManyToMany(() => Colaborador)
+  // @JoinTable()
+  // colaboradores: Colaborador[];
 }
 
 export interface servicoInput {
@@ -45,5 +44,5 @@ export interface servicoInput {
   descricao: string;
   preco: number;
   imagem: string;
-  prestador: Prestador;
+  colaborador: Colaborador;
 }

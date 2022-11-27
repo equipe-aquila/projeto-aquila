@@ -3,6 +3,7 @@ import {
 } from 'typeorm';
 import { Agendamento } from './Agendamento';
 import { Avaliacao } from './Avaliacao';
+import { Colaborador } from './Colaborador';
 import { Servico } from './Servico';
 
 @Entity('prestador')
@@ -43,8 +44,8 @@ export class Prestador extends BaseEntity {
 	@OneToMany(() => Avaliacao, (avaliacao) => avaliacao.prestador)
 	avaliacoes: Avaliacao[]
 
-	@OneToMany(() => Servico, (servico) => servico.prestador)
-	servicos: Servico[]
+	@OneToMany(() => Colaborador, (colaborador) => colaborador.prestador)
+	colaboradores: Colaborador[]
 }
 
 export interface prestadorInput {

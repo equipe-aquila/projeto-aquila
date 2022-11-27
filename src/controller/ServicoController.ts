@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
-import { getPrestador } from "../service/PrestadorService";
+import { getColaborador } from "../service/ColaboradorService";
 import { createServico, deleteServico, getServicos, updateServico, getServico} from '../service/ServicoService'
 
-export const getServicossHandler = async (req: Request, res: Response) => {
+export const getServicosHandler = async (req: Request, res: Response) => {
     try {
         const users = await getServicos();
   
@@ -29,11 +29,11 @@ export const getServicoHandler = async (req: Request, res: Response) => {
 
 export const createServicosHandler = async (req: Request, res: Response) => {
     try {
-        const { titulo, descricao, preco, imagem, idPrestador } = req.body;
+        const { titulo, descricao, preco, imagem, idColaborador } = req.body;
 
-        const prestador = await getPrestador(idPrestador);
+        const colaborador = await getColaborador(idColaborador);
 
-        if (!prestador) {
+        if (!colaborador) {
             return res.status(400).send('Prestador not found');
         }
 
@@ -42,7 +42,7 @@ export const createServicosHandler = async (req: Request, res: Response) => {
             descricao,
             preco,
             imagem,
-            prestador
+            colaborador
         });
 
         return res.status(201).send(servico);

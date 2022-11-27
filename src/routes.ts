@@ -8,13 +8,13 @@ import {
   updateAgendamentoHandler,
 } from "./controller/AgendamentoController";
 import {
-  confirmPaymentIntent,
   createPaymentIntent,
 } from "./controller/PagamentosController";
 import {
   createAvalicaoHandler,
   createPrestadorHandler,
   deletePrestadorHandler,
+  getPrestadorColaboradoresHandler,
   getPrestadoresHandler,
   getPrestadorHandler,
   getPrestadorServicosHandler,
@@ -24,7 +24,7 @@ import {
   createServicosHandler,
   deleteServicosHandler,
   getServicoHandler,
-  getServicossHandler,
+  getServicosHandler,
   updateServicosHandler,
 } from "./controller/ServicoController";
 import {
@@ -40,11 +40,11 @@ import {
   updateUserHandler,
 } from "./controller/UserController";
 import {
-  getServicoColaboradorHandler,
-  getServicosColaboradorsHandler,
-  createServicosColaboradorHandler,
-  updateServicosColaboradorHandler,
-  deleteServicosColaboradorHandler,
+  getColaboradorHandler,
+  getServicosColaboradorHandler,
+  createColaboradorHandler,
+  updateColaboradorHandler,
+  deleteColaboradorHandler,
 } from "./controller/ColaboradorController";
 
 export default (app: Express) => {
@@ -437,6 +437,26 @@ export default (app: Express) => {
 
   /**
    * @openapi
+   * '/api/prestadores/{id}/colaboradores':
+   *  get:
+   *     tags:
+   *     - Prestador
+   *     parameters:
+   *      - name: id
+   *        in: path
+   *        description: O id do prestador
+   *        required: true
+   *     responses:
+   *       200:
+   *         description: Sucesso
+   *       404:
+   *         description: Prestador não encontrado
+   */
+   app.get("/api/prestadores/:id/colaboradores", getPrestadorColaboradoresHandler);
+
+
+  /**
+   * @openapi
    * /api/servicos:
    *  get:
    *    tags:
@@ -445,7 +465,7 @@ export default (app: Express) => {
    *      200:
    *        description: Sucesso
    */
-  app.get("/api/servicos", getServicossHandler);
+  app.get("/api/servicos", getServicosHandler);
 
   /**
    * @openapi
@@ -656,7 +676,7 @@ export default (app: Express) => {
 
   /**
    * @openapi
-   * /api/colaborador:
+   * /api/colaborador/{id}/servicos:
    *  get:
    *    tags:
    *    - Colaborador
@@ -664,7 +684,7 @@ export default (app: Express) => {
    *      200:
    *        description: Sucesso
    */
-   app.get("/api/colaborador", getServicosColaboradorsHandler);
+   app.get("/api/colaborador/:id/servicos", getServicosColaboradorHandler);
 
    /**
     * @openapi
@@ -683,7 +703,7 @@ export default (app: Express) => {
     *       404:
     *         description: colaborador não encontrado
     */
-   app.get("/api/colaborador/:id", getServicoColaboradorHandler);
+   app.get("/api/colaborador/:id", getColaboradorHandler);
  
    /**
     * @openapi
@@ -701,7 +721,7 @@ export default (app: Express) => {
     *      400:
     *        description: Bad request
     */
-   app.post("/api/colaborador", createServicosColaboradorHandler);
+   app.post("/api/colaborador", createColaboradorHandler);
  
    /**
     * @openapi
@@ -726,7 +746,7 @@ export default (app: Express) => {
     *       404:
     *         description: colaborador não encontrado
     */
-   app.put("/api/colaborador/:id", updateServicosColaboradorHandler);
+   app.put("/api/colaborador/:id", updateColaboradorHandler);
  
    /**
     * @openapi
@@ -745,7 +765,7 @@ export default (app: Express) => {
     *       404:
     *         description: Colaborador não encontrado
     */
-   app.delete("/api/colaborador/:id", deleteServicosColaboradorHandler);
+   app.delete("/api/colaborador/:id", deleteColaboradorHandler);
  };
 
 /**

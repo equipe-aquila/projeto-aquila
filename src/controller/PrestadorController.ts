@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { createAvalicao, createPrestador, deletePrestador, getPrestador, getPrestadores, getServicos, updatePrestador } from "../service/PrestadorService";
+import { createAvalicao, createPrestador, deletePrestador, getColaboradores, getPrestador, getPrestadores, getServicos, updatePrestador } from "../service/PrestadorService";
 import { getUser } from "../service/UserService";
 
 export const getPrestadoresHandler = async (req: Request, res: Response) => {
@@ -100,6 +100,22 @@ export const getPrestadorServicosHandler = async (req: Request, res: Response) =
         const servicos = await getServicos(prestador);
 
         return res.status(200).send(servicos);
+    } catch (error) {
+        return res.status(200).send({'error': error.message});
+    }
+}
+
+export const getPrestadorColaboradoresHandler = async (req: Request, res: Response) => {
+    try {
+        const prestadorId = parseInt(req.params.id);
+
+        const prestador = await getPrestador(prestadorId);
+
+        if (!prestador) return res.status(404).send('Prestador not found');
+
+        const colaboradoes = await getColaboradores(prestador);
+
+        return res.status(200).send(colaboradoes);
     } catch (error) {
         return res.status(200).send({'error': error.message});
     }

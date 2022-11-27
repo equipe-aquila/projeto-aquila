@@ -1,50 +1,45 @@
 import { Request, Response } from "express";
 import {
 
-  createServicoColaborador,
-  deleteServicoColaborador,
-  getServicoColaborador,
+  createColaborador,
+  deleteColaborador,
+  getColaborador,
   getServicosColaborador,
-  updateServicoColaborador,
+  updateColaborador,
 } from "../service/ColaboradorService";
 import { getPrestador } from "../service/PrestadorService";
 
-export const getServicosColaboradorsHandler = async (req: Request, res: Response) => {
+export const getServicosColaboradorHandler = async (req: Request, res: Response) => {
     try {
-        const users = await getServicosColaborador();
+        const servicos = await getServicosColaborador();
   
-        return res.status(200).send(users);
+        return res.status(200).send(servicos);
     } catch (error) {
         return res.status(200).send({'error': error.message});
     }
 }
 
-export const getServicoColaboradorHandler = async (req: Request, res: Response) => {
+export const getColaboradorHandler = async (req: Request, res: Response) => {
     try {
-        const servicoId = parseInt(req.params.id)
-        const servico = await getServicoColaborador(servicoId);
+        const colaboradorId = parseInt(req.params.id);
+        const colaborador = await getColaborador(colaboradorId);
 
-        if (!servico) {
-            return res.status(400).send('Serviço not found');
+        if (!colaborador) {
+            return res.status(400).send('Colaborador not found');
         }
-        return res.status(200).send(servico);
+        return res.status(200).send(colaborador);
     } catch (error) {
         return res.status(200).send({'error': error.message});
     }
 }
 
-export const createServicosColaboradorHandler = async (req: Request, res: Response) => {
+export const createColaboradorHandler = async (req: Request, res: Response) => {
     try {
-        const { nomeColaborador, idPrestador } = req.body;
+        const { nome, foto_url } = req.body;
 
-        const prestador = await getPrestador(idPrestador);
-
-        if (!prestador) {
-            return res.status(400).send('Prestador not found');
-        }
-
-        const servico = await createServicoColaborador({
-            nomeColaborador 
+        const servico = await createColaborador({
+            nome,
+            foto_url
         });
 
         return res.status(201).send(servico);
@@ -53,16 +48,16 @@ export const createServicosColaboradorHandler = async (req: Request, res: Respon
     }
 }
 
-export const updateServicosColaboradorHandler = async (req: Request, res: Response) => {
+export const updateColaboradorHandler = async (req: Request, res: Response) => {
     try {
-        const servicoId = parseInt(req.params.id);
-        const servico = await getServicoColaborador(servicoId);
+        const colaboradorId = parseInt(req.params.id);
+        const colaborador = await getColaborador(colaboradorId);
 
-        if (!servico) {
-            return res.status(404).send('Serviço não encontrado');
+        if (!colaborador) {
+            return res.status(404).send('Colaborador não encontrado');
         }
 
-        const updatedServico = await updateServicoColaborador(servicoId, req.body);
+        const updatedServico = await updateColaborador(colaboradorId, req.body);
 
         return res.status(200).send(updatedServico);
     } catch (error) {
@@ -71,13 +66,13 @@ export const updateServicosColaboradorHandler = async (req: Request, res: Respon
 }
 
 
-export const deleteServicosColaboradorHandler = async (req: Request, res: Response) => {
+export const deleteColaboradorHandler = async (req: Request, res: Response) => {
     try {
-        const servicoId = parseInt(req.params.id);
+        const colaboradorId = parseInt(req.params.id);
 
-        await deleteServicoColaborador(servicoId);
+        await deleteColaborador(colaboradorId);
 
-        res.status(200).send('Serviço removido com sucesso');
+        res.status(200).send('Colaborador removido com sucesso');
     } catch (error) {
         return res.status(200).send({'error': error.message});
     }

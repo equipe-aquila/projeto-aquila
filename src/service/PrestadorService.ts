@@ -63,3 +63,13 @@ export const getAgendamentos = async (prestador: Prestador) => {
 
     return agendamentos;
 }
+
+export const getColaboradores = async (prestador: Prestador) => {
+    const colaboradores = await getConnection()
+    .createQueryBuilder()
+    .relation(Prestador, 'colaboradores')
+    .of(prestador)
+    .loadMany();
+
+    return colaboradores;
+}
