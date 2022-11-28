@@ -30,4 +30,5 @@ export class Colaborador extends BaseEntity {
 export interface colaboradorInput {
   nome: string;
   foto_url?: string;
+  prestador: Prestador;
 }

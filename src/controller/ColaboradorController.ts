@@ -35,11 +35,18 @@ export const getColaboradorHandler = async (req: Request, res: Response) => {
 
 export const createColaboradorHandler = async (req: Request, res: Response) => {
     try {
-        const { nome, foto_url } = req.body;
+        const { nome, foto_url, prestadorId } = req.body;
+
+        const prestador = await getPrestador(prestadorId);
+
+        if (!prestador) {
+            return res.status(400).send('Prestador not found');
+        }
 
         const servico = await createColaborador({
             nome,
-            foto_url
+            foto_url,
+            prestador
         });
 
         return res.status(201).send(servico);
