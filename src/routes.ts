@@ -1011,13 +1011,13 @@ export default (app: Express) => {
  *    CreateColaboradorInput:
  *      type: object
  *      required:
- *        - nome
+ *        - nomeColaborador
  *        - prestadorId
  *
  *      properties:
- *        nome:
+ *        nomeColaborador:
  *          type: string
- *          default: 2022-10-30T12:00:00.000-03:00
+ *          default: nome
  *        foto_url:
  *          type: string
  *          default: ""
