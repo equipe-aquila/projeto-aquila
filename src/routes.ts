@@ -733,6 +733,10 @@ export default (app: Express) => {
     *     - Colaborador
     *     requestBody:
     *      required: true
+    *      content:
+    *        application/json:
+    *           schema:
+    *              $ref: '#/components/schemas/CreateColaboradorInput'
     *     responses:
     *      201:
     *        description: Sucesso
@@ -751,10 +755,6 @@ export default (app: Express) => {
     *     - Colaborador
     *     requestBody:
     *      required: true
-    *      content:
-    *        application/json:
-    *           schema:
-    *              $ref: '#/components/schemas/CreateColaboradorInput'
     *     parameters:
     *      - name: id
     *        in: path
