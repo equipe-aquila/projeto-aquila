@@ -1,19 +1,36 @@
 import { Request, Response } from "express";
 import {
-
   createColaborador,
   deleteColaborador,
   getColaborador,
-  getServicosColaborador,
+  getColaboradorAgendamentos,
+  getColaboradores,
   updateColaborador,
 } from "../service/ColaboradorService";
 import { getPrestador } from "../service/PrestadorService";
 
-export const getServicosColaboradorHandler = async (req: Request, res: Response) => {
+export const getColaboradoresHandler = async (req: Request, res: Response) => {
     try {
-        const servicos = await getServicosColaborador();
+        const colaboradores = await getColaboradores();
   
-        return res.status(200).send(servicos);
+        return res.status(200).send(colaboradores);
+    } catch (error) {
+        return res.status(200).send({'error': error.message});
+    }
+}
+
+export const getColaboradorAgendamentosHandler = async (req: Request, res: Response) => {
+    try {
+        const colaboradorId = parseInt(req.params.id);
+        const colaborador = await getColaborador(colaboradorId);
+
+        if (!colaborador) {
+            return res.status(400).send('Colaborador not found');
+        }
+
+        const colaboradorAgendamentos = await getColaboradorAgendamentos(colaborador);
+  
+        return res.status(200).send(colaboradorAgendamentos);
     } catch (error) {
         return res.status(200).send({'error': error.message});
     }

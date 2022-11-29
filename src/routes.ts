@@ -41,10 +41,11 @@ import {
 } from "./controller/UserController";
 import {
   getColaboradorHandler,
-  getServicosColaboradorHandler,
+  getColaboradoresHandler,
   createColaboradorHandler,
   updateColaboradorHandler,
   deleteColaboradorHandler,
+  getColaboradorAgendamentosHandler,
 } from "./controller/ColaboradorController";
 
 export default (app: Express) => {
@@ -676,7 +677,7 @@ export default (app: Express) => {
 
   /**
    * @openapi
-   * /api/colaborador/{id}/servicos:
+   * /api/colaboradores:
    *  get:
    *    tags:
    *    - Colaborador
@@ -684,7 +685,7 @@ export default (app: Express) => {
    *      200:
    *        description: Sucesso
    */
-   app.get("/api/colaborador/:id/servicos", getServicosColaboradorHandler);
+   app.get("/api/colaboradores", getColaboradoresHandler);
 
    /**
     * @openapi
@@ -707,7 +708,26 @@ export default (app: Express) => {
  
    /**
     * @openapi
-    * '/api/colaborador/{id}':
+    * '/api/colaborador/{id}/agendamentos':
+    *  get:
+    *     tags:
+    *     - Colaborador
+    *     parameters:
+    *      - name: id
+    *        in: path
+    *        description: O id do colaborador
+    *        required: true
+    *     responses:
+    *       200:
+    *         description: Sucesso
+    *       404:
+    *         description: colaborador não encontrado
+    */
+    app.get("/api/colaborador/:id/agendamentos", getColaboradorAgendamentosHandler);
+
+   /**
+    * @openapi
+    * '/api/colaborador':
     *  post:
     *     tags:
     *     - Colaborador
@@ -734,7 +754,7 @@ export default (app: Express) => {
     *      content:
     *        application/json:
     *           schema:
-    *              $ref: '#/components/schemas/UpdateServicoInput'
+    *              $ref: '#/components/schemas/CreateColaboradorInput'
     *     parameters:
     *      - name: id
     *        in: path
@@ -986,6 +1006,22 @@ export default (app: Express) => {
  *          type: string
  *          default: 2022-10-30T12:00:00.000-03:00
  *        servicoId:
+ *          type: int
+ *          default: 1
+ *    CreateColaboradorInput:
+ *      type: object
+ *      required:
+ *        - nome
+ *        - prestadorId
+ *
+ *      properties:
+ *        nome:
+ *          type: string
+ *          default: 2022-10-30T12:00:00.000-03:00
+ *        foto_url:
+ *          type: string
+ *          default: ""
+ *        prestadorId:
  *          type: int
  *          default: 1
  */

@@ -8,7 +8,6 @@ export const getPrestadores = async () => {
     return prestadores
 }
 
-
 export const getPrestador = async (prestadorId: number) => {
     const prestador = await Prestador.findOne(prestadorId)
 
@@ -52,16 +51,6 @@ export const getServicos = async (prestador: Prestador) => {
     .loadMany();
 
     return servicos;
-}
-
-export const getAgendamentos = async (prestador: Prestador) => {
-    const agendamentos = await getConnection()
-    .createQueryBuilder()
-    .relation(Prestador, 'agendamentos')
-    .of(prestador)
-    .loadMany();
-
-    return agendamentos;
 }
 
 export const getColaboradores = async (prestador: Prestador) => {

@@ -8,11 +8,12 @@ import {
   getAgendamentosByUser,
   updateAgendamento,
 } from "../service/AgendamentoService";
-import { getAgendamentos, getPrestador } from "../service/PrestadorService";
+import { getPrestador } from "../service/PrestadorService";
 import { getUser } from "../service/UserService";
+import { getColaborador, getColaboradorAgendamentos } from "../service/ColaboradorService";
 
 export const createAgendamentoHandler = async (req: Request, res: Response) => {
-  const { userId, prestadorId } = req.params;
+  const { userId, colaboradorId } = req.params;
 
   try {
     const user = await getUser(userId);
@@ -20,9 +21,9 @@ export const createAgendamentoHandler = async (req: Request, res: Response) => {
       return res.status(404).send("User not found");
     }
   
-    const prestador = await getPrestador(parseInt(prestadorId));
+    const colaborador = await getColaborador(parseInt(colaboradorId));
   
-    if (!prestador) {
+    if (!colaborador) {
       return res.status(404).send("Prestador not found");
     }
   
@@ -34,7 +35,7 @@ export const createAgendamentoHandler = async (req: Request, res: Response) => {
       return res.status(404).send("Serviço not found");
     }
   
-    const agendamentos = await getAgendamentos(prestador);
+    const agendamentos = await getColaboradorAgendamentos(colaborador);
   
     for (const agendamento of agendamentos) {
       if (new Date(data).valueOf() === agendamento.data.valueOf()) {
@@ -45,7 +46,7 @@ export const createAgendamentoHandler = async (req: Request, res: Response) => {
     const agendamento = await createAgendamento({
       data,
       user,
-      prestador,
+      colaborador,
       servico,
     });
 

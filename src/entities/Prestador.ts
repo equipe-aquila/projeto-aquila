@@ -38,9 +38,6 @@ export class Prestador extends BaseEntity {
 	@Column({ nullable: true })
 	cep: string
 
-	@OneToMany(() => Agendamento, (agendamento) => agendamento.prestador)
-	agendamentos: Agendamento[]
-
 	@OneToMany(() => Avaliacao, (avaliacao) => avaliacao.prestador)
 	avaliacoes: Avaliacao[]
 

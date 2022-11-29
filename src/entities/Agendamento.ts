@@ -5,6 +5,7 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
 } from "typeorm";
+import { Colaborador } from "./Colaborador";
 import { Prestador } from "./Prestador";
 import { Servico } from "./Servico";
 import { User } from "./User";
@@ -26,8 +27,8 @@ export class Agendamento extends BaseEntity {
   @ManyToOne(() => User, (user) => user.agendamentos)
   user: User;
 
-  @ManyToOne(() => Prestador, (prestador) => prestador.agendamentos)
-  prestador: Prestador;
+  @ManyToOne(() => Colaborador, (colaborador) => colaborador.agendamentos)
+  colaborador: Colaborador;
 
   @ManyToOne(() => Servico, (servico) => servico.agendamentos, {
     nullable: true,
@@ -40,6 +41,6 @@ export interface agendamentoInput {
   pago?: boolean;
   cancelado?: boolean;
   user: User;
-  prestador: Prestador;
+  colaborador: Colaborador;
   servico: Servico;
 }
