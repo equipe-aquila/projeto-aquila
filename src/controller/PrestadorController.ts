@@ -90,7 +90,7 @@ export const createAvalicaoHandler = async (req: Request, res: Response) => {
 }
 
 export const getPrestadorServicosHandler = async (req: Request, res: Response) => {
-    try {
+    // try {
         const prestadorId = parseInt(req.params.id);
 
         const prestador = await getPrestador(prestadorId);
@@ -100,9 +100,9 @@ export const getPrestadorServicosHandler = async (req: Request, res: Response) =
         const servicos = await getServicos(prestador);
 
         return res.status(200).send(servicos);
-    } catch (error) {
-        return res.status(200).send({'error': error.message});
-    }
+    // } catch (error) {
+    //     // return res.status(200).send({'error': error.message});
+    // }
 }
 
 export const getPrestadorColaboradoresHandler = async (req: Request, res: Response) => {

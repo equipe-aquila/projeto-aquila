@@ -54,7 +54,7 @@ export const getServicos = async (prestador: Prestador) => {
     const servicos = [];
 
     for (const colaborador of colaboradores) {
-        const servico = await Servico.find({where: colaborador});
+        const servico = await Servico.find({where: { colaborador }});
         servicos.push(servico)
     }
 
