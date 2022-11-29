@@ -25,11 +25,11 @@ export const getColaborador = async (id: number) => {
 };
 
 export const createColaborador = async (input: colaboradorInput) => {
-  const servico = Colaborador.create(input);
+  const colaborador = Colaborador.create(input);
 
-  await servico.save();
+  await colaborador.save();
 
-  return servico;
+  return colaborador;
 };
 
 export const updateColaborador = async (servicoId: number, input: colaboradorInput) => {

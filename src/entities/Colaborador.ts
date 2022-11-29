@@ -32,7 +32,7 @@ export class Colaborador extends BaseEntity {
 }
 
 export interface colaboradorInput {
-  nome: string;
+  nomeColaborador: string;
   foto_url?: string;
   prestador: Prestador;
 }

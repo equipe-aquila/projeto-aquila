@@ -52,7 +52,7 @@ export const getColaboradorHandler = async (req: Request, res: Response) => {
 
 export const createColaboradorHandler = async (req: Request, res: Response) => {
     try {
-        const { nome, foto_url, prestadorId } = req.body;
+        const { nomeColaborador, foto_url, prestadorId } = req.body;
 
         const prestador = await getPrestador(prestadorId);
 
@@ -60,13 +60,13 @@ export const createColaboradorHandler = async (req: Request, res: Response) => {
             return res.status(400).send('Prestador not found');
         }
 
-        const servico = await createColaborador({
-            nome,
+        const colaborador = await createColaborador({
+            nomeColaborador,
             foto_url,
             prestador
         });
 
-        return res.status(201).send(servico);
+        return res.status(201).send(colaborador);
     } catch (error) {
         return res.status(200).send({'error': error.message});
     }
