@@ -51,11 +51,11 @@ export const getServicos = async (prestador: Prestador) => {
     .of(prestador)
     .loadMany();
 
-    const servicos = [];
+    let servicos: Servico[] = [];
 
     for (const colaborador of colaboradores) {
         const servico = await Servico.find({where: { colaborador }});
-        servicos.push(servico)
+        servicos = servicos.concat(servico);
     }
 
     return servicos;
