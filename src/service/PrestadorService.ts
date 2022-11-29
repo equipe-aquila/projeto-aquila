@@ -1,3 +1,4 @@
+import { Servico } from "../entities/Servico";
 import { getConnection } from "typeorm";
 import { Avaliacao, avaliacaoInput } from "../entities/Avaliacao";
 import { Prestador, prestadorInput } from "../entities/Prestador";
@@ -44,11 +45,18 @@ export const createAvalicao = async (input: avaliacaoInput) => {
 }
 
 export const getServicos = async (prestador: Prestador) => {
-    const servicos = await getConnection()
+    const colaboradores = await getConnection()
     .createQueryBuilder()
-    .relation(Prestador, 'servicos')
+    .relation(Prestador, 'colaboradores')
     .of(prestador)
     .loadMany();
+
+    const servicos = [];
+
+    for (const colaborador of colaboradores) {
+        const servico = await Servico.find({where: colaborador});
+        servicos.push(servico)
+    }
 
     return servicos;
 }
