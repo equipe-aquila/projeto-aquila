@@ -555,7 +555,7 @@ export default (app: Express) => {
 
   /**
    * @openapi
-   * '/api/agendamentos/{userId}/agendar/{prestadorId}':
+   * '/api/agendamentos/{userId}/agendar/{colaboradorId}':
    *  post:
    *     tags:
    *     - Agendamento
@@ -581,7 +581,7 @@ export default (app: Express) => {
    *        description: Bad request
    */
   app.post(
-    "/api/agendamentos/:userId/agendar/:prestadorId",
+    "/api/agendamentos/:userId/agendar/:colaboradorId",
     createAgendamentoHandler
   );
 
