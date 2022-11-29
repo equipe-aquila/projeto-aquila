@@ -569,9 +569,9 @@ export default (app: Express) => {
    *      - name: userId
    *        in: path
    *        description: O id do usuário
-   *      - name: prestadorId
+   *      - name: colaboradorId
    *        in: path
-   *        description: O id do prestador
+   *        description: O id do colaborador
    *     responses:
    *      201:
    *        description: Success
