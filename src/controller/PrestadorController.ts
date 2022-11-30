@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { createAvalicao, createPrestador, deletePrestador, getColaboradores, getPrestador, getPrestadores, getServicos, updatePrestador } from "../service/PrestadorService";
+import { createAvalicao, createPrestador, deletePrestador, getColaboradores, getPrestador, getPrestadorByEmail, getPrestadores, getServicos, updatePrestador } from "../service/PrestadorService";
 import { getUser } from "../service/UserService";
 
 export const getPrestadoresHandler = async (req: Request, res: Response) => {
@@ -26,13 +26,13 @@ export const getPrestadorHandler = async (req: Request, res: Response) => {
 
 export const createPrestadorHandler = async (req: Request, res: Response) => {
     try {
-        const { id } = req.body;
+        const { email } = req.body;
 
-        const prestadorExists = await getPrestador(id);
+        const prestadorExists = await getPrestadorByEmail(email);
         
         if (!prestadorExists) {
-            const user = await createPrestador(req.body);
-            res.status(201).send(user);
+            const prestador = await createPrestador(req.body);
+            res.status(201).send(prestador);
         }
         
         res.status(201).send(prestadorExists);

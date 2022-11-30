@@ -16,6 +16,12 @@ export const getPrestador = async (prestadorId: number) => {
     return prestador
 }
 
+export const getPrestadorByEmail = async (email: string) => {
+    const prestador = await Prestador.findOne({where: {email}})
+
+    return prestador
+}
+
 export const createPrestador = async (input: prestadorInput) => {
     const prestador = Prestador.create(input);
 
