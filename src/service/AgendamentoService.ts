@@ -24,7 +24,7 @@ export const getAgendamentosByPrestador = async (prestador: Prestador) => {
 
 export const getAgendamento = async (id: number) => {
   const agendamento = await Agendamento.findOne(id, {
-    relations: ["user", "prestador", "servico"],
+    relations: ["user", "colaborador", "servico"],
   });
 
   return agendamento;
