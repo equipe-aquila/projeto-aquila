@@ -8,7 +8,7 @@ export const getServicos = async () => {
 
 export const getServico = async (id: number) => {
   const servico = await Servico.findOne(id, {
-    relations: ["prestador"],
+    relations: ["colaborador"],
   });
 
   return servico;

@@ -24,7 +24,7 @@ export const createAgendamentoHandler = async (req: Request, res: Response) => {
     const colaborador = await getColaborador(parseInt(colaboradorId));
   
     if (!colaborador) {
-      return res.status(404).send("Prestador not found");
+      return res.status(404).send("Colaborador not found");
     }
   
     const { data, servicoId } = req.body;
