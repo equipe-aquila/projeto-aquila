@@ -2,6 +2,7 @@ import { Servico } from "../entities/Servico";
 import { getConnection } from "typeorm";
 import { Avaliacao, avaliacaoInput } from "../entities/Avaliacao";
 import { Prestador, prestadorInput } from "../entities/Prestador";
+import { Colaborador } from "../entities/Colaborador";
 
 export const getPrestadores = async () => {
     const prestadores = await Prestador.find()
@@ -63,10 +64,12 @@ export const getServicos = async (prestador: Prestador) => {
 
 export const getColaboradores = async (prestador: Prestador) => {
     const colaboradores = await getConnection()
-    .createQueryBuilder()
-    .relation(Prestador, 'colaboradores')
-    .of(prestador)
-    .loadMany();
+    .getRepository(Prestador)
+    .createQueryBuilder('prestador')
+    .where(`prestador.id=${prestador.id}`)
+    .leftJoinAndSelect('prestador.colaboradores', 'colaboradores')
+    .leftJoinAndSelect('colaboradores.servicos', 'servicos')
+    .getMany();
 
     return colaboradores;
 }
