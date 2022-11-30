@@ -26,9 +26,16 @@ export const getPrestadorHandler = async (req: Request, res: Response) => {
 
 export const createPrestadorHandler = async (req: Request, res: Response) => {
     try {
-        const prestador = await createPrestador(req.body);
+        const { id } = req.body;
 
-        res.status(201).send(prestador);
+        const prestadorExists = await getPrestador(id);
+        
+        if (!prestadorExists) {
+            const user = await createPrestador(req.body);
+            res.status(201).send(user);
+        }
+        
+        res.status(201).send(prestadorExists);
     } catch (error) {
         return res.status(200).send({'error': error.message});
     }
