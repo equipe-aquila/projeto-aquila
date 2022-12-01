@@ -1,0 +1,22 @@
+.table-wrapper-funcionarios {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+.__table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 90%;
+}
+
+.__td,
+.__th {
+  border: 1px solid #7f6aab;
+  text-align: left;
+  padding: 8px;
+}
+
+.__tr:nth-child(even) {
+  background-color: #dddddd;
+}
