@@ -1,100 +1,116 @@
 import axios from "axios";
 
-import { Form, Input, Button } from 'antd-mobile'
-import { useState } from 'react';
-import { createAuthUserWithEmailAndPassword } from '../utils/firebase/firebase.utils';
+import { Form, Input, Button } from "antd-mobile";
+import { useState } from "react";
+import { createAuthUserWithEmailAndPassword } from "../utils/firebase/firebase.utils";
 
 const defaultFormFields = {
-    displayName: '',
-    email: '',
-    password: '',
-    confirmPassword: ''
+  displayName: "",
+  email: "",
+  password: "",
+  confirmPassword: ""
 };
 
 const SignUp = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
-  const {displayName, email, password, confirmPassword} = formFields;
-
+  const { displayName, email, password, confirmPassword } = formFields;
 
   const handleChange = (v) => {
     const [name, value] = Object.entries(v)[0];
-    setFormFields({...formFields, [name]: value});
+    setFormFields({ ...formFields, [name]: value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if(password !== confirmPassword) {
-        alert("Senhas não conferem");
-        return;
+    if (password !== confirmPassword) {
+      alert("Senhas não conferem");
+      return;
     }
 
     try {
-        const response = await createAuthUserWithEmailAndPassword(email, password);
-        
-        await axios.post('https://projeto-aquila.herokuapp.com/api/users/', {
-            'id': response.user.uid,
-            'name': displayName,
-            'email': email
-        });
+      const response = await createAuthUserWithEmailAndPassword(
+        email,
+        password
+      );
 
+      await axios.post("https://projeto-aquila.herokuapp.com/api/users/", {
+        id: response.user.uid,
+        name: displayName,
+        email: email
+      });
     } catch (error) {
-        switch(error.code) {
-            case 'auth/email-already-in-use':
-                alert('email já está cadastrado');
-                break;
-            case 'auth/invalid-email':
-                alert('email inválido');;
-                break;
-            case 'auth/weak-password':
-                alert('senha deve ter no mínimo 6 caracteres');;
-                break;
-            default:
-                alert('occoreu um erro');
-                break;
-          }
+      switch (error.code) {
+        case "auth/email-already-in-use":
+          alert("email já está cadastrado");
+          break;
+        case "auth/invalid-email":
+          alert("email inválido");
+          break;
+        case "auth/weak-password":
+          alert("senha deve ter no mínimo 6 caracteres");
+          break;
+        default:
+          alert("occoreu um erro");
+          break;
+      }
     }
-  }
+  };
 
   return (
     <>
-        <Form
-            footer={
-                <Button block type='submit' color='primary' onClick={handleSubmit} size='large'>
-                  Registrar
-                </Button>
-              }
-              onValuesChange={handleChange}
+      <Form
+        footer={
+          <Button
+            block
+            type="submit"
+            color="primary"
+            onClick={handleSubmit}
+            size="large"
+          >
+            Registrar
+          </Button>
+        }
+        onValuesChange={handleChange}
+      >
+        <Form.Item
+          label="Nome"
+          name="displayName"
+          rules={[{ required: true, message: "Nome é um campo obrigatório" }]}
         >
-            <Form.Item
-                label='Nome'
-                name='displayName'
-                rules={[{ required: true, message: 'Nome é um campo obrigatório' }]}
-            >
-                <Input placeholder='Nome' value={displayName}/>
-            </Form.Item>
-            <Form.Item
-                name='email'
-                label='Email'
-                rules={[{ required: true, message: 'Email é um campo obrigatório' }]}
-            >
-                <Input placeholder='Email' value={email}/>
-            </Form.Item>
-            <Form.Item
-                name='password'
-                label='Senha'
-                rules={[{ required: true, message: 'Senha é um campo obrigatório' }]}
-            >
-                <Input type='password' placeholder='Senha' value={password}/>
-            </Form.Item>
-            <Form.Item
-                name='confirmPassword'
-                label='Confirmar senha'
-                rules={[{ required: true, message: 'Confirmar senha é um campo obrigatório' }]}
-            >
-                <Input type='password' placeholder='Confirmar senha' value={confirmPassword}/>
-            </Form.Item>
-        </Form>
+          <Input placeholder="Nome" value={displayName} />
+        </Form.Item>
+        <Form.Item
+          name="email"
+          label="Email"
+          rules={[{ required: true, message: "Email é um campo obrigatório" }]}
+        >
+          <Input placeholder="Email" value={email} />
+        </Form.Item>
+        <Form.Item
+          name="password"
+          label="Senha"
+          rules={[{ required: true, message: "Senha é um campo obrigatório" }]}
+        >
+          <Input type="password" placeholder="Senha" value={password} />
+        </Form.Item>
+        <Form.Item
+          name="confirmPassword"
+          label="Confirmar senha"
+          rules={[
+            {
+              required: true,
+              message: "Confirmar senha é um campo obrigatório"
+            }
+          ]}
+        >
+          <Input
+            type="password"
+            placeholder="Confirmar senha"
+            value={confirmPassword}
+          />
+        </Form.Item>
+      </Form>
     </>
   );
 };

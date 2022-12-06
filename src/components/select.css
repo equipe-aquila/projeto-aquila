@@ -1,0 +1,16 @@
+.custom-select {
+  width: 100%;
+  height: 40px;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  color: #7f6aab;
+  border: rgb(170, 170, 170) 1px solid;
+  cursor: pointer;
+  border: 1px solid #7f6aab;
+}
+.custom-select:focus,
+.custom-select:active {
+  border: 1px solid #7f6aab;
+
+  outline: 0;
+}

@@ -1,0 +1,45 @@
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 99999999;
+  background: rgba(0, 0, 0, 0.6);
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.modal-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-size: 24px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.modal-btn:hover {
+  opacity: 80%;
+}
+
+.modal-main {
+  position: relative;
+  background: white;
+  width: 80%;
+  height: 90vh;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 20px;
+  min-height: 500px;
+  overflow-y: scroll;
+}
+
+.display-block {
+  display: block;
+}
+
+.display-none {
+  display: none;
+}

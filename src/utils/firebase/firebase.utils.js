@@ -22,7 +22,10 @@ export const auth = getAuth();
 
 export const signInWithGoogleRedirect = () => signInWithRedirect(auth, provider);
 
-export const signOutUser = async () => await signOut(auth);
+export const signOutUser = async () => {
+    localStorage.clear();
+    await signOut(auth);
+}
 
 export const onAuthStateChangedListener = (callback) => onAuthStateChanged(auth, callback);
 

@@ -1,43 +1,59 @@
-import { NavBar } from 'antd-mobile';
-import axios from 'axios';
-import React, { useContext, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router';
-import PrestadorCard from '../components/prestador-card.component';
-import { UserContext } from '../contexts/user.context'
+import { NavBar, Image, AutoCenter } from "antd-mobile";
+import axios from "axios";
+import React, { Fragment, useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router";
+import { Header } from "../components/Header";
+import PrestadorCard from "../components/prestador-card.component";
+import { UserContext } from "../contexts/user.context";
 
 const Favourites = () => {
-    const navigate = useNavigate();
-    const {currentUser} = useContext(UserContext);
-    const [favourites, setFavourites] = useState([]);
+  const navigate = useNavigate();
+  const { currentUser, loading, setLoading } = useContext(UserContext);
+  const [favourites, setFavourites] = useState([]);
 
-    useEffect(() => {
-        const getFavourites = async () => {
-            const res = await axios.get(`https://projeto-aquila.herokuapp.com/api/users/${currentUser.uid}/favoritos`);
+  useEffect(() => {
+    const getFavourites = async () => {
+      setLoading(true);
+      const res = await axios.get(
+        `https://projeto-aquila.herokuapp.com/api/users/${currentUser.uid}/favoritos`
+      );
+      setLoading(false);
 
-            setFavourites(res.data);
-        }
+      setFavourites(res.data);
+    };
 
-        getFavourites();
-    }, []);
+    getFavourites();
+  }, []);
 
-    const handlePrestadorClick = (id) => {
-        navigate(`/prestador/${id}`);
-    }
+  const handlePrestadorClick = (id) => {
+    navigate(`/prestador/${id}`);
+  };
 
-    return (
-        <>
-        <div style={{display:"flex",justifyContent:"center"}}>
-            <div>
-        <NavBar onBack={() => navigate(-1)}>Favoritos</NavBar>
-        {favourites.map((prestador) => {
+  return (
+    <>
+      <Header />
+
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <div>
+          <AutoCenter>
+            <h1>Meus Favoritos</h1>
+          </AutoCenter>
+          {favourites.map((prestador, index) => {
             return (
-                <PrestadorCard key={prestador.id} prestador={prestador} onClick={handlePrestadorClick}/>
+              <Fragment key={prestador.id}>
+                {index === 0 ? <hr /> : null}
+                <PrestadorCard
+                  prestador={prestador}
+                  onClick={handlePrestadorClick}
+                />
+                <hr />
+              </Fragment>
             );
-        })}
+          })}
         </div>
-        </div>
-        </>
-    );
-}
+      </div>
+    </>
+  );
+};
 
 export default Favourites;

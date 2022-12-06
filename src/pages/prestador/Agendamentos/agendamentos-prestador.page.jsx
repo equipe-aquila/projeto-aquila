@@ -18,7 +18,7 @@ const AgendamentosPrestador = () => {
     const getAgendamentos = async () => {
       setLoading(true);
       const res = await axios.get(
-        `http://ec2-54-164-45-9.compute-1.amazonaws.com/api/colaborador/${funcionario_id}/agendamentos`
+        `https://projeto-aquila.herokuapp.com/api/colaborador/${funcionario_id}/agendamentos`
       );
 
       const agendamentos =

@@ -1,117 +1,218 @@
-import { Avatar, Card, Divider, Grid, NavBar, Space } from 'antd-mobile';
-import { HeartFill, HeartOutline } from 'antd-mobile-icons';
-import axios from 'axios';
-import React, { useContext, useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router';
-import ServicoCard from '../components/servico-card.component';
-import { PrestadorContext } from '../contexts/prestador.context';
-import { UserContext } from '../contexts/user.context';
+import {
+  AutoCenter,
+  Avatar,
+  Card,
+  Divider,
+  Grid,
+  NavBar,
+  Space,
+  Image
+} from "antd-mobile";
+import { HeartFill, HeartOutline } from "antd-mobile-icons";
+import axios from "axios";
+import React, { Fragment, useContext, useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router";
+import { Header } from "../components/Header";
+import ServicoCard from "../components/servico-card.component";
+import ColaboradorCard from "../components/colaborador-card.component";
+import { PrestadorContext } from "../contexts/prestador.context";
+import { UserContext } from "../contexts/user.context";
 
 const PrestadorDetail = () => {
-    const {id} = useParams();
+  const { id } = useParams();
 
-    const [favourites, setFavourites] = useState([]);
-    const [servicos, setServicos] = useState([]);
+  const [favourites, setFavourites] = useState([]);
+  const [servicos, setServicos] = useState([]);
+  const [isFavourite, setIsFavorite] = useState(false);
 
-    const {selectedPrestador, setSelectedPrestador} = useContext(PrestadorContext);
-    const {currentUser} = useContext(UserContext);
+  const {
+    selectedPrestador,
+    setSelectedPrestador,
+    selectedFunc,
+    setSelectedFunc
+  } = useContext(PrestadorContext);
+  const { currentUser, setLoading } = useContext(UserContext);
 
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    useEffect(() => {
-        const getPrestador = async () => {
-            const res = await axios.get(`https://projeto-aquila.herokuapp.com/api/prestadores/${id}`);
-            setSelectedPrestador(res.data);
-        }
+  const [funcionarios, setFuncionarios] = useState([]);
 
-        const getFavourites = async () => {
-            const res = await axios.get(`https://projeto-aquila.herokuapp.com/api/users/${currentUser.uid}/favoritos`);
+  useEffect(() => {
+    const getPrestador = async () => {
+      const res = await axios.get(
+        `https://projeto-aquila.herokuapp.com/api/prestadores/${id}`
+      );
+      setSelectedPrestador(res.data);
+    };
 
-            setFavourites(res.data);
-        }
+    const getFuncionarios = async () => {
+      setLoading(true);
+      const response = await axios.get(
+        `https://projeto-aquila.herokuapp.com/api/prestadores/${id}/colaboradores`
+      );
+      setFuncionarios(response.data[0].colaboradores);
 
-        const getServicos = async () => {
-            const res = await axios.get(`https://projeto-aquila.herokuapp.com/api/prestadores/${id}/servicos`);
+      setLoading(false);
+    };
 
-            setServicos(res.data);
-        }
+    const getFavourites = async () => {
+      const res = await axios.get(
+        `https://projeto-aquila.herokuapp.com/api/users/${currentUser.uid}/favoritos`
+      );
 
-        getPrestador();
-        getFavourites();
-        getServicos();
-    }, []);
+      setFavourites(res.data);
+      if (res.data.length < 0) return;
+      const isFavourite = res.data.some(
+        (prestador) => prestador.id === selectedPrestador.id
+      );
+      setIsFavorite(isFavourite);
+    };
 
-    const handleFavoritoAdd = async () => {
-        await axios.post(`https://projeto-aquila.herokuapp.com/api/users/${currentUser.uid}/favoritos`, {
-            'prestadorId': selectedPrestador.id
-        });
-    }
+    const getServicos = async () => {
+      const res = await axios.get(
+        `https://projeto-aquila.herokuapp.com/api/prestadores/${id}/servicos`
+      );
 
-    const handleFavoritoRemove = async () => {
-        await axios.delete(`https://projeto-aquila.herokuapp.com/api/users/${currentUser.uid}/favoritos`, {
-            'prestadorId': selectedPrestador.id
-        });
-    }
+      setServicos(res.data);
+    };
 
-    const handleServicoClick = (id) => {
-        navigate(`/servico/${id}`)
-    }
+    getPrestador();
+    getFavourites();
+    getServicos();
+    getFuncionarios();
+  }, []);
 
-    return (
-        <>
-        {
-            selectedPrestador && (
-                <>
-                <NavBar
-                    right={
-                        favourites.some(prestador => prestador.id === selectedPrestador.id) ? (
-                            <HeartFill color='red' fontSize='180%' onClick={handleFavoritoRemove}/>
-
-                        ) : (
-                            <HeartOutline fontSize='180%' onClick={handleFavoritoAdd}/>
-                        )
-                    }
-                    onBack={() => navigate(-1)} style={{marginRight:"40px",marginLeft:"40px"}}
-                >
-                    {selectedPrestador.name}
-                </NavBar>
-
-                <Card style={{marginRight:"40px",marginLeft:"40px"}}>
-                    <Grid columns={2}>
-                        <Grid.Item>
-                            <Avatar src='./logo-placeholder-image.png'/>
-                        </Grid.Item>
-                        <Grid.Item style={{justifySelf: 'right'}}>
-                            <Space direction='vertical' style={{textAlign: 'right'}}>
-                                <font style={{fontSize: 'medium', fontWeight: 'bold'}}>
-                                    {selectedPrestador.name}
-                                </font>
-                                <font>
-                                    {
-                                        selectedPrestador.rua
-                                        .concat(', ')
-                                        .concat(selectedPrestador.bairro)
-                                        .concat(' - ')
-                                        .concat(selectedPrestador.cidade)
-                                        .concat(', ')
-                                        .concat(selectedPrestador.estado)
-                                    }
-                                </font>
-                            </Space>
-                        </Grid.Item>
-                    </Grid>
-                </Card>
-                <Divider style={{color:"white"}}>Serviços</Divider>
-                {servicos.map((servico) => {
-                    return (
-                        <ServicoCard key={servico.id} servico={servico} onClick={handleServicoClick}/>
-                    );
-                })}
-                </>
-            )
-        }
-        </>
+  const handleFavoritoAdd = async () => {
+    await axios.post(
+      `https://projeto-aquila.herokuapp.com/api/users/${currentUser.uid}/favoritos`,
+      {
+        prestadorId: selectedPrestador.id
+      }
     );
-}
+    setIsFavorite(true);
+  };
+
+  const handleFavoritoRemove = async () => {
+    await axios.delete(
+      `https://projeto-aquila.herokuapp.com/api/users/${currentUser.uid}/favoritos`,
+      {
+        prestadorId: selectedPrestador.id
+      }
+    );
+    setIsFavorite(false);
+  };
+
+  const handleServicoClick = (id) => {
+    navigate(`/servico/${id}`);
+  };
+
+  const [selectedServices, setSelectedServices] = useState([]);
+
+  return (
+    <>
+      {selectedPrestador && (
+        <>
+          <Header />
+
+          <AutoCenter>
+            <h1 style={{ color: "black", flex: 1, flexDirection: "row" }}>
+              {selectedPrestador.name}{" "}
+              <span>
+                {isFavourite ? (
+                  <HeartFill
+                    style={{ cursor: "pointer" }}
+                    color="red"
+                    onClick={handleFavoritoRemove}
+                  />
+                ) : (
+                  <HeartOutline
+                    style={{ cursor: "pointer" }}
+                    onClick={handleFavoritoAdd}
+                  />
+                )}
+              </span>
+            </h1>
+          </AutoCenter>
+
+          <Card style={{ marginRight: "40px", marginLeft: "40px" }}>
+            <Grid columns={2}>
+              <Grid.Item>
+                <Avatar src="./logo-placeholder-image.png" />
+              </Grid.Item>
+              <Grid.Item style={{ justifySelf: "right" }}>
+                <Space direction="vertical" style={{ textAlign: "right" }}>
+                  <font style={{ fontSize: "medium", fontWeight: "bold" }}>
+                    {selectedPrestador.name}
+                  </font>
+                  <font>
+                    {selectedPrestador.rua
+                      .concat(", ")
+                      .concat(selectedPrestador.bairro)
+                      .concat(" - ")
+                      .concat(selectedPrestador.cidade)
+                      .concat(", ")
+                      .concat(selectedPrestador.estado)}
+                  </font>
+                </Space>
+              </Grid.Item>
+            </Grid>
+          </Card>
+          {selectedServices && selectedServices.length > 0 && (
+            <div>
+              <Divider style={{ color: "black" }}>Serviços</Divider>
+              <AutoCenter>
+                <span
+                  style={{
+                    cursor: "pointer",
+                    color: "purple",
+                    fontSize: 16,
+                    border: "1px solid #ddd",
+                    padding: 5
+                  }}
+                  onClick={() => {
+                    setSelectedServices([]);
+                    setSelectedFunc(null);
+                  }}
+                >
+                  Voltar
+                </span>
+              </AutoCenter>
+            </div>
+          )}
+
+          {selectedServices &&
+            selectedServices.length > 0 &&
+            selectedServices?.map((servico) => {
+              return (
+                <ServicoCard
+                  key={servico.id}
+                  servico={servico}
+                  onClick={handleServicoClick}
+                />
+              );
+            })}
+          {(!selectedServices || selectedServices.length <= 0) &&
+            funcionarios &&
+            funcionarios.length > 0 && (
+              <Divider style={{ color: "black" }}>Funcionarios</Divider>
+            )}
+          {(!selectedServices || selectedServices.length <= 0) &&
+            funcionarios &&
+            funcionarios.length > 0 &&
+            funcionarios?.map((funcionario) => (
+              <ColaboradorCard
+                key={funcionario.id}
+                onClick={() => {
+                  setSelectedServices(funcionario.servicos);
+                  setSelectedFunc(funcionario);
+                }}
+                colaborador={funcionario}
+              />
+            ))}
+        </>
+      )}
+    </>
+  );
+};
 
 export default PrestadorDetail;

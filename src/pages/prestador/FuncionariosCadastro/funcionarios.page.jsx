@@ -22,7 +22,7 @@ export default function Funcionarios() {
   const getFuncionarios = async () => {
     setLoading(true);
     const response = await axios.get(
-      `http://ec2-54-164-45-9.compute-1.amazonaws.com/api/prestadores/${selectedPrestador.id}/colaboradores`
+      `https://projeto-aquila.herokuapp.com/api/prestadores/${selectedPrestador.id}/colaboradores`
     );
     setFuncionarios(response.data[0].colaboradores);
 
@@ -65,7 +65,7 @@ export default function Funcionarios() {
     };
 
     await axios.put(
-      `http://ec2-54-164-45-9.compute-1.amazonaws.com/api/colaborador/${selectedFunc.id}`,
+      `https://projeto-aquila.herokuapp.com/api/colaborador/${selectedFunc.id}`,
       funcionario
     );
     setSelectedFunc(null);
@@ -82,7 +82,7 @@ export default function Funcionarios() {
     };
 
     const response = await axios.post(
-      `http://ec2-54-164-45-9.compute-1.amazonaws.com/api/colaborador`,
+      `https://projeto-aquila.herokuapp.com/api/colaborador`,
       funcionario
     );
     setSelectedFunc(null);
@@ -124,9 +124,7 @@ export default function Funcionarios() {
   const deleteService = (id) => {
     setLoading(true);
     axios
-      .delete(
-        `http://ec2-54-164-45-9.compute-1.amazonaws.com/api/servicos/${id}`
-      )
+      .delete(`https://projeto-aquila.herokuapp.com/api/servicos/${id}`)
       .then(() => {
         getFuncionarios();
         setShowModal(false);
@@ -149,7 +147,7 @@ export default function Funcionarios() {
       };
 
       await axios.post(
-        `http://ec2-54-164-45-9.compute-1.amazonaws.com/api/servicos`,
+        `https://projeto-aquila.herokuapp.com/api/servicos`,
         _service
       );
     }

@@ -12,7 +12,7 @@ export default function Comprovantes() {
 
   const getFuncionarios = async () => {
     const response = await axios.get(
-      `http://ec2-54-164-45-9.compute-1.amazonaws.com/api/prestadores/${selectedPrestador.id}/colaboradores`
+      `https://projeto-aquila.herokuapp.com/api/prestadores/${selectedPrestador.id}/colaboradores`
     );
 
     return response.data[0].colaboradores;
@@ -29,14 +29,14 @@ export default function Comprovantes() {
 
       for await (const colaborador of colaboradores) {
         const res = await axios.get(
-          `http://ec2-54-164-45-9.compute-1.amazonaws.com/api/colaborador/${colaborador.id}/agendamentos`
+          `https://projeto-aquila.herokuapp.com/api/colaborador/${colaborador.id}/agendamentos`
         );
 
         for await (const agendamento of res.data.filter(
           (agendamento) => agendamento.pago
         )) {
           const item = await axios.get(
-            `http://ec2-54-164-45-9.compute-1.amazonaws.com/api/agendamentos/${agendamento.id}`
+            `https://projeto-aquila.herokuapp.com/api/agendamentos/${agendamento.id}`
           );
           agendamentos.push(item.data);
         }

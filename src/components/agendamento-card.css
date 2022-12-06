@@ -1,0 +1,8 @@
+.agendamento-card {
+  transition: all 0.1s ease-in-out;
+}
+.agendamento-card:hover {
+  opacity: 50%;
+  cursor: pointer;
+  color: black;
+}

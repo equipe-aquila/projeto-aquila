@@ -1,20 +1,14 @@
-import { NavBar, Image} from "antd-mobile";
-import React from 'react';
-import MapPage from '../components/Maps';
+import React from "react";
+import { Header } from "../components/Header";
+import MapPage from "../components/Maps";
 import Search from "./search.page";
-const Map  = () => {
-
-    return (
-        <div>
-            <NavBar style={{marginBottom:"12px",marginTop:"12px",zIndex:999999}} back={null}> 
-            <div style={{display:"flex",justifyContent:"center",}}>
-            <Image width={110} src="./aquilalogo.png"></Image>
-            </div>
-            </NavBar>
-            <Search></Search>
-            <MapPage back={null}></MapPage>
-
-        </div>
-    );
-    }
+const Map = () => {
+  return (
+    <div>
+      <Header navigation={null} />
+      <Search></Search>
+      <MapPage back={null}></MapPage>
+    </div>
+  );
+};
 export default Map;

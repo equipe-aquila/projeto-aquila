@@ -1,27 +1,133 @@
 .FormGroup {
-	margin: 0 15px 20px;
-	padding: 0;
-	border-style: none;
-	background-color: #7795f8;
-	will-change: opacity, transform;
-	box-shadow: 0 6px 9px rgba(50, 50, 93, 0.06), 0 2px 5px rgba(0, 0, 0, 0.08), inset 0 1px 0 #829fff;
-	border-radius: 4px;
+  margin: 0 15px 20px;
+  padding: 0;
+  border-style: none;
+  background-color: #7795f8;
+  will-change: opacity, transform;
+  box-shadow: 0 6px 9px rgba(50, 50, 93, 0.06), 0 2px 5px rgba(0, 0, 0, 0.08),
+    inset 0 1px 0 #829fff;
+  border-radius: 4px;
 }
 
 .FormRow {
-	display: -ms-flexbox;
-	display: flex;
-	-ms-flex-align: center;
-	align-items: center;
-	margin-left: 15px;
-	border-top: 1px solid #819efc;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-left: 15px;
+  border-top: 1px solid #819efc;
 }
 
 .StripeElement--webkit-autofill {
-	background: transparent !important;
+  background: transparent !important;
 }
 
 .StripeElement {
-	width: 100%;
-	padding: 11px 15px 11px 0;
+  width: 100%;
+  padding: 11px 15px 11px 0;
+}
+
+.payment-receipt {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  gap: 5px;
+  border: 1px solid #819efc;
+  width: 100%;
+  border-radius: 8px;
+  margin-top: 50px;
+}
+
+.payment-receipt-borderless {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  gap: 5px;
+  width: 100%;
+  border-radius: 8px;
+}
+.payment-padding {
+  margin: 20px;
+}
+
+.payment-receipt span,
+.payment-receipt-borderless span {
+  font-size: 16px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.receipt-date {
+  opacity: 70%;
+}
+
+.payment-receipt strong,
+.payment-receipt-borderless strong {
+  color: black;
+}
+
+.receipt-list {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.header-p {
+  font-size: 16px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.receipt-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0;
+  padding: 0;
+  margin-bottom: 20px;
+}
+
+.strike {
+  display: block;
+  text-align: center;
+  overflow: hidden;
+  white-space: nowrap;
+  color: #000000;
+  margin-bottom: 15px;
+  margin-top: 15px;
+}
+
+.strike > span {
+  position: relative;
+  display: inline-block;
+}
+
+.strike > span:before,
+.strike > span:after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 9999px;
+  height: 1px;
+  background: #819efc;
+}
+
+.strike > span:before {
+  right: 100%;
+  margin-right: 15px;
+}
+
+.strike > span:after {
+  left: 100%;
+  margin-left: 15px;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.cursor-pointer:hover {
+  opacity: 80%;
 }
